@@ -1,15 +1,13 @@
-<!-- Access Financ embed for GoHighLevel. Paste into a Custom JS/HTML element. -->
-<div id="access-financ" style="display:flex;flex-direction:column;width:100%;height:calc(100vh - 20px);min-height:800px;font-family:system-ui,sans-serif;">
-  <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#f5f6f8;border-bottom:1px solid #e3e5e8;font-size:14px;">
-    <strong>Access Financ</strong>
-    <a href="https://accessfinanc-ajmemcpj.manus.space/" target="_blank" rel="noopener"
-       style="padding:6px 12px;background:#155eef;color:#fff;border-radius:6px;text-decoration:none;">Open in new tab</a>
-  </div>
+<style>
+  #access-financ-embed { position:relative; width:100%; height:100vh; min-height:700px; margin:0; padding:0; overflow:hidden; }
+  #access-financ-embed iframe { position:absolute; inset:0; width:100%; height:100%; border:0; display:block; }
+</style>
+<div id="access-financ-embed">
   <iframe
     src="https://accessfinanc-ajmemcpj.manus.space/"
     title="Access Financ"
-    style="flex:1;width:100%;border:0;"
-    allow="clipboard-read; clipboard-write; fullscreen"
+    loading="lazy"
+    allow="clipboard-read; clipboard-write; fullscreen; payment"
     allowfullscreen
   ></iframe>
 </div>
