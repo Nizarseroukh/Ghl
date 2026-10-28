@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growth Track Accounting | Proactive Tax Planning</title>
+    <meta name="description" content="Proactive tax planning and year-round CPA advice for tech professionals and entrepreneurs. Book your strategy call with Growth Track Accounting.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#050608',
+                            card: '#0f1115',
+                            accent: '#3b82f6',
+                            accentDark: '#2563eb',
+                            text: '#ffffff',
+                            dim: '#9ca3af',
+                            border: 'rgba(255, 255, 255, 0.05)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+            background-color: #050608;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .hero-section {
+            background: radial-gradient(circle at 50% -20%, rgba(59, 130, 246, 0.15), transparent 70%),
+                        radial-gradient(circle at 0% 100%, rgba(59, 130, 246, 0.05), transparent 50%);
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .site-header {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            z-index: 10;
+        }
+
+        .staxx-card {
+            background: rgba(15, 17, 21, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .staxx-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+        /* Keep card content above the hover gradient overlay */
+        .staxx-card > * {
+            position: relative;
+            z-index: 1;
+        }
+        .staxx-card:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateY(-8px);
+            background: rgba(20, 23, 28, 0.8);
+            box-shadow: 0 20px 40px -20px rgba(0,0,0,0.5);
+        }
+        .staxx-card:hover::before {
+            opacity: 1;
+        }
+
+        .staxx-btn {
+            background: #ffffff;
+            color: #000000;
+            padding: 1.25rem 3rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid white;
+            cursor: pointer;
+        }
+        .staxx-btn:hover {
+            background: transparent;
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+        }
+        .staxx-btn:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 4px;
+        }
+
+        .text-gradient {
+            background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .benefit-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05));
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            color: #3b82f6;
+            font-size: 1.75rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 2000;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(15px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #0f1115;
+            width: 100%;
+            max-width: 900px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes modalPop {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section { min-height: 80vh; padding-top: 6rem; padding-bottom: 4rem; }
+            .staxx-card { padding: 2rem; }
+            .staxx-btn { width: 100%; justify-content: center; }
+            h1 { font-size: 2.75rem !important; line-height: 1.1 !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-container">
+        <!-- HEADER -->
+        <header class="site-header px-6 py-6">
+            <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+                <a href="#" class="flex items-center gap-3">
+                    <i class="fa-solid fa-chart-line text-blue-500"></i>
+                    <span class="font-display font-bold uppercase tracking-tighter">Growth<span class="text-brand-dim">Track</span></span>
+                </a>
+                <button type="button" onclick="openModal()" class="staxx-btn !w-auto !px-5 !py-2.5 !text-sm">
+                    Book a Call <i class="fa-solid fa-arrow-right text-xs"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- HERO -->
+        <section class="hero-section px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <h1 class="font-display text-6xl md:text-8xl font-extrabold mb-8 leading-[1.05] tracking-tight text-gradient">
+                        Stop Waiting Until Tax Time To Act
+                    </h1>
+                    <p class="text-lg md:text-xl text-brand-dim mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
+                        Proactive tax planning and year-round CPA advice for tech professionals and entrepreneurs.
+                    </p>
+                    <button type="button" onclick="openModal()" class="staxx-btn">
+                        Book Your Strategy Call <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- BENEFITS -->
+        <section id="benefits" class="py-24 md:py-32 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-20 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-8">
+                    <div class="max-w-2xl">
+                        <h2 class="font-display text-4xl md:text-6xl font-bold mb-6 tracking-tight">How Do We Help You?</h2>
+                        <p class="text-brand-dim text-lg">Comprehensive financial strategy designed for high-growth individuals.</p>
+                    </div>
+                    <div class="h-[1px] flex-grow bg-white/10 mb-6 hidden md:block mx-8"></div>
+                </div>
+
+                <!-- data-aos sits on a wrapper so AOS's transform/transition don't override the card hover lift -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Benefit 1 -->
+                    <div class="h-full" data-aos="fade-up">
+                        <div class="staxx-card">
+                            <div class="benefit-icon"><i class="fa-solid fa-calendar-check"></i></div>
+                            <h3 class="text-xl font-bold mb-4">Proactive Tax Planning</h3>
+                            <p class="text-brand-dim text-sm leading-relaxed">We model your income and vesting schedules year-round, turning "April surprises" into predictable, optimized outcomes.</p>
+                        </div>
+                    </div>
+                    <!-- Benefit 2 -->
+                    <div class="h-full" data-aos="fade-up" data-aos-delay="50">
+                        <div class="staxx-card">
+                            <div class="benefit-icon"><i class="fa-solid fa-chart-line"></i></div>
+                            <h3 class="text-xl font-bold mb-4">Stock Option Strategy</h3>
+                            <p class="text-brand-dim text-sm leading-relaxed">We analyze your ISOs, NSOs, and RSUs to create a personalized exercise plan that minimizes AMT and maximizes your take-home wealth.</p>
+                        </div>
+                    </div>
+                    <!-- Benefit 3 -->
+                    <div class="h-full" data-aos="fade-up" data-aos-delay="100">
+                        <div class="staxx-card">
+                            <div class="benefit-icon"><i class="fa-solid fa-user-tie"></i></div>
+                            <h3 class="text-xl font-bold mb-4">Personalized Support</h3>
+                            <p class="text-brand-dim text-sm leading-relaxed">You get a dedicated advisor who understands your unique goals, providing the soul and clarity that automated software lacks.</p>
+                        </div>
+                    </div>
+                    <!-- Benefit 4 -->
+                    <div class="h-full" data-aos="fade-up" data-aos-delay="150">
+                        <div class="staxx-card">
+                            <div class="benefit-icon"><i class="fa-solid fa-gem"></i></div>
+                            <h3 class="text-xl font-bold mb-4">Wealth Building Clarity</h3>
+                            <p class="text-brand-dim text-sm leading-relaxed">We look beyond the tax return to your bigger financial picture, ensuring every move aligns with your long-term freedom goals.</p>
+                        </div>
+                    </div>
+                    <!-- Benefit 5 -->
+                    <div class="h-full" data-aos="fade-up">
+                        <div class="staxx-card">
+                            <div class="benefit-icon"><i class="fa-solid fa-rocket"></i></div>
+                            <h3 class="text-xl font-bold mb-4">Liquidity Readiness</h3>
+                            <p class="text-brand-dim text-sm leading-relaxed">Whether it's an IPO or an acquisition, we prepare your finances in advance so you keep more of what you've earned when it matters most.</p>
+                        </div>
+                    </div>
+                    <!-- Benefit 6 -->
+                    <div class="h-full" data-aos="fade-up" data-aos-delay="50">
+                        <div class="staxx-card">
+                            <div class="benefit-icon"><i class="fa-solid fa-shield-alt"></i></div>
+                            <h3 class="text-xl font-bold mb-4">Strategic Compliance</h3>
+                            <p class="text-brand-dim text-sm leading-relaxed">We handle the complex paperwork with accuracy-first discipline, giving you the peace of mind to focus on your work and passions.</p>
+                        </div>
+                    </div>
+                    <!-- Benefit 7 -->
+                    <div class="h-full" data-aos="fade-up" data-aos-delay="100">
+                        <div class="staxx-card">
+                            <div class="benefit-icon"><i class="fa-solid fa-droplet"></i></div>
+                            <h3 class="text-xl font-bold mb-4">Cash Flow Optimization</h3>
+                            <p class="text-brand-dim text-sm leading-relaxed">By timing your tax payments and exercises strategically, we ensure you always have the liquidity needed for your next big move.</p>
+                        </div>
+                    </div>
+                    <!-- Benefit 8 -->
+                    <div class="h-full" data-aos="fade-up" data-aos-delay="150">
+                        <div class="staxx-card">
+                            <div class="benefit-icon"><i class="fa-solid fa-comments"></i></div>
+                            <h3 class="text-xl font-bold mb-4">Ongoing Advisory</h3>
+                            <p class="text-brand-dim text-sm leading-relaxed">No more waiting days for a response. Our team is available year-round to answer your questions and pivot your strategy as needed.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-16 text-center" data-aos="fade-up">
+                    <button type="button" onclick="openModal()" class="staxx-btn">
+                        Book Your Strategy Call <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section class="py-24 md:py-32 px-6 bg-[#0a0b0d]">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-20">
+                    <h2 class="font-display text-4xl md:text-6xl font-bold mb-6 tracking-tight">Does It Actually Work?</h2>
+                    <div class="w-24 h-1 bg-blue-500 mx-auto rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="h-full" data-aos="fade-up">
+                        <div class="staxx-card !bg-brand-bg flex flex-col justify-between">
+                            <p class="text-lg italic mb-10 text-white/90 leading-relaxed">"Growth Track Accounting changed how I view my taxes. Instead of dreading tax season, I now have a clear roadmap for my RSUs and feel completely in control of my financial future."</p>
+                            <div class="flex items-center gap-4 border-t border-white/5 pt-6">
+                                <div class="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center font-bold text-blue-500">MC</div>
+                                <div>
+                                    <h4 class="font-bold">Michael Chen</h4>
+                                    <p class="text-xs text-brand-dim uppercase tracking-wider">Senior Engineer @ Tech Giant</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h-full" data-aos="fade-up" data-aos-delay="100">
+                        <div class="staxx-card !bg-brand-bg flex flex-col justify-between">
+                            <p class="text-lg italic mb-10 text-white/90 leading-relaxed">"The concierge approach is a game-changer. They don't just file my returns; they proactively reached out before my company's IPO to ensure I was positioned correctly. I saved thousands."</p>
+                            <div class="flex items-center gap-4 border-t border-white/5 pt-6">
+                                <div class="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center font-bold text-blue-500">SJ</div>
+                                <div>
+                                    <h4 class="font-bold">Sarah Jenkins</h4>
+                                    <p class="text-xs text-brand-dim uppercase tracking-wider">Product Lead @ Fintech Startup</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h-full" data-aos="fade-up" data-aos-delay="200">
+                        <div class="staxx-card !bg-brand-bg flex flex-col justify-between">
+                            <p class="text-lg italic mb-10 text-white/90 leading-relaxed">"Finally, an accounting firm that understands stock options and high-growth compensation. Their clarity and strategic vision gave me the stability I needed to scale my side business."</p>
+                            <div class="flex items-center gap-4 border-t border-white/5 pt-6">
+                                <div class="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center font-bold text-blue-500">DR</div>
+                                <div>
+                                    <h4 class="font-bold">David Rodriguez</h4>
+                                    <p class="text-xs text-brand-dim uppercase tracking-wider">Founder @ Creative Agency</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-16 text-center" data-aos="fade-up">
+                    <button type="button" onclick="openModal()" class="staxx-btn">
+                        Get the Same Results <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="py-32 md:py-48 px-6 text-center">
+            <div class="max-w-3xl mx-auto" data-aos="zoom-out">
+                <h2 class="font-display text-5xl md:text-7xl font-extrabold mb-8 text-gradient leading-tight">
+                    Ready to Build Real Wealth?
+                </h2>
+                <p class="text-xl text-brand-dim mb-12">Take the first step with a strategy call.</p>
+                <button type="button" onclick="openModal()" class="staxx-btn !px-12 !py-5 !text-xl">
+                    Book Your Call <i class="fa-solid fa-calendar-days"></i>
+                </button>
+            </div>
+        </section>
+
+        <footer class="py-20 px-6 border-t border-white/5 text-center">
+            <div class="flex items-center justify-center gap-3 mb-8">
+                <i class="fa-solid fa-chart-line text-blue-500"></i>
+                <span class="font-display font-bold uppercase tracking-tighter">Growth<span class="text-brand-dim">Track</span></span>
+            </div>
+            <p class="text-brand-dim text-sm">&copy; 2026 Growth Track Accounting LLC. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- MODAL -->
+    <div id="surveyModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="surveyModalTitle" aria-hidden="true" onclick="closeModalOutside(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button type="button" aria-label="Close" class="absolute right-6 top-6 text-white/50 hover:text-white text-3xl z-50 transition-all" onclick="closeModal()">&times;</button>
+            <div class="p-8 md:p-12">
+                <div class="text-center mb-8">
+                    <h3 id="surveyModalTitle" class="text-3xl font-bold mb-3">Schedule Your Strategy Call</h3>
+                    <p class="text-brand-dim">Answer a few quick questions, then pick a time that works best for your schedule.</p>
+                </div>
+                <div class="bg-black/20 rounded-2xl border border-white/5 min-h-[500px] flex items-center justify-center">
+                    <iframe src="https://link.praveenagency.com/widget/survey/qTA89nW5GUlZkjHK9Iv3" style="border:none;width:100%;min-height:600px;" scrolling="auto" id="qTA89nW5GUlZkjHK9Iv3" title="survey"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://link.praveenagency.com/js/form_embed.js"></script>
+    <script>
+        AOS.init({ once: true, duration: 1000, easing: 'ease-out-cubic' });
+
+        const modal = document.getElementById('surveyModal');
+        let lastFocused = null;
+
+        function openModal() {
+            lastFocused = document.activeElement;
+            modal.style.display = "flex";
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            modal.querySelector('[aria-label="Close"]').focus();
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            if (lastFocused) lastFocused.focus();
+        }
+
+        function closeModalOutside(event) {
+            if (event.target === modal) closeModal();
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && modal.style.display === 'flex') closeModal();
+        });
+    </script>
+</body>
+</html>

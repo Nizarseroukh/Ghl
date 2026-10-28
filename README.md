@@ -14,3 +14,9 @@ is always reachable even if it can't run inside the frame.
 ### Sidebar menu link
 **Settings → Custom Menu Links → Create New**, URL `https://carpen-cfo-lwhxnn2q.manus.space`,
 open mode **Open in new tab**.
+
+## Growth Track Accounting lander
+
+[`landers/growth-track-accounting.html`](landers/growth-track-accounting.html) is a full page. Paste it
+into a GHL custom code page or a full-width **Custom JS/HTML** element. Every CTA opens the survey
+popup (`qTA89nW5GUlZkjHK9Iv3`).
