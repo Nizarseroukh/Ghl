@@ -7,132 +7,190 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-#bss{--indigo:#333394;--indigo-deep:#26266f;--gold:#e8b528;--ink:#24243d;--muted:#626274;--line:#e5e5ef;--pale-gold:#fff9e9;--card-radius:18px;--card-shadow:0 12px 32px rgba(37,37,89,.07);width:100%;margin:0;padding:0;overflow:hidden;background:#fff;color:var(--ink);font-family:"Roboto",Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.6;letter-spacing:normal;text-align:left;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+#bss{--indigo:#333394;--indigo-deep:#26266f;--navy:#151549;--indigo-tint:rgba(85,85,204,.42);--gold:#e8b528;--gold-light:#f5c542;--ink:#24243d;--muted:#5d5d72;--line:#e6e6f0;--pale:#f5f5fc;--pale-gold:#fff9e9;--ease:cubic-bezier(.2,.7,.2,1);width:100%;margin:0;padding:0;overflow:hidden;background:#fff;color:var(--ink);font-family:"Roboto",Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.6;letter-spacing:normal;text-align:left;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
 #bss *,#bss *::before,#bss *::after{box-sizing:border-box}
-#bss h1,#bss h2,#bss h3,#bss h4,#bss p,#bss blockquote,#bss figure{margin:0;padding:0}
+#bss h1,#bss h2,#bss h3,#bss h4,#bss p,#bss blockquote,#bss figure,#bss ul,#bss li{margin:0;padding:0}
+#bss ul{list-style:none}
 #bss h1,#bss h2,#bss h3,#bss h4{color:var(--ink);font-family:"Raleway",Arial,sans-serif;line-height:1.14;text-transform:none}
 #bss img{display:block;max-width:100%;height:auto;border:0}
+#bss h1,#bss h2,#bss .bss-eyebrow,#bss .bss-callout{text-wrap:balance}
+#bss svg{display:block}
 #bss button{margin:0;font:inherit;-webkit-appearance:none;appearance:none}
 #bss a{color:inherit}
-#bss button:focus-visible,#bss a:focus-visible,#bss summary:focus-visible{outline:3px solid rgba(232,181,40,.8);outline-offset:3px}
+#bss button:focus-visible,#bss a:focus-visible{outline:3px solid rgba(232,181,40,.85);outline-offset:3px}
+@keyframes bss-drift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(70px,40px,0) scale(1.15)}}
+@keyframes bss-up{from{opacity:0;translate:0 22px}to{opacity:1;translate:none}}
+@keyframes bss-draw{to{transform:scaleX(1)}}
+@keyframes bss-pulse{0%{transform:scale(.6);opacity:.8}100%{transform:scale(2);opacity:0}}
+@keyframes bss-pop{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes bss-fade{from{opacity:0}to{opacity:1}}
+
+/* Scroll-in reveal (only when the script runs, so nothing stays hidden without it) */
+#bss .bss-reveal{transition:opacity .8s ease var(--d,0s),translate .8s var(--ease) var(--d,0s)}
+#bss.bss-js .bss-reveal{opacity:0;translate:0 28px}
+#bss.bss-js .bss-reveal.is-in{opacity:1;translate:none}
 
 /* Header */
-#bss .bss-header{display:flex;min-height:76px;justify-content:center;align-items:center;padding:15px 24px 8px;background:#fff}
+#bss .bss-header{position:relative;z-index:1;display:flex;min-height:76px;justify-content:center;align-items:center;padding:15px 24px 8px;background:#fff}
 #bss .bss-header img{width:148px;height:auto}
 
-/* Button */
-#bss .bss-btn{display:inline-flex;min-height:54px;min-width:190px;justify-content:center;align-items:center;padding:14px 27px;border:1px solid var(--indigo);border-radius:999px;background:var(--indigo);color:#fff;cursor:pointer;font-family:"Roboto",Arial,sans-serif;font-size:14px;font-weight:700;letter-spacing:.035em;line-height:1.2;text-decoration:none;text-transform:none;transition:background-color 160ms ease,border-color 160ms ease,transform 160ms ease,box-shadow 160ms ease}
-#bss .bss-btn:hover{border-color:var(--indigo-deep);background:var(--indigo-deep);box-shadow:0 8px 20px rgba(51,51,148,.2);transform:translateY(-1px)}
-#bss .bss-cta{display:flex;justify-content:center;margin-top:38px}
+/* Buttons: brand indigo, gold for dark sections */
+#bss .bss-btn{position:relative;isolation:isolate;display:inline-flex;min-height:56px;min-width:200px;justify-content:center;align-items:center;gap:10px;overflow:hidden;padding:15px 30px;border:1px solid var(--indigo);border-radius:999px;background-color:var(--indigo);background-image:linear-gradient(135deg,var(--indigo) 0%,var(--indigo-deep) 100%);box-shadow:0 10px 26px rgba(51,51,148,.28);color:#fff;cursor:pointer;font-family:"Roboto",Arial,sans-serif;font-size:15px;font-weight:700;letter-spacing:.03em;line-height:1.2;text-decoration:none;text-transform:none;transition:transform .25s var(--ease),box-shadow .3s ease}
+#bss .bss-btn::before{content:"";position:absolute;z-index:-1;top:0;left:-70%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.32),transparent);transform:skewX(-20deg);transition:left .7s var(--ease)}
+#bss .bss-btn:hover{box-shadow:0 16px 36px rgba(51,51,148,.36),0 0 0 4px rgba(232,181,40,.28);transform:translateY(-2px)}
+#bss .bss-btn:hover::before{left:130%}
+#bss .bss-btn svg{width:18px;height:18px;flex:0 0 18px;transition:transform .3s var(--ease)}
+#bss .bss-btn:hover svg{transform:translateX(4px)}
+#bss .bss-cta{display:flex;justify-content:center;margin-top:44px}
 
 /* Shared section bits */
-#bss .bss-section{padding:92px 24px}
-#bss .bss-tint{background:#f8f8fc}
-#bss .bss-heading{max-width:840px;margin:0 auto 42px;text-align:center}
-#bss .bss-eyebrow{margin:0 0 13px;color:var(--indigo);font-size:12px;font-weight:700;letter-spacing:.13em;line-height:1.4;text-transform:uppercase}
+#bss .bss-section{position:relative;isolation:isolate;padding:96px 24px}
+#bss .bss-heading{max-width:840px;margin:0 auto 46px;text-align:center}
+#bss .bss-eyebrow{display:block;margin:0 0 14px;color:var(--indigo);font-size:12px;font-weight:700;letter-spacing:.14em;line-height:1.4;text-transform:uppercase}
 #bss .bss-heading h2,#bss .bss-final h2{margin:0;color:var(--indigo-deep);font-size:clamp(2rem,3.5vw,3.15rem);font-weight:800;letter-spacing:-.035em}
 #bss .bss-wrap{width:min(100%,1120px);margin-right:auto;margin-left:auto}
+#bss .bss-num{display:inline-flex;width:44px;height:44px;flex:0 0 44px;justify-content:center;align-items:center;border-radius:50%;background:linear-gradient(135deg,var(--gold-light),var(--gold));box-shadow:0 0 0 4px rgba(232,181,40,.16);color:var(--navy);font-family:"Raleway",Arial,sans-serif;font-size:13px;font-weight:800;line-height:1;transition:transform .35s var(--ease),box-shadow .35s ease}
 
 /* 1. Hero */
-#bss .bss-hero{padding:40px 24px 32px;text-align:center}
-#bss .bss-hero__copy{width:min(100%,880px);margin:0 auto}
-#bss .bss-callout{display:inline-flex;align-items:center;justify-content:center;min-height:34px;margin:0 auto 20px;padding:6px 14px;border:1px solid rgba(232,181,40,.55);border-radius:999px;background:var(--pale-gold);color:var(--indigo-deep);font-size:12px;font-weight:700;letter-spacing:.045em;line-height:1.4;text-transform:uppercase}
-#bss .bss-hero h1{max-width:820px;margin:0 auto 18px;color:var(--indigo-deep);font-size:clamp(2.5rem,5vw,4.35rem);font-weight:800;letter-spacing:-.045em}
-#bss .bss-hero__sub{max-width:710px;margin:0 auto 26px;color:#505064;font-size:clamp(1.05rem,1.6vw,1.25rem);line-height:1.55}
+#bss .bss-hero{position:relative;isolation:isolate;overflow:hidden;padding:40px 24px 76px;background:linear-gradient(180deg,#fff 0%,#f4f4fb 55%,#fff 100%);text-align:center}
+#bss .bss-hero::before,#bss .bss-hero::after{content:"";position:absolute;z-index:-1;border-radius:50%;pointer-events:none;animation:bss-drift 18s ease-in-out infinite alternate}
+#bss .bss-hero::before{top:0;left:50%;width:980px;height:560px;margin-left:-490px;background:radial-gradient(closest-side,rgba(85,85,204,.18),rgba(85,85,204,0))}
+#bss .bss-hero::after{right:-220px;bottom:40px;width:480px;height:480px;background:radial-gradient(closest-side,rgba(232,181,40,.2),rgba(232,181,40,0));animation-direction:alternate-reverse;animation-duration:22s}
+#bss .bss-hero__copy{width:min(100%,900px);margin:0 auto}
+#bss .bss-hero__copy > *{animation:bss-up .9s var(--ease) both}
+#bss .bss-hero__copy > :nth-child(2){animation-delay:.08s}
+#bss .bss-hero__copy > :nth-child(3){animation-delay:.16s}
+#bss .bss-hero__copy > :nth-child(4){animation-delay:.24s}
+#bss .bss-hero__copy > :nth-child(5){animation-delay:.32s}
+#bss .bss-callout{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:36px;margin:0 auto 22px;padding:7px 16px;border:1px solid rgba(232,181,40,.55);border-radius:999px;background:rgba(255,249,233,.9);box-shadow:0 6px 18px rgba(232,181,40,.12);color:var(--indigo-deep);font-size:12px;font-weight:700;letter-spacing:.045em;line-height:1.4;text-transform:uppercase}
+#bss .bss-callout__dot{position:relative;width:8px;height:8px;flex:0 0 8px;border-radius:50%;background:var(--gold)}
+#bss .bss-callout__dot::after{content:"";position:absolute;inset:-4px;border:2px solid var(--gold);border-radius:50%;opacity:0;animation:bss-pulse 2.4s ease-out infinite}
+#bss .bss-hero h1{position:relative;isolation:isolate;max-width:860px;margin:0 auto 20px;color:var(--indigo-deep);font-size:clamp(2.5rem,5.2vw,4.5rem);font-weight:800;letter-spacing:-.045em}
+#bss .bss-hl{position:relative;color:var(--indigo);white-space:nowrap}
+#bss .bss-hl::after{content:"";position:absolute;z-index:-1;right:-.04em;bottom:.04em;left:-.04em;height:.2em;border-radius:999px;background:linear-gradient(90deg,var(--gold),var(--gold-light));opacity:.85;transform:scaleX(0);transform-origin:left;animation:bss-draw 1s var(--ease) .75s forwards}
+#bss .bss-hero__sub{max-width:700px;margin:0 auto 30px;color:#4f4f66;font-size:clamp(1.05rem,1.6vw,1.25rem);line-height:1.6}
+#bss .bss-trust{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;margin:30px auto 0;color:#4f4f66;font-size:14px;font-weight:500;line-height:1.3}
+#bss .bss-trust li{display:inline-flex;align-items:center;gap:8px}
+#bss .bss-trust__g{display:inline-flex;width:24px;height:24px;justify-content:center;align-items:center;border-radius:50%;background:#fff;box-shadow:0 2px 8px rgba(37,37,89,.12)}
+#bss .bss-trust__g svg{width:14px;height:14px}
+#bss .bss-trust .bss-stars{color:var(--gold);font-size:14px;letter-spacing:.08em}
+#bss .bss-trust__check{display:inline-flex;width:22px;height:22px;justify-content:center;align-items:center;border-radius:50%;background:rgba(51,51,148,.1);color:var(--indigo)}
+#bss .bss-trust__check svg{width:13px;height:13px}
 
 /* 2. Reasons */
-#bss .bss-reasons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-#bss .bss-card{display:grid;grid-template-columns:52px minmax(0,1fr);gap:17px;min-height:148px;padding:25px 24px;border:1px solid var(--line);border-radius:var(--card-radius);background:#fff;box-shadow:var(--card-shadow)}
-#bss .bss-num{display:inline-flex;width:42px;height:42px;justify-content:center;align-items:center;border:1px solid rgba(232,181,40,.7);border-radius:50%;background:var(--pale-gold);color:var(--indigo);font-family:"Raleway",Arial,sans-serif;font-size:13px;font-weight:800;line-height:1}
+#bss .bss-reasons-sec{background:#fff}
+#bss .bss-reasons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+#bss .bss-card,#bss .bss-service{position:relative;overflow:hidden;display:grid;border:1px solid var(--line);background:#fff;transition:opacity .8s ease var(--d,0s),translate .8s var(--ease) var(--d,0s),transform .4s var(--ease),border-color .35s ease,box-shadow .35s ease}
+#bss .bss-card::before,#bss .bss-service::before{content:"";position:absolute;top:0;right:0;left:0;height:3px;background:linear-gradient(90deg,var(--indigo),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
+#bss .bss-card:hover,#bss .bss-service:hover{border-color:rgba(232,181,40,.5);box-shadow:0 24px 50px rgba(37,37,89,.13);transform:translateY(-6px)}
+#bss .bss-card:hover::before,#bss .bss-service:hover::before{transform:scaleX(1)}
+#bss .bss-card:hover .bss-num,#bss .bss-service:hover .bss-num{box-shadow:0 0 0 6px rgba(232,181,40,.22);transform:scale(1.08) rotate(-6deg)}
+#bss .bss-card{grid-template-columns:54px minmax(0,1fr);gap:18px;min-height:150px;padding:28px 26px;border-radius:22px;box-shadow:0 12px 32px rgba(37,37,89,.06)}
 #bss .bss-card h3,#bss .bss-service h4{margin:2px 0 9px;font-size:18px;font-weight:700;letter-spacing:-.015em}
 #bss .bss-card p,#bss .bss-service p{margin:0;color:var(--muted);font-size:15px;line-height:1.6}
 
 /* 3. Services */
-#bss .bss-groups{display:grid;gap:42px}
-#bss .bss-group__title{display:flex;align-items:center;gap:13px;margin:0 0 20px;color:var(--indigo-deep);font-size:24px;font-weight:800;letter-spacing:-.025em}
-#bss .bss-group__title span{display:inline-flex;min-width:42px;height:36px;justify-content:center;align-items:center;border-radius:10px;background:var(--indigo);color:#fff;font-size:12px;letter-spacing:.06em}
+#bss .bss-services-sec{overflow:hidden;background:linear-gradient(180deg,#fff 0%,#f5f5fc 14%,#f5f5fc 86%,#fff 100%)}
+#bss .bss-services-sec::before{content:"";position:absolute;z-index:-1;top:120px;right:-280px;width:620px;height:620px;border-radius:50%;background:radial-gradient(closest-side,rgba(85,85,204,.12),rgba(85,85,204,0));pointer-events:none;animation:bss-drift 20s ease-in-out infinite alternate}
+#bss .bss-services-sec::after{content:"";position:absolute;z-index:-1;bottom:120px;left:-260px;width:560px;height:560px;border-radius:50%;background:radial-gradient(closest-side,rgba(232,181,40,.12),rgba(232,181,40,0));pointer-events:none;animation:bss-drift 24s ease-in-out infinite alternate-reverse}
+#bss .bss-groups{display:grid;gap:48px}
+#bss .bss-group__title{display:flex;align-items:center;gap:14px;margin:0 0 22px;color:var(--indigo-deep);font-size:24px;font-weight:800;letter-spacing:-.025em}
+#bss .bss-group__title span{display:inline-flex;min-width:46px;height:38px;justify-content:center;align-items:center;border-radius:12px;background:linear-gradient(135deg,var(--indigo),var(--indigo-deep));box-shadow:0 8px 18px rgba(51,51,148,.25);color:var(--gold-light);font-size:12px;letter-spacing:.06em}
 #bss .bss-services{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-#bss .bss-service{display:grid;grid-template-columns:42px minmax(0,1fr);gap:16px;min-height:142px;padding:22px;border:1px solid var(--line);border-radius:15px;background:#fff}
-#bss .bss-service .bss-num{width:34px;height:34px;margin-top:1px;font-size:11px}
+#bss .bss-service{grid-template-columns:44px minmax(0,1fr);gap:16px;min-height:142px;padding:24px;border-radius:18px;box-shadow:0 8px 22px rgba(37,37,89,.05)}
+#bss .bss-service .bss-num{width:36px;height:36px;flex-basis:36px;margin-top:1px;border:1px solid rgba(232,181,40,.7);background:var(--pale-gold);box-shadow:none;color:var(--indigo);font-size:11px}
+#bss .bss-service:hover .bss-num{border-color:transparent;background:linear-gradient(135deg,var(--gold-light),var(--gold));color:var(--navy)}
 #bss .bss-service h4{font-size:16px;line-height:1.3}
 #bss .bss-service p{font-size:14px}
 
-/* 4. Reviews: dark premium band, glass cards, reveal on scroll, swipe carousel on tablet/phone */
-#bss .bss-proof{--g:24px;position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(160deg,#151549 0%,#26266f 50%,#31318c 100%)}
-#bss .bss-proof::before,#bss .bss-proof::after{content:"";position:absolute;z-index:-1;width:560px;height:560px;border-radius:50%;filter:blur(100px);pointer-events:none;animation:bss-drift 18s ease-in-out infinite alternate}
-#bss .bss-proof::before{top:-240px;left:-180px;background:rgba(99,102,241,.38)}
-#bss .bss-proof::after{right:-200px;bottom:-260px;background:rgba(245,197,66,.13);animation-delay:-9s}
-@keyframes bss-drift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(70px,40px,0) scale(1.15)}}
-#bss .bss-proof .bss-eyebrow{color:var(--gold)}
-#bss .bss-proof .bss-heading h2{color:#fff}
-#bss .bss-rating{display:inline-flex;align-items:center;gap:10px;margin:22px auto 0;padding:7px 16px 7px 7px;border:1px solid rgba(255,255,255,.16);border-radius:999px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.86);font-size:13px;font-weight:500;line-height:1.3}
-#bss .bss-rating__g{display:inline-flex;width:28px;height:28px;flex:0 0 28px;justify-content:center;align-items:center;border-radius:50%;background:#fff}
+/* 4. Reviews: light, same card style as the rest of the page, reveal on scroll, swipe carousel on tablet/phone */
+#bss .bss-proof{--g:24px;overflow:hidden;background:#fff}
+#bss .bss-proof::before,#bss .bss-proof::after{content:"";position:absolute;z-index:-1;border-radius:50%;pointer-events:none;animation:bss-drift 18s ease-in-out infinite alternate}
+#bss .bss-proof::before{top:80px;left:-320px;width:640px;height:640px;background:radial-gradient(closest-side,rgba(85,85,204,.13),rgba(85,85,204,0))}
+#bss .bss-proof::after{right:-280px;bottom:80px;width:560px;height:560px;background:radial-gradient(closest-side,rgba(232,181,40,.15),rgba(232,181,40,0));animation-delay:-9s}
+#bss .bss-rating{display:inline-flex;align-items:center;gap:10px;margin:22px auto 0;padding:7px 16px 7px 7px;border:1px solid var(--line);border-radius:999px;background:#fff;box-shadow:0 8px 22px rgba(37,37,89,.08);color:var(--ink);font-size:13px;font-weight:500;line-height:1.3}
+#bss .bss-rating__g{display:inline-flex;width:28px;height:28px;flex:0 0 28px;justify-content:center;align-items:center;border-radius:50%;background:#fff;box-shadow:0 2px 8px rgba(37,37,89,.14)}
 #bss .bss-rating__g svg{width:16px;height:16px}
-#bss .bss-stars{color:#f5c542;font-size:16px;letter-spacing:.12em;line-height:1}
+#bss .bss-stars{color:var(--gold);font-size:16px;letter-spacing:.12em;line-height:1}
 #bss .bss-reviews{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:start}
-#bss .bss-review{position:relative;display:flex;min-width:0;flex-direction:column;padding:30px 28px 24px;border:1px solid rgba(255,255,255,.13);border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04));box-shadow:0 24px 60px rgba(6,6,36,.35);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);transition:opacity .8s ease var(--d,0s),translate .8s cubic-bezier(.2,.7,.2,1) var(--d,0s),transform .35s ease,border-color .35s ease,box-shadow .35s ease}
-#bss .bss-review:hover{border-color:rgba(232,181,40,.55);box-shadow:0 30px 70px rgba(6,6,36,.45),0 0 0 1px rgba(232,181,40,.22);transform:translateY(-6px)}
+#bss .bss-review{position:relative;display:flex;min-width:0;flex-direction:column;overflow:hidden;padding:30px 28px 24px;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:0 14px 36px rgba(37,37,89,.08);transition:opacity .8s ease var(--d,0s),translate .8s var(--ease) var(--d,0s),transform .4s var(--ease),border-color .35s ease,box-shadow .35s ease}
+#bss .bss-review::before{content:"";position:absolute;top:0;right:0;left:0;height:3px;background:linear-gradient(90deg,var(--indigo),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
+#bss .bss-review:hover{border-color:rgba(232,181,40,.5);box-shadow:0 24px 50px rgba(37,37,89,.13);transform:translateY(-6px)}
+#bss .bss-review:hover::before{transform:scaleX(1)}
 #bss.bss-js .bss-review{opacity:0;translate:0 32px}
 #bss.bss-js .bss-review.is-in{opacity:1;translate:none}
-#bss .bss-review__mark{position:absolute;top:10px;right:24px;color:var(--gold);font-family:Georgia,"Times New Roman",serif;font-size:96px;line-height:1;opacity:.38;pointer-events:none;transition:opacity .35s ease,transform .35s ease}
-#bss .bss-review:hover .bss-review__mark{opacity:.7;transform:translateY(-4px) rotate(-6deg)}
-#bss .bss-review__text{margin:18px 0 0;overflow:hidden;color:rgba(255,255,255,.9);font-size:15px;line-height:1.7;transition:max-height .5s cubic-bezier(.2,.7,.2,1)}
+#bss .bss-review__mark{position:absolute;top:10px;right:24px;color:var(--gold);font-family:Georgia,"Times New Roman",serif;font-size:96px;line-height:1;opacity:.35;pointer-events:none;transition:opacity .35s ease,transform .35s ease}
+#bss .bss-review:hover .bss-review__mark{opacity:.75;transform:translateY(-4px) rotate(-6deg)}
+#bss .bss-review__text{margin:18px 0 0;overflow:hidden;color:#3c3c52;font-size:15px;line-height:1.7;transition:max-height .5s cubic-bezier(.2,.7,.2,1)}
 #bss.bss-js .bss-review__text{max-height:calc(1.7em * 4)}
 #bss .bss-review.is-long:not(.is-open) .bss-review__text{-webkit-mask-image:linear-gradient(180deg,#000 50%,transparent);mask-image:linear-gradient(180deg,#000 50%,transparent)}
 #bss .bss-review__actions{display:flex;align-items:center;gap:12px;margin-top:12px}
-#bss .bss-more{display:none;width:fit-content;align-items:center;gap:7px;margin:0;padding:6px 0;border:0;background:none;color:var(--gold);cursor:pointer;font-size:13px;font-weight:700;letter-spacing:.04em;line-height:1.2}
+#bss .bss-more{display:none;width:fit-content;align-items:center;gap:7px;margin:0;padding:6px 0;border:0;background:none;color:var(--indigo);cursor:pointer;font-size:13px;font-weight:700;letter-spacing:.04em;line-height:1.2}
 #bss .bss-more::after{content:"";width:7px;height:7px;margin-top:-3px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform .3s ease,margin .3s ease}
 #bss .bss-review.is-open .bss-more::after{margin-top:3px;transform:rotate(-135deg)}
 #bss .bss-review.is-long .bss-more{display:inline-flex}
-#bss .bss-more:hover{color:#ffd76a}
-#bss .bss-review__by{display:flex;align-items:center;gap:14px;margin-top:22px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12)}
-#bss .bss-avatar{display:inline-flex;width:46px;height:46px;flex:0 0 46px;justify-content:center;align-items:center;border-radius:50%;background:linear-gradient(135deg,#f5c542,#d69b17);box-shadow:0 0 0 3px rgba(232,181,40,.2);color:#1b1b55;font-family:"Raleway",Arial,sans-serif;font-size:15px;font-weight:800;letter-spacing:.02em}
-#bss .bss-review__who{min-width:0}
-#bss .bss-review__name{color:#fff;font-family:"Raleway",Arial,sans-serif;font-size:16px;font-weight:800;line-height:1.3}
-#bss .bss-review__meta{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.62);font-size:12.5px;line-height:1.4}
-#bss .bss-review__meta svg{width:13px;height:13px;flex:0 0 13px}
-#bss .bss-review__link{display:inline-flex;align-items:center;gap:5px;margin-left:auto;padding:6px 0;color:rgba(255,255,255,.72);font-size:12.5px;font-weight:600;line-height:1.2;text-decoration:none;white-space:nowrap;transition:color .25s ease}
+#bss .bss-more:hover{color:var(--indigo-deep)}
+#bss .bss-review__link{display:inline-flex;align-items:center;gap:5px;margin-left:auto;padding:6px 0;color:var(--muted);font-size:12.5px;font-weight:600;line-height:1.2;text-decoration:none;white-space:nowrap;transition:color .25s ease}
 #bss .bss-review__link svg{width:14px;height:14px;transition:transform .25s ease}
-#bss .bss-review__link:hover{color:#f5c542}
+#bss .bss-review__link:hover{color:var(--indigo)}
 #bss .bss-review__link:hover svg{transform:translate(2px,-2px)}
+#bss .bss-review__by{display:flex;align-items:center;gap:14px;margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
+#bss .bss-avatar{display:inline-flex;width:46px;height:46px;flex:0 0 46px;justify-content:center;align-items:center;border-radius:50%;background:linear-gradient(135deg,var(--gold-light),var(--gold));box-shadow:0 0 0 4px rgba(232,181,40,.16);color:var(--navy);font-family:"Raleway",Arial,sans-serif;font-size:15px;font-weight:800;letter-spacing:.02em}
+#bss .bss-review__who{min-width:0}
+#bss .bss-review__name{color:var(--ink);font-family:"Raleway",Arial,sans-serif;font-size:16px;font-weight:800;line-height:1.3}
+#bss .bss-review__meta{display:flex;align-items:center;gap:6px;color:#77778a;font-size:12.5px;line-height:1.4}
+#bss .bss-review__meta svg{width:13px;height:13px;flex:0 0 13px}
 #bss .bss-dots{display:none;justify-content:center;gap:2px;margin-top:6px}
 #bss .bss-dot{display:inline-flex;width:30px;height:30px;justify-content:center;align-items:center;padding:0;border:0;background:none;cursor:pointer}
-#bss .bss-dot::before{content:"";width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.35);transition:width .3s ease,background-color .3s ease}
+#bss .bss-dot::before{content:"";width:8px;height:8px;border-radius:999px;background:rgba(51,51,148,.2);transition:width .3s ease,background-color .3s ease}
 #bss .bss-dot[aria-current="true"]::before{width:26px;background:var(--gold)}
-#bss .bss-proof .bss-btn{border-color:var(--gold);background:var(--gold);color:#1b1b55}
-#bss .bss-proof .bss-btn:hover{border-color:#f5c542;background:#f5c542;box-shadow:0 12px 32px rgba(232,181,40,.35)}
-#bss .bss-proof :focus-visible{outline-color:#f5c542}
 
 /* 5. FAQ */
-#bss .bss-faq{padding-top:100px;padding-bottom:100px}
-#bss .bss-faq .bss-wrap{max-width:920px}
-#bss .bss-faq .bss-heading{margin:0 0 35px;text-align:left}
-#bss .bss-faq__list{border-top:1px solid #dcdce8}
-#bss .bss-faq__item{border-bottom:1px solid #dcdce8}
+#bss .bss-faq{overflow:hidden;background:linear-gradient(180deg,#fff 0%,#f5f5fc 16%,#f5f5fc 84%,#fff 100%)}
+#bss .bss-faq::before{content:"";position:absolute;z-index:-1;top:120px;right:-260px;width:560px;height:560px;border-radius:50%;background:radial-gradient(closest-side,rgba(232,181,40,.12),rgba(232,181,40,0));pointer-events:none;animation:bss-drift 22s ease-in-out infinite alternate}
+#bss .bss-faq__grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.3fr);grid-template-areas:"head list" "cta list";column-gap:64px;row-gap:28px;align-items:start}
+#bss .bss-faq__head{grid-area:head;margin:0;text-align:left}
+#bss .bss-faq__list{grid-area:list;display:grid;gap:12px}
+#bss .bss-faq__cta{grid-area:cta}
+#bss .bss-faq__item{border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 4px 14px rgba(37,37,89,.04);transition:opacity .8s ease var(--d,0s),translate .8s var(--ease) var(--d,0s),border-color .3s ease,box-shadow .3s ease}
+#bss .bss-faq__item:hover{border-color:rgba(51,51,148,.25)}
+#bss .bss-faq__item.is-open{border-color:rgba(232,181,40,.6);box-shadow:0 18px 40px rgba(37,37,89,.1)}
 #bss .bss-faq__item h3{margin:0}
-#bss .bss-faq__q{display:flex;width:100%;min-height:72px;justify-content:space-between;align-items:center;gap:20px;padding:18px 0;border:0;border-radius:0;background:transparent;color:var(--ink);cursor:pointer;font-family:"Raleway",Arial,sans-serif;font-size:17px;font-weight:700;line-height:1.3;text-align:left}
-#bss .bss-faq__mark{display:inline-flex;width:29px;height:29px;flex:0 0 29px;justify-content:center;align-items:center;border:1px solid rgba(51,51,148,.25);border-radius:50%;color:var(--indigo);font-family:"Roboto",Arial,sans-serif;font-size:20px;font-weight:400;line-height:1}
-#bss .bss-faq__mark::before{content:"+"}
-#bss .bss-faq__q[aria-expanded="true"] .bss-faq__mark::before{content:"\2212"}
-#bss .bss-faq__a{padding:0 50px 20px 0;color:var(--muted);font-size:15px;line-height:1.7}
-#bss .bss-faq__a[hidden]{display:none}
+#bss .bss-faq__q{display:flex;width:100%;min-height:70px;justify-content:space-between;align-items:center;gap:18px;padding:18px 20px 18px 24px;border:0;border-radius:18px;background:transparent;color:var(--ink);cursor:pointer;font-family:"Raleway",Arial,sans-serif;font-size:17px;font-weight:700;line-height:1.35;text-align:left}
+#bss .bss-faq__mark{position:relative;display:inline-flex;width:34px;height:34px;flex:0 0 34px;border-radius:50%;background:var(--pale);transition:background-color .3s ease,transform .45s var(--ease)}
+#bss .bss-faq__mark::before,#bss .bss-faq__mark::after{content:"";position:absolute;top:50%;left:50%;width:12px;height:2px;margin:-1px 0 0 -6px;border-radius:2px;background:var(--indigo);transition:transform .45s var(--ease),background-color .3s ease}
+#bss .bss-faq__mark::after{transform:rotate(90deg)}
+#bss .bss-faq__q:hover .bss-faq__mark{background:rgba(232,181,40,.22)}
+#bss .bss-faq__item.is-open .bss-faq__mark{background:var(--gold);transform:rotate(180deg)}
+#bss .bss-faq__item.is-open .bss-faq__mark::before,#bss .bss-faq__item.is-open .bss-faq__mark::after{background:var(--navy)}
+#bss .bss-faq__item.is-open .bss-faq__mark::after{transform:rotate(0deg)}
+#bss .bss-faq__a{display:grid;grid-template-rows:1fr;transition:grid-template-rows .45s var(--ease),visibility 0s}
+#bss .bss-faq__a > div{min-height:0;overflow:hidden}
+#bss .bss-faq__a p{padding:0 66px 22px 24px;color:var(--muted);font-size:15px;line-height:1.7}
+#bss.bss-js .bss-faq__item:not(.is-open) .bss-faq__a{grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .45s var(--ease),visibility 0s .45s}
 
 /* 6. Final CTA */
-#bss .bss-final-section{padding:74px 24px 96px;background:#fff}
-#bss .bss-final{width:min(100%,1120px);margin:0 auto;padding:64px 28px;border:1px solid rgba(51,51,148,.12);border-top:4px solid var(--gold);border-radius:22px;background:linear-gradient(145deg,#f4f4fb 0%,#fffaf0 100%);text-align:center}
-#bss .bss-final h2{max-width:780px;margin:0 auto 16px}
-#bss .bss-final__text{max-width:680px;margin:0 auto 26px;color:var(--muted);font-size:17px}
+#bss .bss-final-section{padding:40px 24px 110px;background:#fff}
+#bss .bss-final{position:relative;isolation:isolate;overflow:hidden;width:min(100%,1120px);margin:0 auto;padding:84px 32px;border:1px solid rgba(51,51,148,.12);border-radius:28px;background:linear-gradient(145deg,#f4f4fb 0%,#fff 50%,#fff9e9 100%);box-shadow:0 30px 70px rgba(37,37,89,.1);text-align:center}
+#bss .bss-final::before,#bss .bss-final::after{content:"";position:absolute;z-index:-1;width:520px;height:520px;border-radius:50%;pointer-events:none;animation:bss-drift 18s ease-in-out infinite alternate}
+#bss .bss-final::before{top:-260px;left:-160px;background:radial-gradient(closest-side,rgba(85,85,204,.14),rgba(85,85,204,0))}
+#bss .bss-final::after{right:-180px;bottom:-280px;background:radial-gradient(closest-side,rgba(232,181,40,.2),rgba(232,181,40,0));animation-delay:-9s}
+#bss .bss-final h2{max-width:780px;margin:0 auto 18px}
+#bss .bss-final__text{max-width:680px;margin:0 auto 32px;color:var(--muted);font-size:17px}
 
 /* Survey popup: a native <dialog> opened with showModal() sits in the browser's top layer,
    so GHL wrappers (transforms, overflow:hidden, z-index) can't hide or clip it. */
-#bss .bss-modal{width:min(calc(100% - 32px),650px);max-width:none;height:fit-content;max-height:92vh;max-height:min(92dvh,900px);margin:auto;padding:0;overflow:auto;border:1px solid rgba(255,255,255,.75);border-radius:17px;background:#fff;color:var(--ink);box-shadow:0 28px 90px rgba(11,11,45,.3);overscroll-behavior:contain}
-#bss .bss-modal::backdrop{background:rgba(26,26,51,.68)}
+#bss .bss-modal{width:min(calc(100% - 32px),650px);max-width:none;height:fit-content;max-height:92vh;max-height:min(92dvh,900px);margin:auto;padding:0;overflow:auto;border:0;border-top:4px solid var(--gold);border-radius:18px;background:#fff;color:var(--ink);box-shadow:0 30px 90px rgba(11,11,45,.35);overscroll-behavior:contain}
+#bss .bss-modal[open]{animation:bss-pop .35s var(--ease)}
+#bss .bss-modal::backdrop{background:rgba(21,21,73,.7);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+#bss .bss-modal[open]::backdrop{animation:bss-fade .3s ease}
 #bss .bss-modal.bss-modal--fallback{position:fixed;inset:0;z-index:2147483000;display:block}
-#bss .bss-modal__shade{position:fixed;inset:0;z-index:2147482999;background:rgba(26,26,51,.68)}
+#bss .bss-modal__shade{position:fixed;inset:0;z-index:2147482999;background:rgba(21,21,73,.7)}
 #bss .bss-modal__shade[hidden]{display:none}
-#bss .bss-modal__head{position:sticky;z-index:1;top:0;display:flex;min-height:62px;justify-content:space-between;align-items:center;gap:16px;padding:12px 17px 12px 22px;border-bottom:1px solid var(--line);background:#fff}
-#bss .bss-modal__head h2{margin:0;color:var(--indigo-deep);font-size:18px;font-weight:800;line-height:1.3}
-#bss .bss-modal__close{display:inline-flex;width:38px;height:38px;flex:0 0 38px;justify-content:center;align-items:center;padding:0;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--indigo-deep);cursor:pointer;font-size:25px;line-height:1}
+#bss .bss-modal__head{position:sticky;z-index:1;top:0;display:flex;min-height:64px;justify-content:space-between;align-items:center;gap:16px;padding:12px 17px 12px 24px;border-bottom:1px solid var(--line);background:#fff}
+#bss .bss-modal__head h2{margin:0;color:var(--indigo-deep);font-size:19px;font-weight:800;line-height:1.3}
+#bss .bss-modal__close{display:inline-flex;width:40px;height:40px;flex:0 0 40px;justify-content:center;align-items:center;padding:0;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--indigo-deep);cursor:pointer;font-size:25px;line-height:1;transition:border-color .25s ease,background-color .25s ease,transform .3s var(--ease)}
+#bss .bss-modal__close:hover{border-color:var(--gold);background:var(--pale-gold);transform:rotate(90deg)}
 #bss .bss-modal__body{position:relative;min-height:360px}
 #bss .bss-modal__loading{position:absolute;top:40px;right:0;left:0;color:var(--muted);font-size:14px;text-align:center}
 #bss .bss-modal iframe{position:relative;display:block;width:100%;min-height:360px;max-width:100%;border:none;background:transparent}
@@ -141,54 +199,62 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
 @media (max-width:1024px){
   #bss .bss-reviews{display:flex;width:auto;margin-right:calc(var(--g) * -1);margin-left:calc(var(--g) * -1);padding:8px var(--g) 20px;overflow-x:auto;scroll-padding:0 var(--g);scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
   #bss .bss-reviews::-webkit-scrollbar{display:none}
-  #bss .bss-review,#bss .bss-review:hover{flex:0 0 min(80%,420px);scroll-snap-align:start;box-shadow:none}
+  #bss .bss-review,#bss .bss-review:hover{flex:0 0 min(80%,420px);scroll-snap-align:start;box-shadow:0 6px 14px rgba(37,37,89,.06)}
   #bss .bss-dots{display:flex}
+  #bss .bss-faq__grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "list" "cta";row-gap:30px}
+  #bss .bss-faq__head{max-width:none;text-align:center}
+  #bss .bss-faq__cta{text-align:center}
 }
 @media (max-width:900px){
-  #bss .bss-section{padding:76px 22px}
-  #bss .bss-reasons,#bss .bss-services{gap:14px}
-  #bss .bss-card,#bss .bss-service{padding:21px 19px}
+  #bss .bss-section{padding:80px 22px}
   #bss .bss-proof{--g:22px}
+  #bss .bss-reasons,#bss .bss-services{gap:14px}
+  #bss .bss-card,#bss .bss-service{padding:22px 20px}
 }
 @media (max-width:640px){
   #bss .bss-header{min-height:65px;padding:12px 16px 4px}
   #bss .bss-header img{width:132px}
-  #bss .bss-hero{padding:24px 16px 20px}
-  #bss .bss-callout{max-width:100%;margin-bottom:15px;padding:6px 11px;font-size:10px}
-  #bss .bss-hero h1{max-width:520px;margin-bottom:14px;font-size:clamp(2.2rem,9vw,3rem);line-height:1.09}
-  #bss .bss-hero__sub{max-width:520px;margin-bottom:20px;font-size:16px}
-  #bss .bss-btn{min-height:52px;padding:13px 22px}
-  #bss .bss-section{padding:62px 16px}
-  #bss .bss-heading{margin-bottom:30px}
+  #bss .bss-hero{padding:24px 16px 56px}
+  #bss .bss-hero::before{top:30px;width:560px;height:400px;margin-left:-280px}
+  #bss .bss-hero::after{right:-170px;bottom:90px;width:300px;height:300px}
+  #bss .bss-callout{max-width:100%;margin-bottom:16px;padding:6px 12px;font-size:10px}
+  #bss .bss-hero h1{max-width:520px;margin-bottom:14px;font-size:clamp(2.2rem,9.4vw,3rem);line-height:1.09}
+  #bss .bss-hero__sub{max-width:520px;margin-bottom:22px;font-size:16px}
+  #bss .bss-btn{min-height:54px;padding:14px 24px}
+  #bss .bss-trust{flex-direction:column;align-items:center;gap:10px;margin-top:24px;font-size:13px}
+  #bss .bss-section{padding:64px 16px}
+  #bss .bss-heading{margin-bottom:32px}
   #bss .bss-eyebrow{font-size:10px;letter-spacing:.1em}
   #bss .bss-heading h2,#bss .bss-final h2{font-size:clamp(1.9rem,8vw,2.5rem)}
   #bss .bss-reasons,#bss .bss-services{grid-template-columns:minmax(0,1fr)}
   #bss .bss-reasons{gap:12px}
-  #bss .bss-card{min-height:0;grid-template-columns:43px minmax(0,1fr);gap:13px;padding:19px 17px}
-  #bss .bss-card .bss-num{width:36px;height:36px;font-size:11px}
+  #bss .bss-card{min-height:0;grid-template-columns:44px minmax(0,1fr);gap:14px;padding:20px 18px;border-radius:18px}
+  #bss .bss-card .bss-num{width:38px;height:38px;flex-basis:38px;font-size:11px}
   #bss .bss-card h3{font-size:16px}
   #bss .bss-card p{font-size:14px}
-  #bss .bss-groups{gap:34px}
-  #bss .bss-group__title{gap:10px;margin-bottom:15px;font-size:21px}
-  #bss .bss-service{min-height:0;grid-template-columns:35px minmax(0,1fr);gap:12px;padding:18px 16px}
-  #bss .bss-service .bss-num{width:30px;height:30px;font-size:10px}
-  #bss .bss-cta{margin-top:29px}
+  #bss .bss-groups{gap:36px}
+  #bss .bss-group__title{gap:10px;margin-bottom:16px;font-size:21px}
+  #bss .bss-service{min-height:0;grid-template-columns:36px minmax(0,1fr);gap:12px;padding:18px 16px}
+  #bss .bss-service .bss-num{width:30px;height:30px;flex-basis:30px;font-size:10px}
+  #bss .bss-cta{margin-top:32px}
   #bss .bss-proof{--g:16px}
   #bss .bss-reviews{gap:14px}
   #bss .bss-review,#bss .bss-review:hover{flex-basis:86%;padding:26px 22px 22px}
   #bss .bss-review__mark{font-size:80px}
   #bss .bss-rating{font-size:12px}
-  #bss .bss-faq{padding-top:65px;padding-bottom:66px}
-  #bss .bss-faq .bss-heading{margin-bottom:25px}
-  #bss .bss-faq__q{min-height:66px;gap:12px;padding:16px 0;font-size:15px}
-  #bss .bss-faq__a{padding:0 38px 18px 0;font-size:14px}
-  #bss .bss-final-section{padding:48px 16px 62px}
-  #bss .bss-final{padding:42px 21px;border-radius:16px}
+  #bss .bss-faq__q{min-height:64px;gap:12px;padding:16px 16px 16px 18px;font-size:15px}
+  #bss .bss-faq__a p{padding:0 18px 18px;font-size:14px}
+  #bss .bss-final-section{padding:24px 16px 64px}
+  #bss .bss-final{padding:52px 22px;border-radius:20px}
   #bss .bss-final__text{font-size:15px}
-  #bss .bss-modal{width:calc(100% - 18px);max-height:calc(100vh - 18px);max-height:calc(100dvh - 18px);border-radius:14px}
+  #bss .bss-modal{width:calc(100% - 18px);max-height:calc(100vh - 18px);max-height:calc(100dvh - 18px);border-radius:16px}
   #bss .bss-modal__body,#bss .bss-modal iframe{min-height:330px}
 }
-@media (prefers-reduced-motion:reduce){#bss *,#bss *::before,#bss *::after{transition-duration:.01ms !important;animation:none !important}#bss.bss-js .bss-review{opacity:1;translate:none}}
+@media (prefers-reduced-motion:reduce){
+  #bss *,#bss *::before,#bss *::after{transition-duration:.01ms !important;animation:none !important}
+  #bss.bss-js .bss-reveal,#bss.bss-js .bss-review{opacity:1;translate:none}
+  #bss .bss-hl::after{transform:none}
+}
 </style>
 
 <div id="bss">
@@ -200,66 +266,71 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
     <!-- 1. Hero -->
     <section class="bss-hero">
       <div class="bss-hero__copy">
-        <p class="bss-callout">For MedSpas, wellness businesses, and private-pay medical providers</p>
-        <h1>Find Financial Serenity in Your Wellness Business</h1>
+        <p class="bss-callout"><span class="bss-callout__dot" aria-hidden="true"></span>For MedSpas, wellness businesses, and private-pay medical providers</p>
+        <h1>Find Financial <span class="bss-hl">Serenity</span> in Your Wellness Business</h1>
         <p class="bss-hero__sub">You provide balance and care for your clients. It is time you had the same for your finances.</p>
-        <button class="bss-btn" type="button" data-bss-open aria-haspopup="dialog">Get Started Now</button>
+        <button class="bss-btn" type="button" data-bss-open aria-haspopup="dialog">Get Started Now<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <ul class="bss-trust">
+          <li><span class="bss-trust__g"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg></span><span class="bss-stars" aria-hidden="true">★★★★★</span>Five-star Google reviews</li>
+          <li><span class="bss-trust__check"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7.5"/></svg></span>Certified Profit First Professional</li>
+          <li><span class="bss-trust__check"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7.5"/></svg></span>Built for wellness and medical businesses</li>
+        </ul>
       </div>
     </section>
 
     <!-- 2. Six reasons -->
-    <section class="bss-section" aria-labelledby="bss-reasons-title">
-      <div class="bss-heading">
+    <section class="bss-section bss-reasons-sec" aria-labelledby="bss-reasons-title">
+      <div class="bss-heading bss-reveal">
         <p class="bss-eyebrow">A better view of your business finances</p>
         <h2 id="bss-reasons-title">Six Reasons to Work With Bright Skies</h2>
       </div>
       <div class="bss-wrap bss-reasons">
-        <article class="bss-card"><span class="bss-num" aria-hidden="true">01</span><div><h3>Built for wellness and medical businesses</h3><p>Bright Skies focuses on spa, wellness, MedSpa, weight-loss clinic, and private-pay medical providers.</p></div></article>
-        <article class="bss-card"><span class="bss-num" aria-hidden="true">02</span><div><h3>Profit First experience</h3><p>The current Bright Skies website identifies a certified Profit First Professional and MBA.</p></div></article>
-        <article class="bss-card"><span class="bss-num" aria-hidden="true">03</span><div><h3>Bookkeeping beyond reconciliation</h3><p>Support includes a clear cash position and tracking for services, products, supplies, gift cards, and payroll costs.</p></div></article>
-        <article class="bss-card"><span class="bss-num" aria-hidden="true">04</span><div><h3>A tailored Profit First rollout</h3><p>Bright Skies describes an assessment and customized rollout plan for the Profit First system.</p></div></article>
-        <article class="bss-card"><span class="bss-num" aria-hidden="true">05</span><div><h3>Accounting software support</h3><p>Accounting services include setup and management of software such as QuickBooks for a spa business.</p></div></article>
-        <article class="bss-card"><span class="bss-num" aria-hidden="true">06</span><div><h3>Reports explained in plain language</h3><p>Financial reporting includes monthly statements and help understanding what the numbers mean for the business.</p></div></article>
+          <article class="bss-card bss-reveal" style="--d:0.00s"><span class="bss-num" aria-hidden="true">01</span><div><h3>Built for wellness and medical businesses</h3><p>Bright Skies focuses on spa, wellness, MedSpa, weight-loss clinic, and private-pay medical providers.</p></div></article>
+          <article class="bss-card bss-reveal" style="--d:0.08s"><span class="bss-num" aria-hidden="true">02</span><div><h3>Profit First experience</h3><p>The current Bright Skies website identifies a certified Profit First Professional and MBA.</p></div></article>
+          <article class="bss-card bss-reveal" style="--d:0.06s"><span class="bss-num" aria-hidden="true">03</span><div><h3>Bookkeeping beyond reconciliation</h3><p>Support includes a clear cash position and tracking for services, products, supplies, gift cards, and payroll costs.</p></div></article>
+          <article class="bss-card bss-reveal" style="--d:0.14s"><span class="bss-num" aria-hidden="true">04</span><div><h3>A tailored Profit First rollout</h3><p>Bright Skies describes an assessment and customized rollout plan for the Profit First system.</p></div></article>
+          <article class="bss-card bss-reveal" style="--d:0.12s"><span class="bss-num" aria-hidden="true">05</span><div><h3>Accounting software support</h3><p>Accounting services include setup and management of software such as QuickBooks for a spa business.</p></div></article>
+          <article class="bss-card bss-reveal" style="--d:0.20s"><span class="bss-num" aria-hidden="true">06</span><div><h3>Reports explained in plain language</h3><p>Financial reporting includes monthly statements and help understanding what the numbers mean for the business.</p></div></article>
       </div>
-      <div class="bss-cta"><button class="bss-btn" type="button" data-bss-open aria-haspopup="dialog">Get Started Now</button></div>
+      <div class="bss-cta bss-reveal"><button class="bss-btn" type="button" data-bss-open aria-haspopup="dialog">Get Started Now<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
     </section>
 
     <!-- 3. Services -->
-    <section class="bss-section bss-tint" aria-labelledby="bss-services-title">
-      <div class="bss-heading">
+    <section class="bss-section bss-services-sec" aria-labelledby="bss-services-title">
+      <div class="bss-heading bss-reveal">
         <p class="bss-eyebrow">Practical support, clear reporting</p>
         <h2 id="bss-services-title">Here’s Everything We Do For You</h2>
       </div>
       <div class="bss-wrap bss-groups">
         <div>
-          <h3 class="bss-group__title"><span aria-hidden="true">01</span>What We Deliver</h3>
+          <h3 class="bss-group__title bss-reveal"><span aria-hidden="true">01</span>What We Deliver</h3>
           <div class="bss-services">
-            <article class="bss-service"><span class="bss-num" aria-hidden="true">01</span><div><h4>Bookkeeping and transaction reconciliation</h4><p>Keep transactions accounted for and maintain an up-to-date view of the business’s cash position.</p></div></article>
-            <article class="bss-service"><span class="bss-num" aria-hidden="true">02</span><div><h4>Profit First assessment and rollout</h4><p>Review current financials, shape a customized rollout plan, and help set up the accounts for the system.</p></div></article>
-            <article class="bss-service"><span class="bss-num" aria-hidden="true">03</span><div><h4>Accounting software setup</h4><p>Set up and manage accounting software such as QuickBooks to match a spa business’s needs.</p></div></article>
-            <article class="bss-service"><span class="bss-num" aria-hidden="true">04</span><div><h4>Invoicing and bill payments</h4><p>Support invoicing and bill-payment processes for cash flow and vendor relationships.</p></div></article>
-            <article class="bss-service"><span class="bss-num" aria-hidden="true">05</span><div><h4>Service and product profitability analysis</h4><p>Review profitability by service, package, and product line.</p></div></article>
-            <article class="bss-service"><span class="bss-num" aria-hidden="true">06</span><div><h4>Payroll tracking</h4><p>Work with the payroll provider to track salaries, hourly wages, and commission structures.</p></div></article>
+          <article class="bss-service bss-reveal" style="--d:0.00s"><span class="bss-num" aria-hidden="true">01</span><div><h4>Bookkeeping and transaction reconciliation</h4><p>Keep transactions accounted for and maintain an up-to-date view of the business’s cash position.</p></div></article>
+          <article class="bss-service bss-reveal" style="--d:0.08s"><span class="bss-num" aria-hidden="true">02</span><div><h4>Profit First assessment and rollout</h4><p>Review current financials, shape a customized rollout plan, and help set up the accounts for the system.</p></div></article>
+          <article class="bss-service bss-reveal" style="--d:0.06s"><span class="bss-num" aria-hidden="true">03</span><div><h4>Accounting software setup</h4><p>Set up and manage accounting software such as QuickBooks to match a spa business’s needs.</p></div></article>
+          <article class="bss-service bss-reveal" style="--d:0.14s"><span class="bss-num" aria-hidden="true">04</span><div><h4>Invoicing and bill payments</h4><p>Support invoicing and bill-payment processes for cash flow and vendor relationships.</p></div></article>
+          <article class="bss-service bss-reveal" style="--d:0.12s"><span class="bss-num" aria-hidden="true">05</span><div><h4>Service and product profitability analysis</h4><p>Review profitability by service, package, and product line.</p></div></article>
+          <article class="bss-service bss-reveal" style="--d:0.20s"><span class="bss-num" aria-hidden="true">06</span><div><h4>Payroll tracking</h4><p>Work with the payroll provider to track salaries, hourly wages, and commission structures.</p></div></article>
           </div>
         </div>
         <div>
-          <h3 class="bss-group__title"><span aria-hidden="true">02</span>What You Get</h3>
+          <h3 class="bss-group__title bss-reveal"><span aria-hidden="true">02</span>What You Get</h3>
           <div class="bss-services">
-            <article class="bss-service"><span class="bss-num" aria-hidden="true">01</span><div><h4>A clear cash position</h4><p>Transactions are accounted for to give a current picture of cash position.</p></div></article>
-            <article class="bss-service"><span class="bss-num" aria-hidden="true">02</span><div><h4>Monthly financial statements</h4><p>Receive easy-to-understand Profit and Loss and Balance Sheet statements each month.</p></div></article>
-            <article class="bss-service"><span class="bss-num" aria-hidden="true">03</span><div><h4>Visibility by service and product</h4><p>Understand where revenue comes from across services and retail, and review profitability by line.</p></div></article>
-            <article class="bss-service"><span class="bss-num" aria-hidden="true">04</span><div><h4>Retail, supply, and gift-card tracking</h4><p>Track retail product and professional supply costs, along with the liability from unredeemed gift cards.</p></div></article>
-            <article class="bss-service"><span class="bss-num" aria-hidden="true">05</span><div><h4>Budgeting and cash flow forecasting</h4><p>Plan for seasonal changes and major investments with a budget and cash flow forecast.</p></div></article>
-            <article class="bss-service"><span class="bss-num" aria-hidden="true">06</span><div><h4>A twice-monthly allocation rhythm</h4><p>Establish a regular cadence for allocating income into the designated Profit First accounts.</p></div></article>
+          <article class="bss-service bss-reveal" style="--d:0.00s"><span class="bss-num" aria-hidden="true">01</span><div><h4>A clear cash position</h4><p>Transactions are accounted for to give a current picture of cash position.</p></div></article>
+          <article class="bss-service bss-reveal" style="--d:0.08s"><span class="bss-num" aria-hidden="true">02</span><div><h4>Monthly financial statements</h4><p>Receive easy-to-understand Profit and Loss and Balance Sheet statements each month.</p></div></article>
+          <article class="bss-service bss-reveal" style="--d:0.06s"><span class="bss-num" aria-hidden="true">03</span><div><h4>Visibility by service and product</h4><p>Understand where revenue comes from across services and retail, and review profitability by line.</p></div></article>
+          <article class="bss-service bss-reveal" style="--d:0.14s"><span class="bss-num" aria-hidden="true">04</span><div><h4>Retail, supply, and gift-card tracking</h4><p>Track retail product and professional supply costs, along with the liability from unredeemed gift cards.</p></div></article>
+          <article class="bss-service bss-reveal" style="--d:0.12s"><span class="bss-num" aria-hidden="true">05</span><div><h4>Budgeting and cash flow forecasting</h4><p>Plan for seasonal changes and major investments with a budget and cash flow forecast.</p></div></article>
+          <article class="bss-service bss-reveal" style="--d:0.20s"><span class="bss-num" aria-hidden="true">06</span><div><h4>A twice-monthly allocation rhythm</h4><p>Establish a regular cadence for allocating income into the designated Profit First accounts.</p></div></article>
           </div>
         </div>
       </div>
-      <div class="bss-cta"><button class="bss-btn" type="button" data-bss-open aria-haspopup="dialog">Get Started Now</button></div>
+      <div class="bss-cta bss-reveal"><button class="bss-btn" type="button" data-bss-open aria-haspopup="dialog">Get Started Now<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
     </section>
 
     <!-- 4. Testimonials -->
     <section class="bss-section bss-proof" aria-labelledby="bss-reviews-title">
-      <div class="bss-heading">
+      <div class="bss-heading bss-reveal">
         <p class="bss-eyebrow">Client reviews shared on Google</p>
         <h2 id="bss-reviews-title">Hear From Bright Skies Clients</h2>
         <p class="bss-rating"><span class="bss-rating__g"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg></span><span class="bss-stars" aria-hidden="true">★★★★★</span><span>Five-star client reviews</span></p>
@@ -312,49 +383,51 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
           <button class="bss-dot" type="button" aria-label="Review 3" aria-current="false"></button>
         </div>
       </div>
-      <div class="bss-cta"><button class="bss-btn" type="button" data-bss-open aria-haspopup="dialog">Get Started Now</button></div>
+      <div class="bss-cta bss-reveal"><button class="bss-btn" type="button" data-bss-open aria-haspopup="dialog">Get Started Now<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
     </section>
 
     <!-- 5. FAQ -->
-    <section class="bss-section bss-tint bss-faq" aria-labelledby="bss-faq-title">
-      <div class="bss-wrap">
-        <div class="bss-heading">
+    <section class="bss-section bss-faq" aria-labelledby="bss-faq-title">
+      <div class="bss-wrap bss-faq__grid">
+        <div class="bss-heading bss-faq__head bss-reveal">
           <p class="bss-eyebrow">Answers from Bright Skies’ official service information</p>
           <h2 id="bss-faq-title">Frequently Asked Questions</h2>
         </div>
         <div class="bss-faq__list">
-          <div class="bss-faq__item">
+          <div class="bss-faq__item bss-reveal" style="--d:0.00s">
             <h3><button type="button" class="bss-faq__q" id="bss-faq-q1" aria-expanded="false" aria-controls="bss-faq-a1"><span>Which types of businesses does Bright Skies serve?</span><span class="bss-faq__mark" aria-hidden="true"></span></button></h3>
-            <div class="bss-faq__a" id="bss-faq-a1" role="region" aria-labelledby="bss-faq-q1" hidden><p>Bright Skies describes its focus as spa and wellness businesses, MedSpas, weight-loss clinics, medical services, and other private-pay medical providers.</p></div>
+            <div class="bss-faq__a" id="bss-faq-a1" role="region" aria-labelledby="bss-faq-q1"><div><p>Bright Skies describes its focus as spa and wellness businesses, MedSpas, weight-loss clinics, medical services, and other private-pay medical providers.</p></div></div>
           </div>
-          <div class="bss-faq__item">
+          <div class="bss-faq__item bss-reveal" style="--d:0.06s">
             <h3><button type="button" class="bss-faq__q" id="bss-faq-q2" aria-expanded="false" aria-controls="bss-faq-a2"><span>What does the bookkeeping service cover?</span><span class="bss-faq__mark" aria-hidden="true"></span></button></h3>
-            <div class="bss-faq__a" id="bss-faq-a2" role="region" aria-labelledby="bss-faq-q2" hidden><p>The official bookkeeping page describes transaction reconciliation and tracking for revenue sources, retail products, professional supplies, unredeemed gift cards, payroll costs, and monthly financial statements.</p></div>
+            <div class="bss-faq__a" id="bss-faq-a2" role="region" aria-labelledby="bss-faq-q2"><div><p>The official bookkeeping page describes transaction reconciliation and tracking for revenue sources, retail products, professional supplies, unredeemed gift cards, payroll costs, and monthly financial statements.</p></div></div>
           </div>
-          <div class="bss-faq__item">
+          <div class="bss-faq__item bss-reveal" style="--d:0.12s">
             <h3><button type="button" class="bss-faq__q" id="bss-faq-q3" aria-expanded="false" aria-controls="bss-faq-a3"><span>Can Bright Skies help with accounting software?</span><span class="bss-faq__mark" aria-hidden="true"></span></button></h3>
-            <div class="bss-faq__a" id="bss-faq-a3" role="region" aria-labelledby="bss-faq-q3" hidden><p>Yes. Bright Skies says it can set up and manage accounting software such as QuickBooks to fit a spa business’s needs.</p></div>
+            <div class="bss-faq__a" id="bss-faq-a3" role="region" aria-labelledby="bss-faq-q3"><div><p>Yes. Bright Skies says it can set up and manage accounting software such as QuickBooks to fit a spa business’s needs.</p></div></div>
           </div>
-          <div class="bss-faq__item">
+          <div class="bss-faq__item bss-reveal" style="--d:0.18s">
             <h3><button type="button" class="bss-faq__q" id="bss-faq-q4" aria-expanded="false" aria-controls="bss-faq-a4"><span>How does a Profit First rollout work?</span><span class="bss-faq__mark" aria-hidden="true"></span></button></h3>
-            <div class="bss-faq__a" id="bss-faq-a4" role="region" aria-labelledby="bss-faq-q4" hidden><p>Bright Skies describes starting with an assessment of the business, creating a customized rollout plan, helping set up the necessary bank accounts, and establishing a twice-monthly allocation rhythm.</p></div>
+            <div class="bss-faq__a" id="bss-faq-a4" role="region" aria-labelledby="bss-faq-q4"><div><p>Bright Skies describes starting with an assessment of the business, creating a customized rollout plan, helping set up the necessary bank accounts, and establishing a twice-monthly allocation rhythm.</p></div></div>
           </div>
-          <div class="bss-faq__item">
+          <div class="bss-faq__item bss-reveal" style="--d:0.24s">
             <h3><button type="button" class="bss-faq__q" id="bss-faq-q5" aria-expanded="false" aria-controls="bss-faq-a5"><span>What financial reports are provided?</span><span class="bss-faq__mark" aria-hidden="true"></span></button></h3>
-            <div class="bss-faq__a" id="bss-faq-a5" role="region" aria-labelledby="bss-faq-q5" hidden><p>Bright Skies describes monthly Profit and Loss and Balance Sheet statements, along with help understanding what the numbers mean for the business.</p></div>
+            <div class="bss-faq__a" id="bss-faq-a5" role="region" aria-labelledby="bss-faq-q5"><div><p>Bright Skies describes monthly Profit and Loss and Balance Sheet statements, along with help understanding what the numbers mean for the business.</p></div></div>
           </div>
         </div>
-        <div class="bss-cta"><button class="bss-btn" type="button" data-bss-open aria-haspopup="dialog">Get Started Now</button></div>
+        <div class="bss-faq__cta bss-reveal">
+          <button class="bss-btn" type="button" data-bss-open aria-haspopup="dialog">Get Started Now<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
       </div>
     </section>
 
     <!-- 6. Final CTA -->
     <section class="bss-final-section" aria-labelledby="bss-final-title">
-      <div class="bss-final">
+      <div class="bss-final bss-reveal">
         <p class="bss-eyebrow">Complimentary Financial Wellness Consultation</p>
         <h2 id="bss-final-title">Ready to Align Your Profits with Your Purpose?</h2>
         <p class="bss-final__text">Let us bring the same sense of peace and order to your finances that you bring to your clients every day. Schedule your complimentary Financial Wellness Consultation and let us build a more profitable, sustainable, and serene future for your business.</p>
-        <button class="bss-btn" type="button" data-bss-open aria-haspopup="dialog">Get Started Now</button>
+        <button class="bss-btn" type="button" data-bss-open aria-haspopup="dialog">Get Started Now<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       </div>
     </section>
   </main>
@@ -515,19 +588,29 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
       })(d));
     }
 
-    // FAQ accordion: one answer open at a time.
-    var questions = root.querySelectorAll(".bss-faq__q");
-    for (var j = 0; j < questions.length; j++) {
-      questions[j].addEventListener("click", function () {
-        var wasOpen = this.getAttribute("aria-expanded") === "true";
-        for (var k = 0; k < questions.length; k++) {
-          questions[k].setAttribute("aria-expanded", "false");
-          document.getElementById(questions[k].getAttribute("aria-controls")).hidden = true;
+    // Sections fade up as they scroll into view.
+    var revealEls = root.querySelectorAll(".bss-reveal");
+    if ("IntersectionObserver" in window) {
+      var rio = new IntersectionObserver(function (entries) {
+        for (var e = 0; e < entries.length; e++) {
+          if (entries[e].isIntersecting) { entries[e].target.classList.add("is-in"); rio.unobserve(entries[e].target); }
         }
-        if (!wasOpen) {
-          this.setAttribute("aria-expanded", "true");
-          document.getElementById(this.getAttribute("aria-controls")).hidden = false;
+      }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+      for (var r = 0; r < revealEls.length; r++) rio.observe(revealEls[r]);
+    } else {
+      for (var r2 = 0; r2 < revealEls.length; r2++) revealEls[r2].classList.add("is-in");
+    }
+
+    // FAQ accordion: one answer open at a time, animated open and close.
+    var faqItems = root.querySelectorAll(".bss-faq__item");
+    for (var f = 0; f < faqItems.length; f++) {
+      faqItems[f].querySelector(".bss-faq__q").addEventListener("click", function () {
+        var item = this.closest(".bss-faq__item"), wasOpen = item.classList.contains("is-open");
+        for (var k = 0; k < faqItems.length; k++) {
+          faqItems[k].classList.remove("is-open");
+          faqItems[k].querySelector(".bss-faq__q").setAttribute("aria-expanded", "false");
         }
+        if (!wasOpen) { item.classList.add("is-open"); this.setAttribute("aria-expanded", "true"); }
       });
     }
   }
