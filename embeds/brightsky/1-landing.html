@@ -57,18 +57,51 @@
 #bss .bss-service h4{font-size:16px;line-height:1.3}
 #bss .bss-service p{font-size:14px}
 
-/* 4. Reviews */
-#bss .bss-reviews{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
-#bss .bss-review{display:flex;min-width:0;min-height:330px;flex-direction:column;padding:25px 24px 22px;border:1px solid var(--line);border-radius:var(--card-radius);background:#fff;box-shadow:var(--card-shadow)}
-#bss .bss-stars{margin:0 0 12px;color:#dba800;font-size:18px;letter-spacing:.1em;line-height:1.4}
-#bss .bss-review__preview{display:-webkit-box;min-height:105px;margin:0 0 8px;overflow:hidden;color:#404052;font-size:14px;line-height:1.55;-webkit-box-orient:vertical;-webkit-line-clamp:5}
-#bss .bss-review details{margin-bottom:18px;color:var(--indigo);font-size:13px;font-weight:700}
-#bss .bss-review summary{width:fit-content;cursor:pointer;list-style-position:outside}
-#bss .bss-review blockquote{margin:10px 0 0;color:#4c4c5e;font-size:13px;font-weight:400;line-height:1.6}
-#bss .bss-review__by{margin-top:auto;padding-top:13px;border-top:1px solid var(--line)}
-#bss .bss-review__name{color:var(--ink);font-family:"Raleway",Arial,sans-serif;font-size:15px;font-weight:800}
-#bss .bss-review__source{color:#777787;font-size:12px}
-#bss .bss-review__by a{color:var(--indigo);font-size:12px;font-weight:700;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+/* 4. Reviews: dark premium band, glass cards, reveal on scroll, swipe carousel on tablet/phone */
+#bss .bss-proof{--g:24px;position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(160deg,#151549 0%,#26266f 50%,#31318c 100%)}
+#bss .bss-proof::before,#bss .bss-proof::after{content:"";position:absolute;z-index:-1;width:560px;height:560px;border-radius:50%;filter:blur(100px);pointer-events:none;animation:bss-drift 18s ease-in-out infinite alternate}
+#bss .bss-proof::before{top:-240px;left:-180px;background:rgba(99,102,241,.38)}
+#bss .bss-proof::after{right:-200px;bottom:-260px;background:rgba(245,197,66,.13);animation-delay:-9s}
+@keyframes bss-drift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(70px,40px,0) scale(1.15)}}
+#bss .bss-proof .bss-eyebrow{color:var(--gold)}
+#bss .bss-proof .bss-heading h2{color:#fff}
+#bss .bss-rating{display:inline-flex;align-items:center;gap:10px;margin:22px auto 0;padding:7px 16px 7px 7px;border:1px solid rgba(255,255,255,.16);border-radius:999px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.86);font-size:13px;font-weight:500;line-height:1.3}
+#bss .bss-rating__g{display:inline-flex;width:28px;height:28px;flex:0 0 28px;justify-content:center;align-items:center;border-radius:50%;background:#fff}
+#bss .bss-rating__g svg{width:16px;height:16px}
+#bss .bss-stars{color:#f5c542;font-size:16px;letter-spacing:.12em;line-height:1}
+#bss .bss-reviews{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:start}
+#bss .bss-review{position:relative;display:flex;min-width:0;flex-direction:column;padding:30px 28px 24px;border:1px solid rgba(255,255,255,.13);border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04));box-shadow:0 24px 60px rgba(6,6,36,.35);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);transition:opacity .8s ease var(--d,0s),translate .8s cubic-bezier(.2,.7,.2,1) var(--d,0s),transform .35s ease,border-color .35s ease,box-shadow .35s ease}
+#bss .bss-review:hover{border-color:rgba(232,181,40,.55);box-shadow:0 30px 70px rgba(6,6,36,.45),0 0 0 1px rgba(232,181,40,.22);transform:translateY(-6px)}
+#bss.bss-js .bss-review{opacity:0;translate:0 32px}
+#bss.bss-js .bss-review.is-in{opacity:1;translate:none}
+#bss .bss-review__mark{position:absolute;top:10px;right:24px;color:var(--gold);font-family:Georgia,"Times New Roman",serif;font-size:96px;line-height:1;opacity:.38;pointer-events:none;transition:opacity .35s ease,transform .35s ease}
+#bss .bss-review:hover .bss-review__mark{opacity:.7;transform:translateY(-4px) rotate(-6deg)}
+#bss .bss-review__text{margin:18px 0 0;overflow:hidden;color:rgba(255,255,255,.9);font-size:15px;line-height:1.7;transition:max-height .5s cubic-bezier(.2,.7,.2,1)}
+#bss.bss-js .bss-review__text{max-height:calc(1.7em * 4)}
+#bss .bss-review.is-long:not(.is-open) .bss-review__text{-webkit-mask-image:linear-gradient(180deg,#000 50%,transparent);mask-image:linear-gradient(180deg,#000 50%,transparent)}
+#bss .bss-review__actions{display:flex;align-items:center;gap:12px;margin-top:12px}
+#bss .bss-more{display:none;width:fit-content;align-items:center;gap:7px;margin:0;padding:6px 0;border:0;background:none;color:var(--gold);cursor:pointer;font-size:13px;font-weight:700;letter-spacing:.04em;line-height:1.2}
+#bss .bss-more::after{content:"";width:7px;height:7px;margin-top:-3px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform .3s ease,margin .3s ease}
+#bss .bss-review.is-open .bss-more::after{margin-top:3px;transform:rotate(-135deg)}
+#bss .bss-review.is-long .bss-more{display:inline-flex}
+#bss .bss-more:hover{color:#ffd76a}
+#bss .bss-review__by{display:flex;align-items:center;gap:14px;margin-top:22px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12)}
+#bss .bss-avatar{display:inline-flex;width:46px;height:46px;flex:0 0 46px;justify-content:center;align-items:center;border-radius:50%;background:linear-gradient(135deg,#f5c542,#d69b17);box-shadow:0 0 0 3px rgba(232,181,40,.2);color:#1b1b55;font-family:"Raleway",Arial,sans-serif;font-size:15px;font-weight:800;letter-spacing:.02em}
+#bss .bss-review__who{min-width:0}
+#bss .bss-review__name{color:#fff;font-family:"Raleway",Arial,sans-serif;font-size:16px;font-weight:800;line-height:1.3}
+#bss .bss-review__meta{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.62);font-size:12.5px;line-height:1.4}
+#bss .bss-review__meta svg{width:13px;height:13px;flex:0 0 13px}
+#bss .bss-review__link{display:inline-flex;align-items:center;gap:5px;margin-left:auto;padding:6px 0;color:rgba(255,255,255,.72);font-size:12.5px;font-weight:600;line-height:1.2;text-decoration:none;white-space:nowrap;transition:color .25s ease}
+#bss .bss-review__link svg{width:14px;height:14px;transition:transform .25s ease}
+#bss .bss-review__link:hover{color:#f5c542}
+#bss .bss-review__link:hover svg{transform:translate(2px,-2px)}
+#bss .bss-dots{display:none;justify-content:center;gap:2px;margin-top:6px}
+#bss .bss-dot{display:inline-flex;width:30px;height:30px;justify-content:center;align-items:center;padding:0;border:0;background:none;cursor:pointer}
+#bss .bss-dot::before{content:"";width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.35);transition:width .3s ease,background-color .3s ease}
+#bss .bss-dot[aria-current="true"]::before{width:26px;background:var(--gold)}
+#bss .bss-proof .bss-btn{border-color:var(--gold);background:var(--gold);color:#1b1b55}
+#bss .bss-proof .bss-btn:hover{border-color:#f5c542;background:#f5c542;box-shadow:0 12px 32px rgba(232,181,40,.35)}
+#bss .bss-proof :focus-visible{outline-color:#f5c542}
 
 /* 5. FAQ */
 #bss .bss-faq{padding-top:100px;padding-bottom:100px}
@@ -105,12 +138,17 @@
 #bss .bss-modal iframe{position:relative;display:block;width:100%;min-height:360px;max-width:100%;border:none;background:transparent}
 html.bss-lock,html.bss-lock body{overflow:hidden !important}
 
+@media (max-width:1024px){
+  #bss .bss-reviews{display:flex;width:auto;margin-right:calc(var(--g) * -1);margin-left:calc(var(--g) * -1);padding:8px var(--g) 20px;overflow-x:auto;scroll-padding:0 var(--g);scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  #bss .bss-reviews::-webkit-scrollbar{display:none}
+  #bss .bss-review,#bss .bss-review:hover{flex:0 0 min(80%,420px);scroll-snap-align:start;box-shadow:none}
+  #bss .bss-dots{display:flex}
+}
 @media (max-width:900px){
   #bss .bss-section{padding:76px 22px}
   #bss .bss-reasons,#bss .bss-services{gap:14px}
   #bss .bss-card,#bss .bss-service{padding:21px 19px}
-  #bss .bss-reviews{grid-template-columns:repeat(2,minmax(0,1fr))}
-  #bss .bss-review:last-child{grid-column:1/-1}
+  #bss .bss-proof{--g:22px}
 }
 @media (max-width:640px){
   #bss .bss-header{min-height:65px;padding:12px 16px 4px}
@@ -124,7 +162,7 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
   #bss .bss-heading{margin-bottom:30px}
   #bss .bss-eyebrow{font-size:10px;letter-spacing:.1em}
   #bss .bss-heading h2,#bss .bss-final h2{font-size:clamp(1.9rem,8vw,2.5rem)}
-  #bss .bss-reasons,#bss .bss-services,#bss .bss-reviews{grid-template-columns:minmax(0,1fr)}
+  #bss .bss-reasons,#bss .bss-services{grid-template-columns:minmax(0,1fr)}
   #bss .bss-reasons{gap:12px}
   #bss .bss-card{min-height:0;grid-template-columns:43px minmax(0,1fr);gap:13px;padding:19px 17px}
   #bss .bss-card .bss-num{width:36px;height:36px;font-size:11px}
@@ -135,9 +173,11 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
   #bss .bss-service{min-height:0;grid-template-columns:35px minmax(0,1fr);gap:12px;padding:18px 16px}
   #bss .bss-service .bss-num{width:30px;height:30px;font-size:10px}
   #bss .bss-cta{margin-top:29px}
+  #bss .bss-proof{--g:16px}
   #bss .bss-reviews{gap:14px}
-  #bss .bss-review,#bss .bss-review:last-child{grid-column:auto;min-height:0;padding:21px 19px}
-  #bss .bss-review__preview{min-height:0;-webkit-line-clamp:4}
+  #bss .bss-review,#bss .bss-review:hover{flex-basis:86%;padding:26px 22px 22px}
+  #bss .bss-review__mark{font-size:80px}
+  #bss .bss-rating{font-size:12px}
   #bss .bss-faq{padding-top:65px;padding-bottom:66px}
   #bss .bss-faq .bss-heading{margin-bottom:25px}
   #bss .bss-faq__q{min-height:66px;gap:12px;padding:16px 0;font-size:15px}
@@ -148,7 +188,7 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
   #bss .bss-modal{width:calc(100% - 18px);max-height:calc(100vh - 18px);max-height:calc(100dvh - 18px);border-radius:14px}
   #bss .bss-modal__body,#bss .bss-modal iframe{min-height:330px}
 }
-@media (prefers-reduced-motion:reduce){#bss *,#bss *::before,#bss *::after{transition-duration:.01ms !important}}
+@media (prefers-reduced-motion:reduce){#bss *,#bss *::before,#bss *::after{transition-duration:.01ms !important;animation:none !important}#bss.bss-js .bss-review{opacity:1;translate:none}}
 </style>
 
 <div id="bss">
@@ -218,30 +258,59 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
     </section>
 
     <!-- 4. Testimonials -->
-    <section class="bss-section" aria-labelledby="bss-reviews-title">
+    <section class="bss-section bss-proof" aria-labelledby="bss-reviews-title">
       <div class="bss-heading">
         <p class="bss-eyebrow">Client reviews shared on Google</p>
         <h2 id="bss-reviews-title">Hear From Bright Skies Clients</h2>
+        <p class="bss-rating"><span class="bss-rating__g"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg></span><span class="bss-stars" aria-hidden="true">★★★★★</span><span>Five-star client reviews</span></p>
       </div>
-      <div class="bss-wrap bss-reviews">
-        <article class="bss-review">
-          <div class="bss-stars" aria-label="5 out of 5 stars">★★★★★</div>
-          <p class="bss-review__preview">“My company has been working with BrightSkies Services over the last couple of months and I have been extremely impressed with how quickly the team at…”</p>
-          <details><summary>Read full review</summary><blockquote>“My company has been working with BrightSkies Services over the last couple of months and I have been extremely impressed with how quickly the team at BrightSkies is getting things fixed, explaining best practice and helping me think through potential issues. So thankful that I made the decision to switch.”</blockquote></details>
-          <div class="bss-review__by"><p class="bss-review__name">Jake Isaacs</p><p class="bss-review__source">Google Reviews · December 2024</p><a href="https://maps.app.goo.gl/LoBXUZ31f2bXTxu66" target="_blank" rel="noopener noreferrer">View on Google</a></div>
+      <div class="bss-wrap">
+        <div class="bss-reviews">
+        <article class="bss-review" style="--d:0.00s">
+          <span class="bss-review__mark" aria-hidden="true">“</span>
+          <div class="bss-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="bss-review__text" id="bss-review-1">“My company has been working with BrightSkies Services over the last couple of months and I have been extremely impressed with how quickly the team at BrightSkies is getting things fixed, explaining best practice and helping me think through potential issues. So thankful that I made the decision to switch.”</p>
+          <div class="bss-review__actions">
+            <button class="bss-more" type="button" aria-expanded="false" aria-controls="bss-review-1">Show more</button>
+            <a class="bss-review__link" href="https://maps.app.goo.gl/LoBXUZ31f2bXTxu66" target="_blank" rel="noopener noreferrer" aria-label="View Jake Isaacs’s review on Google">View on Google<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          </div>
+          <div class="bss-review__by">
+            <span class="bss-avatar" aria-hidden="true">JI</span>
+            <div class="bss-review__who"><p class="bss-review__name">Jake Isaacs</p><p class="bss-review__meta"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google · December 2024</p></div>
+          </div>
         </article>
-        <article class="bss-review">
-          <div class="bss-stars" aria-label="5 out of 5 stars">★★★★★</div>
-          <p class="bss-review__preview">“The team at Brightskies is top notch! The way Masheka coached me in Profit First methods and money mindset was a game changer. Everyone works so hard…”</p>
-          <details><summary>Read full review</summary><blockquote>“The team at Brightskies is top notch! The way Masheka coached me in Profit First methods and money mindset was a game changer. Everyone works so hard to make sure all my accounts were settled and I was prepared for taxes, goals, and business strategy. You will have a great experience with this team!”</blockquote></details>
-          <div class="bss-review__by"><p class="bss-review__name">Rebecca Robinson</p><p class="bss-review__source">Google Reviews · March 2025</p><a href="https://maps.app.goo.gl/ffSwPZ77MpnwgJrD7" target="_blank" rel="noopener noreferrer">View on Google</a></div>
+        <article class="bss-review" style="--d:0.12s">
+          <span class="bss-review__mark" aria-hidden="true">“</span>
+          <div class="bss-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="bss-review__text" id="bss-review-2">“The team at Brightskies is top notch! The way Masheka coached me in Profit First methods and money mindset was a game changer. Everyone works so hard to make sure all my accounts were settled and I was prepared for taxes, goals, and business strategy. You will have a great experience with this team!”</p>
+          <div class="bss-review__actions">
+            <button class="bss-more" type="button" aria-expanded="false" aria-controls="bss-review-2">Show more</button>
+            <a class="bss-review__link" href="https://maps.app.goo.gl/ffSwPZ77MpnwgJrD7" target="_blank" rel="noopener noreferrer" aria-label="View Rebecca Robinson’s review on Google">View on Google<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          </div>
+          <div class="bss-review__by">
+            <span class="bss-avatar" aria-hidden="true">RR</span>
+            <div class="bss-review__who"><p class="bss-review__name">Rebecca Robinson</p><p class="bss-review__meta"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google · March 2025</p></div>
+          </div>
         </article>
-        <article class="bss-review">
-          <div class="bss-stars" aria-label="5 out of 5 stars">★★★★★</div>
-          <p class="bss-review__preview">“Best decision we made with our business bookkeeping was to move over to BrightSkies. They are just what we needed to get things in order so we can con…”</p>
-          <details><summary>Read full review</summary><blockquote>“Best decision we made with our business bookkeeping was to move over to BrightSkies. They are just what we needed to get things in order so we can continue to run our business successfully. The team is great and their attention to detail in an area that needs it is a huge plus.”</blockquote></details>
-          <div class="bss-review__by"><p class="bss-review__name">Tony &amp; Lisa DiLorenzo</p><p class="bss-review__source">Google Reviews · February 2025</p><a href="https://maps.app.goo.gl/a7GQKXxVZ9wV19td8" target="_blank" rel="noopener noreferrer">View on Google</a></div>
+        <article class="bss-review" style="--d:0.24s">
+          <span class="bss-review__mark" aria-hidden="true">“</span>
+          <div class="bss-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="bss-review__text" id="bss-review-3">“Best decision we made with our business bookkeeping was to move over to BrightSkies. They are just what we needed to get things in order so we can continue to run our business successfully. The team is great and their attention to detail in an area that needs it is a huge plus.”</p>
+          <div class="bss-review__actions">
+            <button class="bss-more" type="button" aria-expanded="false" aria-controls="bss-review-3">Show more</button>
+            <a class="bss-review__link" href="https://maps.app.goo.gl/a7GQKXxVZ9wV19td8" target="_blank" rel="noopener noreferrer" aria-label="View Tony & Lisa DiLorenzo’s review on Google">View on Google<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          </div>
+          <div class="bss-review__by">
+            <span class="bss-avatar" aria-hidden="true">TL</span>
+            <div class="bss-review__who"><p class="bss-review__name">Tony &amp; Lisa DiLorenzo</p><p class="bss-review__meta"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google · February 2025</p></div>
+          </div>
         </article>
+        </div>
+        <div class="bss-dots" role="group" aria-label="Choose a review">
+          <button class="bss-dot" type="button" aria-label="Review 1" aria-current="true"></button>
+          <button class="bss-dot" type="button" aria-label="Review 2" aria-current="false"></button>
+          <button class="bss-dot" type="button" aria-label="Review 3" aria-current="false"></button>
+        </div>
       </div>
       <div class="bss-cta"><button class="bss-btn" type="button" data-bss-open aria-haspopup="dialog">Get Started Now</button></div>
     </section>
@@ -384,6 +453,67 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
     document.addEventListener("keydown", function (e) {
       if (!native && e.key === "Escape" && isOpen()) close();
     });
+
+    // Reviews: "Show more" only on reviews that are actually cut off; expands the same text in place.
+    root.classList.add("bss-js");
+    var cards = root.querySelectorAll(".bss-review");
+    function measureReviews() {
+      for (var c = 0; c < cards.length; c++) {
+        var text = cards[c].querySelector(".bss-review__text");
+        if (cards[c].classList.contains("is-open")) { text.style.maxHeight = text.scrollHeight + "px"; continue; }
+        cards[c].classList.toggle("is-long", text.scrollHeight > text.clientHeight + 2);
+      }
+    }
+    for (var c = 0; c < cards.length; c++) {
+      cards[c].querySelector(".bss-more").addEventListener("click", function () {
+        var card = this.closest(".bss-review"), text = card.querySelector(".bss-review__text");
+        var opening = !card.classList.contains("is-open");
+        card.classList.toggle("is-open", opening);
+        text.style.maxHeight = opening ? text.scrollHeight + "px" : "";
+        this.setAttribute("aria-expanded", opening ? "true" : "false");
+        this.textContent = opening ? "Show less" : "Show more";
+      });
+    }
+    measureReviews();
+    var resizeTick = null;
+    window.addEventListener("resize", function () {
+      if (resizeTick) cancelAnimationFrame(resizeTick);
+      resizeTick = requestAnimationFrame(function () { measureReviews(); updateDots(); });
+    });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureReviews);
+
+    // Reviews fade up when they scroll into view.
+    function reveal() { for (var c = 0; c < cards.length; c++) cards[c].classList.add("is-in"); }
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        for (var e = 0; e < entries.length; e++) if (entries[e].isIntersecting) { reveal(); io.disconnect(); break; }
+      }, { threshold: 0.15 });
+      io.observe(root.querySelector(".bss-reviews"));
+    } else {
+      reveal();
+    }
+
+    // Tablet/phone: swipeable reviews with dots.
+    var track = root.querySelector(".bss-reviews");
+    var dots = root.querySelectorAll(".bss-dot");
+    function updateDots() {
+      var best = 0, bestDist = Infinity, pad = parseFloat(getComputedStyle(track).scrollPaddingLeft) || 0;
+      for (var c = 0; c < cards.length; c++) {
+        var dist = Math.abs(cards[c].offsetLeft - pad - track.scrollLeft);
+        if (dist < bestDist) { bestDist = dist; best = c; }
+      }
+      if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 2) best = cards.length - 1;
+      for (var d = 0; d < dots.length; d++) dots[d].setAttribute("aria-current", d === best ? "true" : "false");
+    }
+    track.addEventListener("scroll", function () { requestAnimationFrame(updateDots); }, { passive: true });
+    for (var d = 0; d < dots.length; d++) {
+      dots[d].addEventListener("click", (function (index) {
+        return function () {
+          var pad = parseFloat(getComputedStyle(track).scrollPaddingLeft) || 0;
+          track.scrollTo({ left: cards[index].offsetLeft - pad, behavior: "smooth" });
+        };
+      })(d));
+    }
 
     // FAQ accordion: one answer open at a time.
     var questions = root.querySelectorAll(".bss-faq__q");
