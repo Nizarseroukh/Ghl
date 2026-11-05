@@ -5,8 +5,8 @@
 | Step | Path | Paste this file |
 | --- | --- | --- |
 | 1. Landing page + survey popup | `/` (any path) | [`embeds/brightsky/1-landing.html`](embeds/brightsky/1-landing.html) |
-| 2. Booking (Calendly) | `/booking` | [`embeds/brightsky/2-booking.html`](embeds/brightsky/2-booking.html) |
-| 3. Confirmation | `/confirmation` | [`embeds/brightsky/3-confirmation.html`](embeds/brightsky/3-confirmation.html) |
+| 2. Booking (your calendar embed) | `/booking` | [`embeds/brightsky/2-booking.html`](embeds/brightsky/2-booking.html) |
+| 3. Thank-you page | `/confirmation` | [`embeds/brightsky/3-confirmation.html`](embeds/brightsky/3-confirmation.html) |
 
 For each step:
 1. Add a section, set it to **Full Width**, and set the padding of the section, row and column to 0.
@@ -15,11 +15,14 @@ For each step:
 
 Wiring the steps together:
 - **Survey → booking:** in the survey's settings, set the submit action to redirect to the booking step's URL.
-- **Booking → confirmation:** handled by the code. When Calendly reports a completed booking, the page
-  goes to `/confirmation`. If your step path is different, change `CONFIRMATION_URL` at the top of
-  the script in `2-booking.html`, and the `/booking` link in `3-confirmation.html`.
-- The confirmation step shows "You're booked!" only after a real booking on step 2. Opening it
-  directly shows a neutral "Booking status" message.
+- **Calendar:** paste your calendar's embed code between the two `PASTE YOUR CALENDAR EMBED CODE`
+  lines in `2-booking.html`. None of the page's CSS touches anything in that spot, so the
+  calendar keeps its own styles.
+- **Booking → thank-you page:**
+  - GHL calendar: set the calendar's redirect after booking to the thank-you step's URL.
+  - Calendly: handled by the code. Once Calendly reports a booking, the page goes to `/confirmation`.
+    If your path is different, change `CONFIRMATION_URL` in the script at the bottom of
+    `2-booking.html`.
 
 Why the popup is built on `<dialog>`: the survey popup opens with the browser's native
 `showModal()`. That puts it in the top layer, so GHL's section animations (transforms),
