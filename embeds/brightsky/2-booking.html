@@ -1,57 +1,102 @@
 <!--
   Bright Skies Services | Funnel step 2 of 3: Booking page
   Paste all of this into ONE "Custom JS/HTML" element, inside a full-width section with 0 padding.
-  Then paste your calendar's embed code into the marked spot below. Nothing on this page
-  styles your calendar: it keeps its own look.
+  Then add your calendar where it says "YOUR CALENDAR GOES HERE" further down.
+  Nothing on this page styles your calendar: it keeps its own look.
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* Every rule targets this page's own elements by class. None of them reach inside .bss-slot. */
-#bss{width:100%;min-height:100vh;margin:0;padding:0;background:#fff}
-#bss .bss-header{box-sizing:border-box;display:flex;min-height:76px;justify-content:center;align-items:center;padding:15px 24px 8px;background:#fff}
+/* Every rule targets this page's own elements by class, and #bss sets no fonts or colors,
+   so none of it reaches or is inherited by your calendar inside .bss-slot. */
+@keyframes bss-drift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(70px,40px,0) scale(1.15)}}
+@keyframes bss-up{from{opacity:0;translate:0 22px}to{opacity:1;translate:none}}
+@keyframes bss-draw{to{transform:scaleX(1)}}
+#bss{position:relative;width:100%;min-height:100vh;margin:0;padding:0;background:linear-gradient(180deg,#fff 0%,#f4f4fb 45%,#fff 100%)}
+#bss .bss-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+#bss .bss-bg span{position:absolute;display:block;border-radius:50%;animation:bss-drift 18s ease-in-out infinite alternate}
+#bss .bss-bg span:nth-child(1){top:40px;left:50%;width:960px;height:540px;margin-left:-480px;background:radial-gradient(closest-side,rgba(85,85,204,.16),rgba(85,85,204,0))}
+#bss .bss-bg span:nth-child(2){top:420px;right:-280px;width:580px;height:580px;background:radial-gradient(closest-side,rgba(232,181,40,.16),rgba(232,181,40,0));animation-duration:22s;animation-direction:alternate-reverse}
+#bss .bss-bg span:nth-child(3){bottom:140px;left:-300px;width:620px;height:620px;background:radial-gradient(closest-side,rgba(85,85,204,.12),rgba(85,85,204,0));animation-duration:24s}
+#bss .bss-header{position:relative;box-sizing:border-box;display:flex;min-height:76px;justify-content:center;align-items:center;padding:15px 24px 8px}
 #bss .bss-header img{display:block;width:148px;max-width:100%;height:auto;border:0}
-#bss .bss-intro,#bss .bss-foot{box-sizing:border-box;width:min(100%,1060px);margin:0 auto;color:#24243d;font-family:"Roboto",Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.6;letter-spacing:normal;text-align:center;-webkit-font-smoothing:antialiased}
-#bss .bss-intro{padding:28px 24px 25px}
-#bss .bss-eyebrow{margin:0 0 13px;padding:0;color:#333394;font-size:12px;font-weight:700;letter-spacing:.13em;line-height:1.4;text-transform:uppercase}
-#bss .bss-intro h1{margin:0 0 12px;padding:0;color:#26266f;font-family:"Raleway",Arial,sans-serif;font-size:clamp(2rem,4vw,3.4rem);font-weight:800;letter-spacing:-.035em;line-height:1.14;text-transform:none}
-#bss .bss-sub{margin:0;padding:0;color:#626274}
-#bss .bss-slot{box-sizing:border-box;width:min(100%,1060px);margin:0 auto;padding:0 24px}
-#bss .bss-foot{padding:14px 24px 50px}
-#bss .bss-foot p{margin:0;padding:0;color:#626274}
-#bss .bss-foot a{color:#333394;font-weight:700;text-decoration:underline;text-underline-offset:3px}
-#bss .bss-foot a:focus-visible{outline:3px solid rgba(232,181,40,.8);outline-offset:3px}
+#bss .bss-intro{position:relative;box-sizing:border-box;width:min(100%,1000px);margin:0 auto;padding:30px 24px 36px;color:#24243d;font-family:"Roboto",Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.6;letter-spacing:normal;text-align:center;-webkit-font-smoothing:antialiased}
+#bss .bss-intro > *{animation:bss-up .9s cubic-bezier(.2,.7,.2,1) both}
+#bss .bss-intro > :nth-child(2){animation-delay:.08s}
+#bss .bss-intro > :nth-child(3){animation-delay:.16s}
+#bss .bss-intro > :nth-child(4){animation-delay:.24s}
+#bss .bss-eyebrow{display:block;margin:0 0 14px;padding:0;color:#333394;font-size:12px;font-weight:700;letter-spacing:.14em;line-height:1.4;text-transform:uppercase}
+#bss .bss-intro h1{position:relative;isolation:isolate;max-width:860px;margin:0 auto 16px;padding:0;color:#26266f;font-family:"Raleway",Arial,sans-serif;font-size:clamp(2.1rem,4.4vw,3.6rem);font-weight:800;letter-spacing:-.04em;line-height:1.12;text-transform:none;text-wrap:balance}
+#bss .bss-hl{position:relative;color:#333394;white-space:nowrap}
+#bss .bss-hl::after{content:"";position:absolute;z-index:-1;right:-.04em;bottom:.04em;left:-.04em;height:.2em;border-radius:999px;background:linear-gradient(90deg,#e8b528,#f5c542);opacity:.85;transform:scaleX(0);transform-origin:left;animation:bss-draw 1s cubic-bezier(.2,.7,.2,1) .7s forwards}
+#bss .bss-sub{max-width:620px;margin:0 auto;padding:0;color:#4f4f66;font-size:clamp(1rem,1.5vw,1.15rem)}
+#bss .bss-trust{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;margin:24px auto 0;padding:0;color:#4f4f66;font-size:14px;font-weight:500;line-height:1.3;list-style:none}
+#bss .bss-trust li{display:inline-flex;align-items:center;gap:8px;margin:0;padding:0}
+#bss .bss-trust svg{display:block}
+#bss .bss-trust__g{display:inline-flex;width:24px;height:24px;justify-content:center;align-items:center;border-radius:50%;background:#fff;box-shadow:0 2px 8px rgba(37,37,89,.12)}
+#bss .bss-trust__g svg{width:14px;height:14px}
+#bss .bss-trust__stars{color:#e8b528;font-size:14px;letter-spacing:.08em}
+#bss .bss-trust__check{display:inline-flex;width:22px;height:22px;justify-content:center;align-items:center;border-radius:50%;background:rgba(51,51,148,.1);color:#333394}
+#bss .bss-trust__check svg{width:13px;height:13px}
+/* The card around your calendar. Only the card itself is styled, never what's inside it. */
+#bss .bss-slot{position:relative;box-sizing:border-box;width:min(calc(100% - 48px),1060px);min-height:140px;margin:0 auto 90px;padding:20px;border:1px solid #e6e6f0;border-radius:24px;background:#fff;box-shadow:0 30px 70px rgba(37,37,89,.1);animation:bss-up .9s cubic-bezier(.2,.7,.2,1) .3s both}
+#bss .bss-slot::before{content:"";position:absolute;top:-1px;right:28px;left:28px;height:3px;border-radius:0 0 3px 3px;background:linear-gradient(90deg,#333394,#e8b528)}
+#bss .bss-slot:not(:has(*))::after{content:"Your calendar will show here once you add it.";display:flex;min-height:98px;justify-content:center;align-items:center;color:#8a8a9c;font-family:"Roboto",Arial,sans-serif;font-size:14px;text-align:center}
 @media (max-width:640px){
   #bss .bss-header{min-height:65px;padding:12px 16px 4px}
   #bss .bss-header img{width:132px}
-  #bss .bss-intro{padding:22px 16px 22px}
+  #bss .bss-bg span:nth-child(1){width:560px;height:420px;margin-left:-280px}
+  #bss .bss-bg span:nth-child(2){top:300px;right:-200px;width:380px;height:380px}
+  #bss .bss-intro{padding:22px 16px 26px}
   #bss .bss-eyebrow{font-size:10px;letter-spacing:.1em}
-  #bss .bss-intro h1{font-size:clamp(1.8rem,8vw,2.55rem)}
-  #bss .bss-slot{padding:0 16px}
-  #bss .bss-foot{padding:14px 16px 38px}
+  #bss .bss-intro h1{font-size:clamp(1.9rem,8.4vw,2.6rem)}
+  #bss .bss-trust{margin-top:18px;font-size:13px}
+  #bss .bss-trust li:not(:first-child){display:none}
+  #bss .bss-slot{width:calc(100% - 16px);margin-bottom:48px;padding:6px;border-radius:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  #bss .bss-bg span,#bss .bss-intro > *,#bss .bss-slot{animation:none}
+  #bss .bss-hl::after{animation:none;transform:none}
 }
 </style>
 
 <div id="bss">
+  <div class="bss-bg" aria-hidden="true"><span></span><span></span><span></span></div>
+
   <header class="bss-header">
     <img src="https://img1.wsimg.com/isteam/ip/ede29c46-864b-4bea-afe1-1c4cf4c2ccdf/logo/f2dc896d-bda5-4912-80f0-ba4c31a88c16.jpg/:/rs=w:285,h:86,cg:true,m/cr=w:285,h:86/qt=q:100/ll" alt="BrightSkies Services" width="285" height="86">
   </header>
 
   <div class="bss-intro">
     <p class="bss-eyebrow">Bright Skies Services</p>
-    <h1>Schedule Your Financial Wellness Consultation</h1>
+    <h1>Schedule Your Financial Wellness <span class="bss-hl">Consultation</span></h1>
     <p class="bss-sub">Select an available time in the calendar below.</p>
+    <ul class="bss-trust">
+      <li><span class="bss-trust__g"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg></span><span class="bss-trust__stars" aria-hidden="true">★★★★★</span>Five-star Google reviews</li>
+      <li><span class="bss-trust__check"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7.5"/></svg></span>Certified Profit First Professional</li>
+      <li><span class="bss-trust__check"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7.5"/></svg></span>Built for wellness and medical businesses</li>
+    </ul>
   </div>
 
+  <!-- =====================================================================
+       YOUR CALENDAR GOES HERE
+
+       Option 1 (best): paste your calendar's full embed code between the
+       two PASTE lines below.
+         - GHL calendar: open the calendar's share options and copy its embed code.
+         - Calendly: Share, then Add to website, then Inline embed, and copy the code.
+
+       Option 2 (you only have a link): on the iframe line between the PASTE
+       lines, remove the comment marks at its start and end, then replace
+       PASTE-YOUR-CALENDAR-LINK-HERE with your calendar link.
+       ===================================================================== -->
   <div class="bss-slot">
     <!-- ▼▼▼ PASTE YOUR CALENDAR EMBED CODE BELOW THIS LINE ▼▼▼ -->
 
-    <!-- ▲▲▲ PASTE YOUR CALENDAR EMBED CODE ABOVE THIS LINE ▲▲▲ -->
-  </div>
+    <!-- <iframe src="PASTE-YOUR-CALENDAR-LINK-HERE" title="Book your call" style="display:block;width:100%;height:800px;border:none;"></iframe> -->
 
-  <div class="bss-foot">
-    <p>Questions? Call <a href="tel:+16153105778">(615) 310-5778</a>.</p>
+    <!-- ▲▲▲ PASTE YOUR CALENDAR EMBED CODE ABOVE THIS LINE ▲▲▲ -->
   </div>
 </div>
 

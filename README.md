@@ -15,9 +15,10 @@ For each step:
 
 Wiring the steps together:
 - **Survey → booking:** in the survey's settings, set the submit action to redirect to the booking step's URL.
-- **Calendar:** paste your calendar's embed code between the two `PASTE YOUR CALENDAR EMBED CODE`
-  lines in `2-booking.html`. None of the page's CSS touches anything in that spot, so the
-  calendar keeps its own styles.
+- **Calendar:** in `2-booking.html`, look for `YOUR CALENDAR GOES HERE`. Paste your calendar's
+  embed code between the two `PASTE YOUR CALENDAR EMBED CODE` lines. If you only have a calendar
+  link, use the ready-made iframe line in that spot instead (the comment explains how).
+  None of the page's CSS touches anything in that spot, so the calendar keeps its own styles.
 - **Booking → thank-you page:**
   - GHL calendar: set the calendar's redirect after booking to the thank-you step's URL.
   - Calendly: handled by the code. Once Calendly reports a booking, the page goes to `/confirmation`.
