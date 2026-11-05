@@ -1,0 +1,414 @@
+<!--
+  Bright Skies Services | Funnel step 1 of 3: Landing page
+  Paste all of this into ONE "Custom JS/HTML" element, inside a full-width section with 0 padding.
+  Every "Get Started Now" button opens the survey popup.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+#bss{--indigo:#333394;--indigo-deep:#26266f;--gold:#e8b528;--ink:#24243d;--muted:#626274;--line:#e5e5ef;--pale-gold:#fff9e9;--card-radius:18px;--card-shadow:0 12px 32px rgba(37,37,89,.07);width:100%;margin:0;padding:0;overflow:hidden;background:#fff;color:var(--ink);font-family:"Roboto",Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.6;letter-spacing:normal;text-align:left;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+#bss *,#bss *::before,#bss *::after{box-sizing:border-box}
+#bss h1,#bss h2,#bss h3,#bss h4,#bss p,#bss blockquote,#bss figure{margin:0;padding:0}
+#bss h1,#bss h2,#bss h3,#bss h4{color:var(--ink);font-family:"Raleway",Arial,sans-serif;line-height:1.14;text-transform:none}
+#bss img{display:block;max-width:100%;height:auto;border:0}
+#bss button{margin:0;font:inherit;-webkit-appearance:none;appearance:none}
+#bss a{color:inherit}
+#bss button:focus-visible,#bss a:focus-visible,#bss summary:focus-visible{outline:3px solid rgba(232,181,40,.8);outline-offset:3px}
+
+/* Header */
+#bss .bss-header{display:flex;min-height:76px;justify-content:center;align-items:center;padding:15px 24px 8px;background:#fff}
+#bss .bss-header img{width:148px;height:auto}
+
+/* Button */
+#bss .bss-btn{display:inline-flex;min-height:54px;min-width:190px;justify-content:center;align-items:center;padding:14px 27px;border:1px solid var(--indigo);border-radius:999px;background:var(--indigo);color:#fff;cursor:pointer;font-family:"Roboto",Arial,sans-serif;font-size:14px;font-weight:700;letter-spacing:.035em;line-height:1.2;text-decoration:none;text-transform:none;transition:background-color 160ms ease,border-color 160ms ease,transform 160ms ease,box-shadow 160ms ease}
+#bss .bss-btn:hover{border-color:var(--indigo-deep);background:var(--indigo-deep);box-shadow:0 8px 20px rgba(51,51,148,.2);transform:translateY(-1px)}
+#bss .bss-cta{display:flex;justify-content:center;margin-top:38px}
+
+/* Shared section bits */
+#bss .bss-section{padding:92px 24px}
+#bss .bss-tint{background:#f8f8fc}
+#bss .bss-heading{max-width:840px;margin:0 auto 42px;text-align:center}
+#bss .bss-eyebrow{margin:0 0 13px;color:var(--indigo);font-size:12px;font-weight:700;letter-spacing:.13em;line-height:1.4;text-transform:uppercase}
+#bss .bss-heading h2,#bss .bss-final h2{margin:0;color:var(--indigo-deep);font-size:clamp(2rem,3.5vw,3.15rem);font-weight:800;letter-spacing:-.035em}
+#bss .bss-wrap{width:min(100%,1120px);margin-right:auto;margin-left:auto}
+
+/* 1. Hero */
+#bss .bss-hero{padding:26px 24px 78px;text-align:center}
+#bss .bss-hero__copy{width:min(100%,880px);margin:0 auto}
+#bss .bss-callout{display:inline-flex;align-items:center;justify-content:center;min-height:34px;margin:0 auto 20px;padding:6px 14px;border:1px solid rgba(232,181,40,.55);border-radius:999px;background:var(--pale-gold);color:var(--indigo-deep);font-size:12px;font-weight:700;letter-spacing:.045em;line-height:1.4;text-transform:uppercase}
+#bss .bss-hero h1{max-width:820px;margin:0 auto 18px;color:var(--indigo-deep);font-size:clamp(2.5rem,5vw,4.35rem);font-weight:800;letter-spacing:-.045em}
+#bss .bss-hero__sub{max-width:710px;margin:0 auto 26px;color:#505064;font-size:clamp(1.05rem,1.6vw,1.25rem);line-height:1.55}
+#bss .bss-hero__image{width:min(100%,1060px);aspect-ratio:16/8.2;margin:48px auto 0;overflow:hidden;border:1px solid rgba(51,51,148,.12);border-radius:18px;background:#242439;box-shadow:0 20px 52px rgba(34,34,72,.14)}
+#bss .bss-hero__image img{width:100%;height:100%;object-fit:cover;object-position:center}
+
+/* 2. Reasons */
+#bss .bss-reasons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+#bss .bss-card{display:grid;grid-template-columns:52px minmax(0,1fr);gap:17px;min-height:148px;padding:25px 24px;border:1px solid var(--line);border-radius:var(--card-radius);background:#fff;box-shadow:var(--card-shadow)}
+#bss .bss-num{display:inline-flex;width:42px;height:42px;justify-content:center;align-items:center;border:1px solid rgba(232,181,40,.7);border-radius:50%;background:var(--pale-gold);color:var(--indigo);font-family:"Raleway",Arial,sans-serif;font-size:13px;font-weight:800;line-height:1}
+#bss .bss-card h3,#bss .bss-service h4{margin:2px 0 9px;font-size:18px;font-weight:700;letter-spacing:-.015em}
+#bss .bss-card p,#bss .bss-service p{margin:0;color:var(--muted);font-size:15px;line-height:1.6}
+
+/* 3. Services */
+#bss .bss-groups{display:grid;gap:42px}
+#bss .bss-group__title{display:flex;align-items:center;gap:13px;margin:0 0 20px;color:var(--indigo-deep);font-size:24px;font-weight:800;letter-spacing:-.025em}
+#bss .bss-group__title span{display:inline-flex;min-width:42px;height:36px;justify-content:center;align-items:center;border-radius:10px;background:var(--indigo);color:#fff;font-size:12px;letter-spacing:.06em}
+#bss .bss-services{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+#bss .bss-service{display:grid;grid-template-columns:42px minmax(0,1fr);gap:16px;min-height:142px;padding:22px;border:1px solid var(--line);border-radius:15px;background:#fff}
+#bss .bss-service .bss-num{width:34px;height:34px;margin-top:1px;font-size:11px}
+#bss .bss-service h4{font-size:16px;line-height:1.3}
+#bss .bss-service p{font-size:14px}
+
+/* 4. Reviews */
+#bss .bss-reviews{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
+#bss .bss-review{display:flex;min-width:0;min-height:330px;flex-direction:column;padding:25px 24px 22px;border:1px solid var(--line);border-radius:var(--card-radius);background:#fff;box-shadow:var(--card-shadow)}
+#bss .bss-stars{margin:0 0 12px;color:#dba800;font-size:18px;letter-spacing:.1em;line-height:1.4}
+#bss .bss-review__preview{display:-webkit-box;min-height:105px;margin:0 0 8px;overflow:hidden;color:#404052;font-size:14px;line-height:1.55;-webkit-box-orient:vertical;-webkit-line-clamp:5}
+#bss .bss-review details{margin-bottom:18px;color:var(--indigo);font-size:13px;font-weight:700}
+#bss .bss-review summary{width:fit-content;cursor:pointer;list-style-position:outside}
+#bss .bss-review blockquote{margin:10px 0 0;color:#4c4c5e;font-size:13px;font-weight:400;line-height:1.6}
+#bss .bss-review__by{margin-top:auto;padding-top:13px;border-top:1px solid var(--line)}
+#bss .bss-review__name{color:var(--ink);font-family:"Raleway",Arial,sans-serif;font-size:15px;font-weight:800}
+#bss .bss-review__source{color:#777787;font-size:12px}
+#bss .bss-review__by a{color:var(--indigo);font-size:12px;font-weight:700;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+
+/* 5. FAQ */
+#bss .bss-faq{padding-top:100px;padding-bottom:100px}
+#bss .bss-faq .bss-wrap{max-width:920px}
+#bss .bss-faq .bss-heading{margin:0 0 35px;text-align:left}
+#bss .bss-faq__list{border-top:1px solid #dcdce8}
+#bss .bss-faq__item{border-bottom:1px solid #dcdce8}
+#bss .bss-faq__item h3{margin:0}
+#bss .bss-faq__q{display:flex;width:100%;min-height:72px;justify-content:space-between;align-items:center;gap:20px;padding:18px 0;border:0;border-radius:0;background:transparent;color:var(--ink);cursor:pointer;font-family:"Raleway",Arial,sans-serif;font-size:17px;font-weight:700;line-height:1.3;text-align:left}
+#bss .bss-faq__mark{display:inline-flex;width:29px;height:29px;flex:0 0 29px;justify-content:center;align-items:center;border:1px solid rgba(51,51,148,.25);border-radius:50%;color:var(--indigo);font-family:"Roboto",Arial,sans-serif;font-size:20px;font-weight:400;line-height:1}
+#bss .bss-faq__mark::before{content:"+"}
+#bss .bss-faq__q[aria-expanded="true"] .bss-faq__mark::before{content:"\2212"}
+#bss .bss-faq__a{padding:0 50px 20px 0;color:var(--muted);font-size:15px;line-height:1.7}
+#bss .bss-faq__a[hidden]{display:none}
+
+/* 6. Final CTA */
+#bss .bss-final-section{padding:74px 24px 96px;background:#fff}
+#bss .bss-final{width:min(100%,1120px);margin:0 auto;padding:64px 28px;border:1px solid rgba(51,51,148,.12);border-top:4px solid var(--gold);border-radius:22px;background:linear-gradient(145deg,#f4f4fb 0%,#fffaf0 100%);text-align:center}
+#bss .bss-final h2{max-width:780px;margin:0 auto 16px}
+#bss .bss-final__text{max-width:680px;margin:0 auto 26px;color:var(--muted);font-size:17px}
+
+/* Survey popup: a native <dialog> opened with showModal() sits in the browser's top layer,
+   so GHL wrappers (transforms, overflow:hidden, z-index) can't hide or clip it. */
+#bss .bss-modal{width:min(calc(100% - 32px),650px);max-width:none;height:fit-content;max-height:92vh;max-height:min(92dvh,900px);margin:auto;padding:0;overflow:auto;border:1px solid rgba(255,255,255,.75);border-radius:17px;background:#fff;color:var(--ink);box-shadow:0 28px 90px rgba(11,11,45,.3);overscroll-behavior:contain}
+#bss .bss-modal::backdrop{background:rgba(26,26,51,.68)}
+#bss .bss-modal.bss-modal--fallback{position:fixed;inset:0;z-index:2147483000;display:block}
+#bss .bss-modal__shade{position:fixed;inset:0;z-index:2147482999;background:rgba(26,26,51,.68)}
+#bss .bss-modal__shade[hidden]{display:none}
+#bss .bss-modal__head{position:sticky;z-index:1;top:0;display:flex;min-height:62px;justify-content:space-between;align-items:center;gap:16px;padding:12px 17px 12px 22px;border-bottom:1px solid var(--line);background:#fff}
+#bss .bss-modal__head h2{margin:0;color:var(--indigo-deep);font-size:18px;font-weight:800;line-height:1.3}
+#bss .bss-modal__close{display:inline-flex;width:38px;height:38px;flex:0 0 38px;justify-content:center;align-items:center;padding:0;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--indigo-deep);cursor:pointer;font-size:25px;line-height:1}
+#bss .bss-modal__body{position:relative;min-height:360px}
+#bss .bss-modal__loading{position:absolute;top:40px;right:0;left:0;color:var(--muted);font-size:14px;text-align:center}
+#bss .bss-modal iframe{position:relative;display:block;width:100%;min-height:360px;max-width:100%;border:none;background:transparent}
+html.bss-lock,html.bss-lock body{overflow:hidden !important}
+
+@media (max-width:900px){
+  #bss .bss-section{padding:76px 22px}
+  #bss .bss-reasons,#bss .bss-services{gap:14px}
+  #bss .bss-card,#bss .bss-service{padding:21px 19px}
+  #bss .bss-reviews{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #bss .bss-review:last-child{grid-column:1/-1}
+}
+@media (max-width:640px){
+  #bss .bss-header{min-height:65px;padding:12px 16px 4px}
+  #bss .bss-header img{width:132px}
+  #bss .bss-hero{padding:21px 16px 58px}
+  #bss .bss-callout{max-width:100%;margin-bottom:15px;padding:6px 11px;font-size:10px}
+  #bss .bss-hero h1{max-width:520px;margin-bottom:14px;font-size:clamp(2.2rem,9vw,3rem);line-height:1.09}
+  #bss .bss-hero__sub{max-width:520px;margin-bottom:20px;font-size:16px}
+  #bss .bss-btn{min-height:52px;padding:13px 22px}
+  #bss .bss-hero__image{aspect-ratio:1.24/1;margin-top:34px;border-radius:14px}
+  #bss .bss-section{padding:62px 16px}
+  #bss .bss-heading{margin-bottom:30px}
+  #bss .bss-eyebrow{font-size:10px;letter-spacing:.1em}
+  #bss .bss-heading h2,#bss .bss-final h2{font-size:clamp(1.9rem,8vw,2.5rem)}
+  #bss .bss-reasons,#bss .bss-services,#bss .bss-reviews{grid-template-columns:minmax(0,1fr)}
+  #bss .bss-reasons{gap:12px}
+  #bss .bss-card{min-height:0;grid-template-columns:43px minmax(0,1fr);gap:13px;padding:19px 17px}
+  #bss .bss-card .bss-num{width:36px;height:36px;font-size:11px}
+  #bss .bss-card h3{font-size:16px}
+  #bss .bss-card p{font-size:14px}
+  #bss .bss-groups{gap:34px}
+  #bss .bss-group__title{gap:10px;margin-bottom:15px;font-size:21px}
+  #bss .bss-service{min-height:0;grid-template-columns:35px minmax(0,1fr);gap:12px;padding:18px 16px}
+  #bss .bss-service .bss-num{width:30px;height:30px;font-size:10px}
+  #bss .bss-cta{margin-top:29px}
+  #bss .bss-reviews{gap:14px}
+  #bss .bss-review,#bss .bss-review:last-child{grid-column:auto;min-height:0;padding:21px 19px}
+  #bss .bss-review__preview{min-height:0;-webkit-line-clamp:4}
+  #bss .bss-faq{padding-top:65px;padding-bottom:66px}
+  #bss .bss-faq .bss-heading{margin-bottom:25px}
+  #bss .bss-faq__q{min-height:66px;gap:12px;padding:16px 0;font-size:15px}
+  #bss .bss-faq__a{padding:0 38px 18px 0;font-size:14px}
+  #bss .bss-final-section{padding:48px 16px 62px}
+  #bss .bss-final{padding:42px 21px;border-radius:16px}
+  #bss .bss-final__text{font-size:15px}
+  #bss .bss-modal{width:calc(100% - 18px);max-height:calc(100vh - 18px);max-height:calc(100dvh - 18px);border-radius:14px}
+  #bss .bss-modal__body,#bss .bss-modal iframe{min-height:330px}
+}
+@media (prefers-reduced-motion:reduce){#bss *,#bss *::before,#bss *::after{transition-duration:.01ms !important}}
+</style>
+
+<div id="bss">
+  <header class="bss-header">
+    <img src="https://img1.wsimg.com/isteam/ip/ede29c46-864b-4bea-afe1-1c4cf4c2ccdf/logo/f2dc896d-bda5-4912-80f0-ba4c31a88c16.jpg/:/rs=w:285,h:86,cg:true,m/cr=w:285,h:86/qt=q:100/ll" alt="BrightSkies Services" width="285" height="86">
+  </header>
+
+  <main>
+    <!-- 1. Hero -->
+    <section class="bss-hero">
+      <div class="bss-hero__copy">
+        <p class="bss-callout">For MedSpas, wellness businesses, and private-pay medical providers</p>
+        <h1>Find Financial Serenity in Your Wellness Business</h1>
+        <p class="bss-hero__sub">You provide balance and care for your clients. It is time you had the same for your finances.</p>
+        <button class="bss-btn" type="button" data-bss-open aria-haspopup="dialog">Get Started Now</button>
+      </div>
+      <div class="bss-hero__image">
+        <img src="https://img1.wsimg.com/isteam/ip/ede29c46-864b-4bea-afe1-1c4cf4c2ccdf/thumbnails/thumbnail-f63ae2af-56ee-4e28-b479-c4b490f09153.png" alt="A handshake between business professionals" width="1920" height="1080" fetchpriority="high">
+      </div>
+    </section>
+
+    <!-- 2. Six reasons -->
+    <section class="bss-section" aria-labelledby="bss-reasons-title">
+      <div class="bss-heading">
+        <p class="bss-eyebrow">A better view of your business finances</p>
+        <h2 id="bss-reasons-title">Six Reasons to Work With Bright Skies</h2>
+      </div>
+      <div class="bss-wrap bss-reasons">
+        <article class="bss-card"><span class="bss-num" aria-hidden="true">01</span><div><h3>Built for wellness and medical businesses</h3><p>Bright Skies focuses on spa, wellness, MedSpa, weight-loss clinic, and private-pay medical providers.</p></div></article>
+        <article class="bss-card"><span class="bss-num" aria-hidden="true">02</span><div><h3>Profit First experience</h3><p>The current Bright Skies website identifies a certified Profit First Professional and MBA.</p></div></article>
+        <article class="bss-card"><span class="bss-num" aria-hidden="true">03</span><div><h3>Bookkeeping beyond reconciliation</h3><p>Support includes a clear cash position and tracking for services, products, supplies, gift cards, and payroll costs.</p></div></article>
+        <article class="bss-card"><span class="bss-num" aria-hidden="true">04</span><div><h3>A tailored Profit First rollout</h3><p>Bright Skies describes an assessment and customized rollout plan for the Profit First system.</p></div></article>
+        <article class="bss-card"><span class="bss-num" aria-hidden="true">05</span><div><h3>Accounting software support</h3><p>Accounting services include setup and management of software such as QuickBooks for a spa business.</p></div></article>
+        <article class="bss-card"><span class="bss-num" aria-hidden="true">06</span><div><h3>Reports explained in plain language</h3><p>Financial reporting includes monthly statements and help understanding what the numbers mean for the business.</p></div></article>
+      </div>
+      <div class="bss-cta"><button class="bss-btn" type="button" data-bss-open aria-haspopup="dialog">Get Started Now</button></div>
+    </section>
+
+    <!-- 3. Services -->
+    <section class="bss-section bss-tint" aria-labelledby="bss-services-title">
+      <div class="bss-heading">
+        <p class="bss-eyebrow">Practical support, clear reporting</p>
+        <h2 id="bss-services-title">Here’s Everything We Do For You</h2>
+      </div>
+      <div class="bss-wrap bss-groups">
+        <div>
+          <h3 class="bss-group__title"><span aria-hidden="true">01</span>What We Deliver</h3>
+          <div class="bss-services">
+            <article class="bss-service"><span class="bss-num" aria-hidden="true">01</span><div><h4>Bookkeeping and transaction reconciliation</h4><p>Keep transactions accounted for and maintain an up-to-date view of the business’s cash position.</p></div></article>
+            <article class="bss-service"><span class="bss-num" aria-hidden="true">02</span><div><h4>Profit First assessment and rollout</h4><p>Review current financials, shape a customized rollout plan, and help set up the accounts for the system.</p></div></article>
+            <article class="bss-service"><span class="bss-num" aria-hidden="true">03</span><div><h4>Accounting software setup</h4><p>Set up and manage accounting software such as QuickBooks to match a spa business’s needs.</p></div></article>
+            <article class="bss-service"><span class="bss-num" aria-hidden="true">04</span><div><h4>Invoicing and bill payments</h4><p>Support invoicing and bill-payment processes for cash flow and vendor relationships.</p></div></article>
+            <article class="bss-service"><span class="bss-num" aria-hidden="true">05</span><div><h4>Service and product profitability analysis</h4><p>Review profitability by service, package, and product line.</p></div></article>
+            <article class="bss-service"><span class="bss-num" aria-hidden="true">06</span><div><h4>Payroll tracking</h4><p>Work with the payroll provider to track salaries, hourly wages, and commission structures.</p></div></article>
+          </div>
+        </div>
+        <div>
+          <h3 class="bss-group__title"><span aria-hidden="true">02</span>What You Get</h3>
+          <div class="bss-services">
+            <article class="bss-service"><span class="bss-num" aria-hidden="true">01</span><div><h4>A clear cash position</h4><p>Transactions are accounted for to give a current picture of cash position.</p></div></article>
+            <article class="bss-service"><span class="bss-num" aria-hidden="true">02</span><div><h4>Monthly financial statements</h4><p>Receive easy-to-understand Profit and Loss and Balance Sheet statements each month.</p></div></article>
+            <article class="bss-service"><span class="bss-num" aria-hidden="true">03</span><div><h4>Visibility by service and product</h4><p>Understand where revenue comes from across services and retail, and review profitability by line.</p></div></article>
+            <article class="bss-service"><span class="bss-num" aria-hidden="true">04</span><div><h4>Retail, supply, and gift-card tracking</h4><p>Track retail product and professional supply costs, along with the liability from unredeemed gift cards.</p></div></article>
+            <article class="bss-service"><span class="bss-num" aria-hidden="true">05</span><div><h4>Budgeting and cash flow forecasting</h4><p>Plan for seasonal changes and major investments with a budget and cash flow forecast.</p></div></article>
+            <article class="bss-service"><span class="bss-num" aria-hidden="true">06</span><div><h4>A twice-monthly allocation rhythm</h4><p>Establish a regular cadence for allocating income into the designated Profit First accounts.</p></div></article>
+          </div>
+        </div>
+      </div>
+      <div class="bss-cta"><button class="bss-btn" type="button" data-bss-open aria-haspopup="dialog">Get Started Now</button></div>
+    </section>
+
+    <!-- 4. Testimonials -->
+    <section class="bss-section" aria-labelledby="bss-reviews-title">
+      <div class="bss-heading">
+        <p class="bss-eyebrow">Client reviews shared on Google</p>
+        <h2 id="bss-reviews-title">Hear From Bright Skies Clients</h2>
+      </div>
+      <div class="bss-wrap bss-reviews">
+        <article class="bss-review">
+          <div class="bss-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="bss-review__preview">“My company has been working with BrightSkies Services over the last couple of months and I have been extremely impressed with how quickly the team at…”</p>
+          <details><summary>Read full review</summary><blockquote>“My company has been working with BrightSkies Services over the last couple of months and I have been extremely impressed with how quickly the team at BrightSkies is getting things fixed, explaining best practice and helping me think through potential issues. So thankful that I made the decision to switch.”</blockquote></details>
+          <div class="bss-review__by"><p class="bss-review__name">Jake Isaacs</p><p class="bss-review__source">Google Reviews · December 2024</p><a href="https://maps.app.goo.gl/LoBXUZ31f2bXTxu66" target="_blank" rel="noopener noreferrer">View on Google</a></div>
+        </article>
+        <article class="bss-review">
+          <div class="bss-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="bss-review__preview">“The team at Brightskies is top notch! The way Masheka coached me in Profit First methods and money mindset was a game changer. Everyone works so hard…”</p>
+          <details><summary>Read full review</summary><blockquote>“The team at Brightskies is top notch! The way Masheka coached me in Profit First methods and money mindset was a game changer. Everyone works so hard to make sure all my accounts were settled and I was prepared for taxes, goals, and business strategy. You will have a great experience with this team!”</blockquote></details>
+          <div class="bss-review__by"><p class="bss-review__name">Rebecca Robinson</p><p class="bss-review__source">Google Reviews · March 2025</p><a href="https://maps.app.goo.gl/ffSwPZ77MpnwgJrD7" target="_blank" rel="noopener noreferrer">View on Google</a></div>
+        </article>
+        <article class="bss-review">
+          <div class="bss-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="bss-review__preview">“Best decision we made with our business bookkeeping was to move over to BrightSkies. They are just what we needed to get things in order so we can con…”</p>
+          <details><summary>Read full review</summary><blockquote>“Best decision we made with our business bookkeeping was to move over to BrightSkies. They are just what we needed to get things in order so we can continue to run our business successfully. The team is great and their attention to detail in an area that needs it is a huge plus.”</blockquote></details>
+          <div class="bss-review__by"><p class="bss-review__name">Tony &amp; Lisa DiLorenzo</p><p class="bss-review__source">Google Reviews · February 2025</p><a href="https://maps.app.goo.gl/a7GQKXxVZ9wV19td8" target="_blank" rel="noopener noreferrer">View on Google</a></div>
+        </article>
+      </div>
+      <div class="bss-cta"><button class="bss-btn" type="button" data-bss-open aria-haspopup="dialog">Get Started Now</button></div>
+    </section>
+
+    <!-- 5. FAQ -->
+    <section class="bss-section bss-tint bss-faq" aria-labelledby="bss-faq-title">
+      <div class="bss-wrap">
+        <div class="bss-heading">
+          <p class="bss-eyebrow">Answers from Bright Skies’ official service information</p>
+          <h2 id="bss-faq-title">Frequently Asked Questions</h2>
+        </div>
+        <div class="bss-faq__list">
+          <div class="bss-faq__item">
+            <h3><button type="button" class="bss-faq__q" id="bss-faq-q1" aria-expanded="false" aria-controls="bss-faq-a1"><span>Which types of businesses does Bright Skies serve?</span><span class="bss-faq__mark" aria-hidden="true"></span></button></h3>
+            <div class="bss-faq__a" id="bss-faq-a1" role="region" aria-labelledby="bss-faq-q1" hidden><p>Bright Skies describes its focus as spa and wellness businesses, MedSpas, weight-loss clinics, medical services, and other private-pay medical providers.</p></div>
+          </div>
+          <div class="bss-faq__item">
+            <h3><button type="button" class="bss-faq__q" id="bss-faq-q2" aria-expanded="false" aria-controls="bss-faq-a2"><span>What does the bookkeeping service cover?</span><span class="bss-faq__mark" aria-hidden="true"></span></button></h3>
+            <div class="bss-faq__a" id="bss-faq-a2" role="region" aria-labelledby="bss-faq-q2" hidden><p>The official bookkeeping page describes transaction reconciliation and tracking for revenue sources, retail products, professional supplies, unredeemed gift cards, payroll costs, and monthly financial statements.</p></div>
+          </div>
+          <div class="bss-faq__item">
+            <h3><button type="button" class="bss-faq__q" id="bss-faq-q3" aria-expanded="false" aria-controls="bss-faq-a3"><span>Can Bright Skies help with accounting software?</span><span class="bss-faq__mark" aria-hidden="true"></span></button></h3>
+            <div class="bss-faq__a" id="bss-faq-a3" role="region" aria-labelledby="bss-faq-q3" hidden><p>Yes. Bright Skies says it can set up and manage accounting software such as QuickBooks to fit a spa business’s needs.</p></div>
+          </div>
+          <div class="bss-faq__item">
+            <h3><button type="button" class="bss-faq__q" id="bss-faq-q4" aria-expanded="false" aria-controls="bss-faq-a4"><span>How does a Profit First rollout work?</span><span class="bss-faq__mark" aria-hidden="true"></span></button></h3>
+            <div class="bss-faq__a" id="bss-faq-a4" role="region" aria-labelledby="bss-faq-q4" hidden><p>Bright Skies describes starting with an assessment of the business, creating a customized rollout plan, helping set up the necessary bank accounts, and establishing a twice-monthly allocation rhythm.</p></div>
+          </div>
+          <div class="bss-faq__item">
+            <h3><button type="button" class="bss-faq__q" id="bss-faq-q5" aria-expanded="false" aria-controls="bss-faq-a5"><span>What financial reports are provided?</span><span class="bss-faq__mark" aria-hidden="true"></span></button></h3>
+            <div class="bss-faq__a" id="bss-faq-a5" role="region" aria-labelledby="bss-faq-q5" hidden><p>Bright Skies describes monthly Profit and Loss and Balance Sheet statements, along with help understanding what the numbers mean for the business.</p></div>
+          </div>
+        </div>
+        <div class="bss-cta"><button class="bss-btn" type="button" data-bss-open aria-haspopup="dialog">Get Started Now</button></div>
+      </div>
+    </section>
+
+    <!-- 6. Final CTA -->
+    <section class="bss-final-section" aria-labelledby="bss-final-title">
+      <div class="bss-final">
+        <p class="bss-eyebrow">Complimentary Financial Wellness Consultation</p>
+        <h2 id="bss-final-title">Ready to Align Your Profits with Your Purpose?</h2>
+        <p class="bss-final__text">Let us bring the same sense of peace and order to your finances that you bring to your clients every day. Schedule your complimentary Financial Wellness Consultation and let us build a more profitable, sustainable, and serene future for your business.</p>
+        <button class="bss-btn" type="button" data-bss-open aria-haspopup="dialog">Get Started Now</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Survey popup -->
+  <dialog class="bss-modal" id="bss-survey" aria-labelledby="bss-survey-title">
+    <div class="bss-modal__head">
+      <h2 id="bss-survey-title">Get Started Now</h2>
+      <button class="bss-modal__close" type="button" data-bss-close aria-label="Close survey"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="bss-modal__body">
+      <p class="bss-modal__loading" aria-live="polite">Loading survey…</p>
+      <iframe data-src="https://link.praveenagency.com/widget/survey/EkjS9OkyZEAOXbhxLzuP" style="border:none;width:100%;" scrolling="no" id="EkjS9OkyZEAOXbhxLzuP" title="survey" data-cookie-consent="true" data-cookie-consent-provider="auto"></iframe>
+    </div>
+  </dialog>
+  <div class="bss-modal__shade" hidden></div>
+</div>
+
+<script>
+(function () {
+  var SURVEY_SCRIPT = "https://link.praveenagency.com/js/form_embed.js";
+
+  function init() {
+    var root = document.getElementById("bss");
+    if (!root || root.getAttribute("data-ready")) return;
+    root.setAttribute("data-ready", "1");
+
+    var modal = root.querySelector("#bss-survey");
+    var shade = root.querySelector(".bss-modal__shade");
+    var frame = modal.querySelector("iframe");
+    var loading = modal.querySelector(".bss-modal__loading");
+    var closeBtn = modal.querySelector("[data-bss-close]");
+    var native = typeof modal.showModal === "function";
+    var lastFocus = null;
+
+    // The survey and its resize script load on the first click only.
+    function loadSurvey() {
+      if (frame.getAttribute("src")) return;
+      frame.addEventListener("load", function () { loading.hidden = true; });
+      frame.setAttribute("src", frame.getAttribute("data-src"));
+      if (!document.querySelector('script[src="' + SURVEY_SCRIPT + '"]')) {
+        var s = document.createElement("script");
+        s.src = SURVEY_SCRIPT;
+        document.body.appendChild(s);
+      }
+    }
+
+    function isOpen() {
+      return native ? modal.open : modal.classList.contains("bss-modal--fallback");
+    }
+
+    function open(e) {
+      if (e) e.preventDefault();
+      if (isOpen()) return;
+      lastFocus = document.activeElement;
+      loadSurvey();
+      document.documentElement.classList.add("bss-lock");
+      if (native) {
+        modal.showModal();
+      } else {
+        modal.classList.add("bss-modal--fallback");
+        modal.setAttribute("open", "");
+        shade.hidden = false;
+      }
+      modal.scrollTop = 0;
+      closeBtn.focus();
+    }
+
+    function close() {
+      if (native) {
+        if (modal.open) modal.close();
+      } else {
+        modal.classList.remove("bss-modal--fallback");
+        modal.removeAttribute("open");
+        shade.hidden = true;
+        onClosed();
+      }
+    }
+
+    function onClosed() {
+      document.documentElement.classList.remove("bss-lock");
+      if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus({ preventScroll: true });
+    }
+
+    var openers = root.querySelectorAll("[data-bss-open]");
+    for (var i = 0; i < openers.length; i++) openers[i].addEventListener("click", open);
+    closeBtn.addEventListener("click", close);
+    modal.addEventListener("close", onClosed);
+    // Click on the dark area around the box closes it.
+    modal.addEventListener("click", function (e) {
+      if (e.target !== modal) return;
+      var r = modal.getBoundingClientRect();
+      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) close();
+    });
+    shade.addEventListener("click", close);
+    document.addEventListener("keydown", function (e) {
+      if (!native && e.key === "Escape" && isOpen()) close();
+    });
+
+    // FAQ accordion: one answer open at a time.
+    var questions = root.querySelectorAll(".bss-faq__q");
+    for (var j = 0; j < questions.length; j++) {
+      questions[j].addEventListener("click", function () {
+        var wasOpen = this.getAttribute("aria-expanded") === "true";
+        for (var k = 0; k < questions.length; k++) {
+          questions[k].setAttribute("aria-expanded", "false");
+          document.getElementById(questions[k].getAttribute("aria-controls")).hidden = true;
+        }
+        if (!wasOpen) {
+          this.setAttribute("aria-expanded", "true");
+          document.getElementById(this.getAttribute("aria-controls")).hidden = false;
+        }
+      });
+    }
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
+</script>

@@ -1,0 +1,99 @@
+<!--
+  Bright Skies Services | Funnel step 2 of 3: Booking page (Calendly)
+  Paste all of this into ONE "Custom JS/HTML" element, inside a full-width section with 0 padding.
+  After someone books, the page sends them to CONFIRMATION_URL (set it in the script below).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+#bss{--indigo:#333394;--indigo-deep:#26266f;--ink:#24243d;--muted:#626274;width:100%;min-height:100vh;margin:0;padding:0;background:#fff;color:var(--ink);font-family:"Roboto",Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.6;letter-spacing:normal;text-align:left;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+#bss *,#bss *::before,#bss *::after{box-sizing:border-box}
+#bss h1,#bss p{margin:0;padding:0}
+#bss h1{font-family:"Raleway",Arial,sans-serif;line-height:1.14;text-transform:none}
+#bss img{display:block;max-width:100%;height:auto;border:0}
+#bss a:focus-visible{outline:3px solid rgba(232,181,40,.8);outline-offset:3px}
+#bss .bss-header{display:flex;min-height:76px;justify-content:center;align-items:center;padding:15px 24px 8px;background:#fff}
+#bss .bss-header img{width:148px;height:auto}
+#bss .bss-eyebrow{margin:0 0 13px;color:var(--indigo);font-size:12px;font-weight:700;letter-spacing:.13em;line-height:1.4;text-transform:uppercase}
+#bss .bss-booking{width:min(100%,1060px);margin:0 auto;padding:28px 24px 50px}
+#bss .bss-booking__intro{margin:0 auto 25px;text-align:center}
+#bss .bss-booking__intro h1{margin:0 0 12px;color:var(--indigo-deep);font-size:clamp(2rem,4vw,3.4rem);font-weight:800;letter-spacing:-.035em}
+#bss .bss-booking__intro p:last-child{margin:0;color:var(--muted)}
+#bss .bss-calendly{width:100%;min-width:320px;height:780px;overflow:visible}
+#bss .bss-calendly iframe{width:100% !important;min-width:320px !important;height:100% !important;min-height:760px !important;border:0 !important}
+#bss .bss-booking__phone{margin:14px 0 0;color:var(--muted);text-align:center}
+#bss .bss-booking__fallback{margin:9px 0 0;color:var(--muted);font-size:13px;text-align:center}
+#bss .bss-booking a{color:var(--indigo);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+@media (max-width:640px){
+  #bss .bss-header{min-height:65px;padding:12px 16px 4px}
+  #bss .bss-header img{width:132px}
+  #bss .bss-eyebrow{font-size:10px;letter-spacing:.1em}
+  #bss .bss-booking{padding:22px 16px 38px}
+  #bss .bss-booking__intro h1{font-size:clamp(1.8rem,8vw,2.55rem)}
+  #bss .bss-calendly{height:1000px}
+}
+</style>
+
+<div id="bss">
+  <header class="bss-header">
+    <img src="https://img1.wsimg.com/isteam/ip/ede29c46-864b-4bea-afe1-1c4cf4c2ccdf/logo/f2dc896d-bda5-4912-80f0-ba4c31a88c16.jpg/:/rs=w:285,h:86,cg:true,m/cr=w:285,h:86/qt=q:100/ll" alt="BrightSkies Services" width="285" height="86">
+  </header>
+  <main class="bss-booking">
+    <div class="bss-booking__intro">
+      <p class="bss-eyebrow">Bright Skies Services</p>
+      <h1>Schedule Your Financial Wellness Consultation</h1>
+      <p>Select an available time in the calendar below.</p>
+    </div>
+    <div class="bss-calendly" id="bss-calendly" aria-label="Calendly scheduling calendar"></div>
+    <p class="bss-booking__phone">Questions? Call <a href="tel:+16153105778">(615) 310-5778</a>.</p>
+    <p class="bss-booking__fallback">If the calendar does not appear, <a href="https://calendly.com/mturner-6" target="_blank" rel="noopener noreferrer">open the official Calendly page</a>.</p>
+  </main>
+</div>
+
+<script>
+(function () {
+  var CALENDLY_URL = "https://calendly.com/mturner-6";
+  // Path of funnel step 3. Change it if your confirmation step uses a different path.
+  var CONFIRMATION_URL = "/confirmation";
+  var WIDGET_SCRIPT = "https://assets.calendly.com/assets/external/widget.js";
+
+  function init() {
+    var root = document.getElementById("bss");
+    var box = document.getElementById("bss-calendly");
+    if (!root || !box || root.getAttribute("data-ready")) return;
+    root.setAttribute("data-ready", "1");
+
+    function mount() {
+      if (!window.Calendly || !window.Calendly.initInlineWidget) return;
+      box.innerHTML = "";
+      window.Calendly.initInlineWidget({ url: CALENDLY_URL, parentElement: box });
+    }
+
+    if (window.Calendly && window.Calendly.initInlineWidget) {
+      mount();
+    } else {
+      var s = document.querySelector('script[src="' + WIDGET_SCRIPT + '"]');
+      if (!s) {
+        s = document.createElement("script");
+        s.src = WIDGET_SCRIPT;
+        s.async = true;
+        document.head.appendChild(s);
+      }
+      s.addEventListener("load", mount);
+    }
+
+    // When Calendly reports a completed booking, go to the confirmation step.
+    window.addEventListener("message", function (e) {
+      if (e.origin !== "https://calendly.com" || !e.data || e.data.event !== "calendly.event_scheduled") return;
+      var url = CONFIRMATION_URL;
+      try { sessionStorage.setItem("bss_booked", String(Date.now())); }
+      catch (err) { url += (url.indexOf("?") === -1 ? "?" : "&") + "booked=1"; }
+      window.location.href = url;
+    });
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
+</script>

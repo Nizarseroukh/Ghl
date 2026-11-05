@@ -1,0 +1,78 @@
+<!--
+  Bright Skies Services | Funnel step 3 of 3: Confirmation page
+  Paste all of this into ONE "Custom JS/HTML" element, inside a full-width section with 0 padding.
+  "You're booked" only shows when the visitor arrives here from a completed Calendly booking on step 2.
+  Anyone who opens this page directly sees the neutral "Booking status" message instead.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+#bss{--indigo:#333394;--indigo-deep:#26266f;--ink:#24243d;--muted:#626274;--line:#e5e5ef;width:100%;min-height:100vh;margin:0;padding:1px 0 0;background:#fff;color:var(--ink);font-family:"Roboto",Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.6;letter-spacing:normal;text-align:left;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+#bss *,#bss *::before,#bss *::after{box-sizing:border-box}
+#bss h1,#bss p{margin:0;padding:0}
+#bss h1{font-family:"Raleway",Arial,sans-serif;line-height:1.14;text-transform:none}
+#bss img{display:block;max-width:100%;height:auto;border:0}
+#bss a:focus-visible{outline:3px solid rgba(232,181,40,.8);outline-offset:3px}
+#bss [hidden]{display:none !important}
+#bss .bss-header{display:flex;min-height:76px;justify-content:center;align-items:center;padding:15px 24px 8px;background:#fff}
+#bss .bss-header img{width:148px;height:auto}
+#bss .bss-eyebrow{margin:0 0 13px;color:var(--indigo);font-size:12px;font-weight:700;letter-spacing:.13em;line-height:1.4;text-transform:uppercase}
+#bss .bss-confirm{width:min(100% - 48px,760px);margin:42px auto 100px;padding:42px 36px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 12px 32px rgba(37,37,89,.07)}
+#bss .bss-confirm h1{margin:0 0 12px;color:var(--indigo-deep);font-size:clamp(2rem,4vw,3.4rem);font-weight:800;letter-spacing:-.035em}
+#bss .bss-confirm p:not(.bss-eyebrow){margin:0 0 16px;color:var(--muted);font-size:17px}
+#bss .bss-confirm p:last-child{margin-bottom:0}
+#bss .bss-confirm a:not(.bss-btn){color:var(--indigo);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+#bss .bss-btn{display:inline-flex;min-height:42px;margin-left:4px;justify-content:center;align-items:center;padding:10px 18px;border:1px solid var(--indigo);border-radius:999px;background:var(--indigo);color:#fff;font-size:13px;font-weight:700;letter-spacing:.035em;line-height:1.2;text-decoration:none;vertical-align:middle;transition:background-color 160ms ease,box-shadow 160ms ease}
+#bss .bss-btn:hover{border-color:var(--indigo-deep);background:var(--indigo-deep);box-shadow:0 8px 20px rgba(51,51,148,.2)}
+@media (max-width:640px){
+  #bss .bss-header{min-height:65px;padding:12px 16px 4px}
+  #bss .bss-header img{width:132px}
+  #bss .bss-eyebrow{font-size:10px;letter-spacing:.1em}
+  #bss .bss-confirm{width:calc(100% - 32px);margin-top:30px;padding:32px 22px}
+  #bss .bss-confirm h1{font-size:clamp(1.8rem,8vw,2.55rem)}
+  #bss .bss-confirm p:not(.bss-eyebrow){font-size:15px}
+  #bss .bss-btn{display:flex;width:fit-content;margin:14px 0 0}
+}
+</style>
+
+<div id="bss">
+  <header class="bss-header">
+    <img src="https://img1.wsimg.com/isteam/ip/ede29c46-864b-4bea-afe1-1c4cf4c2ccdf/logo/f2dc896d-bda5-4912-80f0-ba4c31a88c16.jpg/:/rs=w:285,h:86,cg:true,m/cr=w:285,h:86/qt=q:100/ll" alt="BrightSkies Services" width="285" height="86">
+  </header>
+  <main class="bss-confirm">
+    <!-- Shown after a completed Calendly booking -->
+    <div data-bss-state="booked" hidden>
+      <p class="bss-eyebrow">Bright Skies Services</p>
+      <h1>You’re booked!</h1>
+      <p>Thank you for scheduling your complimentary Financial Wellness Consultation with Bright Skies Services.</p>
+      <p>Calendly sends your confirmation and meeting details to the email address you booked with. Use the links in that email if you need to reschedule or cancel.</p>
+      <p>Questions before your call? <a class="bss-btn" href="tel:+16153105778">(615) 310-5778</a></p>
+    </div>
+    <!-- Shown to anyone who lands here without booking -->
+    <div data-bss-state="unknown">
+      <p class="bss-eyebrow">Bright Skies Services</p>
+      <h1>Booking status</h1>
+      <p>We could not confirm a booking from this visit. If you finished scheduling, Calendly’s confirmation email is your record of the appointment.</p>
+      <!-- Change /booking if your booking step uses a different path. -->
+      <p>Not booked yet? <a href="/booking">Choose a time on the booking page</a>.</p>
+      <p>If you need assistance, call Bright Skies Services at <a class="bss-btn" href="tel:+16153105778">(615) 310-5778</a></p>
+    </div>
+  </main>
+</div>
+
+<script>
+(function () {
+  function init() {
+    var root = document.getElementById("bss");
+    if (!root) return;
+    var booked = /[?&]booked=1(&|$)/.test(window.location.search);
+    try { booked = booked || !!sessionStorage.getItem("bss_booked"); } catch (err) {}
+    if (!booked) return;
+    root.querySelector('[data-bss-state="booked"]').hidden = false;
+    root.querySelector('[data-bss-state="unknown"]').hidden = true;
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
+</script>
