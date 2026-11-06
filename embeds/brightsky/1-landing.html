@@ -5,6 +5,7 @@
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://link.praveenagency.com">
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 #bss{--indigo:#333394;--indigo-deep:#26266f;--navy:#151549;--indigo-tint:rgba(85,85,204,.42);--gold:#e8b528;--gold-light:#f5c542;--ink:#24243d;--muted:#5d5d72;--line:#e6e6f0;--pale:#f5f5fc;--pale-gold:#fff9e9;--ease:cubic-bezier(.2,.7,.2,1);width:100%;margin:0;padding:0;overflow:hidden;background:#fff;color:var(--ink);font-family:"Roboto",Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.6;letter-spacing:normal;text-align:left;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
@@ -195,6 +196,7 @@
 #bss .bss-modal::backdrop{background:rgba(21,21,73,.7);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
 #bss .bss-modal[open]::backdrop{animation:bss-fade .3s ease}
 #bss .bss-modal.bss-modal--fallback{position:fixed;inset:0;z-index:2147483000;display:block}
+#bss .bss-modal.is-preloading:not([open]){display:block;position:fixed;top:0;left:-10000px;visibility:hidden;pointer-events:none;animation:none}
 #bss .bss-modal__shade{position:fixed;inset:0;z-index:2147482999;background:rgba(21,21,73,.7)}
 #bss .bss-modal__shade[hidden]{display:none}
 #bss .bss-modal__head{position:sticky;z-index:1;top:0;display:flex;min-height:64px;justify-content:space-between;align-items:center;gap:16px;padding:12px 17px 12px 24px;border-bottom:1px solid var(--line);background:#fff}
@@ -470,6 +472,9 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
 <script>
 (function () {
   var SURVEY_SCRIPT = "https://link.praveenagency.com/js/form_embed.js";
+  // Once someone opens the survey, this calendar is quietly loaded in the background so the
+  // booking step opens fast (it comes from the browser's cache). Set it to "" to turn it off.
+  var CALENDAR_WARMUP_URL = "https://calendly.com/mturner-6/brightskies-strategy-session";
 
   function init() {
     var root = document.getElementById("bss");
@@ -484,7 +489,6 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
     var native = typeof modal.showModal === "function";
     var lastFocus = null;
 
-    // The survey and its resize script load on the first click only.
     function loadSurvey() {
       if (frame.getAttribute("src")) return;
       frame.addEventListener("load", function () { loading.hidden = true; });
@@ -496,6 +500,34 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
       }
     }
 
+    // Load the survey in the background as soon as the page settles, so the popup opens instantly.
+    // Until it's opened, the popup sits off screen at its real width, so the survey sizes itself correctly.
+    function preloadSurvey() {
+      if (frame.getAttribute("src")) return;
+      modal.classList.add("is-preloading");
+      loadSurvey();
+    }
+    function whenIdle(fn) {
+      if ("requestIdleCallback" in window) requestIdleCallback(fn, { timeout: 2500 });
+      else setTimeout(fn, 800);
+    }
+    if (document.readyState === "complete") whenIdle(preloadSurvey);
+    else window.addEventListener("load", function () { whenIdle(preloadSurvey); });
+
+    var warmed = false;
+    function warmCalendar() {
+      if (warmed || !CALENDAR_WARMUP_URL) return;
+      warmed = true;
+      var f = document.createElement("iframe");
+      f.src = CALENDAR_WARMUP_URL;
+      f.title = "";
+      f.tabIndex = -1;
+      f.setAttribute("aria-hidden", "true");
+      f.style.cssText = "position:fixed;top:0;left:-10000px;width:400px;height:700px;border:0;visibility:hidden;pointer-events:none";
+      f.addEventListener("load", function () { setTimeout(function () { if (f.parentNode) f.parentNode.removeChild(f); }, 5000); });
+      document.body.appendChild(f);
+    }
+
     function isOpen() {
       return native ? modal.open : modal.classList.contains("bss-modal--fallback");
     }
@@ -505,6 +537,7 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
       if (isOpen()) return;
       lastFocus = document.activeElement;
       loadSurvey();
+      setTimeout(warmCalendar, 3000);
       document.documentElement.classList.add("bss-lock");
       if (native) {
         modal.showModal();
@@ -534,7 +567,11 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
     }
 
     var openers = root.querySelectorAll("[data-bss-open]");
-    for (var i = 0; i < openers.length; i++) openers[i].addEventListener("click", open);
+    for (var i = 0; i < openers.length; i++) {
+      openers[i].addEventListener("click", open);
+      openers[i].addEventListener("pointerenter", preloadSurvey);
+      openers[i].addEventListener("touchstart", preloadSurvey, { passive: true });
+    }
     closeBtn.addEventListener("click", close);
     modal.addEventListener("close", onClosed);
     // Click on the dark area around the box closes it.
