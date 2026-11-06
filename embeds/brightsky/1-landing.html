@@ -103,6 +103,7 @@
 #bss .bss-service h4{font-size:16px;line-height:1.3}
 #bss .bss-service--featured{grid-column:1/-1;grid-template-columns:56px minmax(0,1fr);gap:20px;min-height:0;padding:28px 30px;border-color:rgba(232,181,40,.55);background:linear-gradient(120deg,#fff9e9 0%,#fff 55%,#f5f5fc 100%);box-shadow:0 18px 40px rgba(232,181,40,.14)}
 #bss .bss-service--featured::before{transform:scaleX(1)}
+#bss .bss-services > .bss-service--featured ~ .bss-service:last-child:nth-child(even){grid-column:1/-1}
 #bss .bss-service--featured:hover{box-shadow:0 26px 54px rgba(232,181,40,.22)}
 #bss .bss-feature-icon{display:inline-flex;width:52px;height:52px;justify-content:center;align-items:center;border-radius:16px;background:linear-gradient(135deg,var(--gold-light),var(--gold));box-shadow:0 10px 22px rgba(232,181,40,.3);color:var(--navy);transition:transform .35s var(--ease)}
 #bss .bss-feature-icon svg{width:26px;height:26px}
@@ -338,7 +339,6 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
           <article class="bss-service bss-reveal" style="--d:0.12s"><span class="bss-num" aria-hidden="true">03</span><div><h4>Visibility by service and product</h4><p>Understand where revenue comes from across services and retail, and review profitability by line.</p></div></article>
           <article class="bss-service bss-reveal" style="--d:0.20s"><span class="bss-num" aria-hidden="true">04</span><div><h4>Retail, supply, and gift-card tracking</h4><p>Track retail product and professional supply costs, along with the liability from unredeemed gift cards.</p></div></article>
           <article class="bss-service bss-reveal" style="--d:0.18s"><span class="bss-num" aria-hidden="true">05</span><div><h4>Budgeting and cash flow forecasting</h4><p>Plan for seasonal changes and major investments with a budget and cash flow forecast.</p></div></article>
-          <article class="bss-service bss-reveal" style="--d:0.26s"><span class="bss-num" aria-hidden="true">06</span><div><h4>A twice-monthly allocation rhythm</h4><p>Establish a regular cadence for allocating income into the designated Profit First accounts.</p></div></article>
           </div>
         </div>
       </div>
@@ -429,7 +429,7 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
           </div>
           <div class="bss-faq__item bss-reveal" style="--d:0.18s">
             <h3><button type="button" class="bss-faq__q" id="bss-faq-q4" aria-expanded="false" aria-controls="bss-faq-a4"><span>How does a Profit First rollout work?</span><span class="bss-faq__mark" aria-hidden="true"></span></button></h3>
-            <div class="bss-faq__a" id="bss-faq-a4" role="region" aria-labelledby="bss-faq-q4"><div><p>BrightSkies describes starting with an assessment of the business, creating a customized rollout plan, helping set up the necessary bank accounts, and establishing a twice-monthly allocation rhythm.</p></div></div>
+            <div class="bss-faq__a" id="bss-faq-a4" role="region" aria-labelledby="bss-faq-q4"><div><p>BrightSkies describes starting with an assessment of the business, creating a customized rollout plan, and helping set up the necessary bank accounts.</p></div></div>
           </div>
           <div class="bss-faq__item bss-reveal" style="--d:0.24s">
             <h3><button type="button" class="bss-faq__q" id="bss-faq-q5" aria-expanded="false" aria-controls="bss-faq-a5"><span>What financial reports are provided?</span><span class="bss-faq__mark" aria-hidden="true"></span></button></h3>
