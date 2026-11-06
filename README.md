@@ -1,6 +1,6 @@
 # GHL embeds
 
-## Bright Skies Services funnel (3 steps)
+## BrightSkies Services funnel (3 steps)
 
 | Step | Path | Paste this file |
 | --- | --- | --- |

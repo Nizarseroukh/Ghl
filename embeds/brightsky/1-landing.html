@@ -1,5 +1,5 @@
 <!--
-  Bright Skies Services | Funnel step 1 of 3: Landing page
+  BrightSkies Services | Funnel step 1 of 3: Landing page
   Paste all of this into ONE "Custom JS/HTML" element, inside a full-width section with 0 padding.
   Every "Get Started Now" button opens the survey popup.
 -->
@@ -101,6 +101,15 @@
 #bss .bss-service .bss-num{width:36px;height:36px;flex-basis:36px;margin-top:1px;border:1px solid rgba(232,181,40,.7);background:var(--pale-gold);box-shadow:none;color:var(--indigo);font-size:11px}
 #bss .bss-service:hover .bss-num{border-color:transparent;background:linear-gradient(135deg,var(--gold-light),var(--gold));color:var(--navy)}
 #bss .bss-service h4{font-size:16px;line-height:1.3}
+#bss .bss-service--featured{grid-column:1/-1;grid-template-columns:56px minmax(0,1fr);gap:20px;min-height:0;padding:28px 30px;border-color:rgba(232,181,40,.55);background:linear-gradient(120deg,#fff9e9 0%,#fff 55%,#f5f5fc 100%);box-shadow:0 18px 40px rgba(232,181,40,.14)}
+#bss .bss-service--featured::before{transform:scaleX(1)}
+#bss .bss-service--featured:hover{box-shadow:0 26px 54px rgba(232,181,40,.22)}
+#bss .bss-feature-icon{display:inline-flex;width:52px;height:52px;justify-content:center;align-items:center;border-radius:16px;background:linear-gradient(135deg,var(--gold-light),var(--gold));box-shadow:0 10px 22px rgba(232,181,40,.3);color:var(--navy);transition:transform .35s var(--ease)}
+#bss .bss-feature-icon svg{width:26px;height:26px}
+#bss .bss-service--featured:hover .bss-feature-icon{transform:scale(1.06) rotate(-6deg)}
+#bss .bss-service .bss-feature-tag{display:inline-flex;margin:0 0 8px;padding:4px 10px;border-radius:999px;background:rgba(51,51,148,.08);color:var(--indigo);font-size:11px;font-weight:700;letter-spacing:.08em;line-height:1.4;text-transform:uppercase}
+#bss .bss-service--featured h4{margin-top:0;font-size:19px}
+#bss .bss-service--featured p:last-child{max-width:800px;color:#4f4f66;font-size:15px}
 #bss .bss-service p{font-size:14px}
 
 /* 4. Reviews: light, same card style as the rest of the page, reveal on scroll, swipe carousel on tablet/phone */
@@ -236,6 +245,12 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
   #bss .bss-group__title{gap:10px;margin-bottom:16px;font-size:21px}
   #bss .bss-service{min-height:0;grid-template-columns:36px minmax(0,1fr);gap:12px;padding:18px 16px}
   #bss .bss-service .bss-num{width:30px;height:30px;flex-basis:30px;font-size:10px}
+  #bss .bss-service--featured{grid-template-columns:44px minmax(0,1fr);gap:14px;padding:22px 18px}
+  #bss .bss-feature-icon{width:44px;height:44px;border-radius:14px}
+  #bss .bss-feature-icon svg{width:22px;height:22px}
+  #bss .bss-service .bss-feature-tag{font-size:10px}
+  #bss .bss-service--featured h4{font-size:17px}
+  #bss .bss-service--featured p:last-child{font-size:14px}
   #bss .bss-cta{margin-top:32px}
   #bss .bss-proof{--g:16px}
   #bss .bss-reviews{gap:14px}
@@ -273,7 +288,7 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
         <ul class="bss-trust">
           <li><span class="bss-trust__g"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg></span><span class="bss-stars" aria-hidden="true">★★★★★</span>Five-star Google reviews</li>
           <li><span class="bss-trust__check"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7.5"/></svg></span>Certified Profit First Professional</li>
-          <li><span class="bss-trust__check"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7.5"/></svg></span>Built for wellness and medical businesses</li>
+          <li><span class="bss-trust__check"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7.5"/></svg></span>Monthly check-in calls</li>
         </ul>
       </div>
     </section>
@@ -282,13 +297,13 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
     <section class="bss-section bss-reasons-sec" aria-labelledby="bss-reasons-title">
       <div class="bss-heading bss-reveal">
         <p class="bss-eyebrow">A better view of your business finances</p>
-        <h2 id="bss-reasons-title">Six Reasons to Work With Bright Skies</h2>
+        <h2 id="bss-reasons-title">Six Reasons to Work With BrightSkies</h2>
       </div>
       <div class="bss-wrap bss-reasons">
-          <article class="bss-card bss-reveal" style="--d:0.00s"><span class="bss-num" aria-hidden="true">01</span><div><h3>Built for wellness and medical businesses</h3><p>Bright Skies focuses on spa, wellness, MedSpa, weight-loss clinic, and private-pay medical providers.</p></div></article>
-          <article class="bss-card bss-reveal" style="--d:0.08s"><span class="bss-num" aria-hidden="true">02</span><div><h3>Profit First experience</h3><p>The current Bright Skies website identifies a certified Profit First Professional and MBA.</p></div></article>
+          <article class="bss-card bss-reveal" style="--d:0.00s"><span class="bss-num" aria-hidden="true">01</span><div><h3>Built for wellness and medical businesses</h3><p>BrightSkies focuses on spa, wellness, MedSpa, weight-loss clinic, and private-pay medical providers.</p></div></article>
+          <article class="bss-card bss-reveal" style="--d:0.08s"><span class="bss-num" aria-hidden="true">02</span><div><h3>Profit First experience</h3><p>The current BrightSkies website identifies a certified Profit First Professional and MBA.</p></div></article>
           <article class="bss-card bss-reveal" style="--d:0.06s"><span class="bss-num" aria-hidden="true">03</span><div><h3>Bookkeeping beyond reconciliation</h3><p>Support includes a clear cash position and tracking for services, products, supplies, gift cards, and payroll costs.</p></div></article>
-          <article class="bss-card bss-reveal" style="--d:0.14s"><span class="bss-num" aria-hidden="true">04</span><div><h3>A tailored Profit First rollout</h3><p>Bright Skies describes an assessment and customized rollout plan for the Profit First system.</p></div></article>
+          <article class="bss-card bss-reveal" style="--d:0.14s"><span class="bss-num" aria-hidden="true">04</span><div><h3>A tailored Profit First rollout</h3><p>BrightSkies describes an assessment and customized rollout plan for the Profit First system.</p></div></article>
           <article class="bss-card bss-reveal" style="--d:0.12s"><span class="bss-num" aria-hidden="true">05</span><div><h3>Accounting software support</h3><p>Accounting services include setup and management of software such as QuickBooks for a spa business.</p></div></article>
           <article class="bss-card bss-reveal" style="--d:0.20s"><span class="bss-num" aria-hidden="true">06</span><div><h3>Reports explained in plain language</h3><p>Financial reporting includes monthly statements and help understanding what the numbers mean for the business.</p></div></article>
       </div>
@@ -305,23 +320,25 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
         <div>
           <h3 class="bss-group__title bss-reveal"><span aria-hidden="true">01</span>What We Deliver</h3>
           <div class="bss-services">
-          <article class="bss-service bss-reveal" style="--d:0.00s"><span class="bss-num" aria-hidden="true">01</span><div><h4>Bookkeeping and transaction reconciliation</h4><p>Keep transactions accounted for and maintain an up-to-date view of the business’s cash position.</p></div></article>
-          <article class="bss-service bss-reveal" style="--d:0.08s"><span class="bss-num" aria-hidden="true">02</span><div><h4>Profit First assessment and rollout</h4><p>Review current financials, shape a customized rollout plan, and help set up the accounts for the system.</p></div></article>
-          <article class="bss-service bss-reveal" style="--d:0.06s"><span class="bss-num" aria-hidden="true">03</span><div><h4>Accounting software setup</h4><p>Set up and manage accounting software such as QuickBooks to match a spa business’s needs.</p></div></article>
-          <article class="bss-service bss-reveal" style="--d:0.14s"><span class="bss-num" aria-hidden="true">04</span><div><h4>Invoicing and bill payments</h4><p>Support invoicing and bill-payment processes for cash flow and vendor relationships.</p></div></article>
-          <article class="bss-service bss-reveal" style="--d:0.12s"><span class="bss-num" aria-hidden="true">05</span><div><h4>Service and product profitability analysis</h4><p>Review profitability by service, package, and product line.</p></div></article>
-          <article class="bss-service bss-reveal" style="--d:0.20s"><span class="bss-num" aria-hidden="true">06</span><div><h4>Payroll tracking</h4><p>Work with the payroll provider to track salaries, hourly wages, and commission structures.</p></div></article>
+          <article class="bss-service bss-service--featured bss-reveal" style="--d:0.00s"><span class="bss-feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16.5" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 10h18M9 15.5l2 2 4-4"/></svg></span><div><p class="bss-feature-tag">Every month, not once a year</p><h4>A monthly check-in call</h4><p>Every month, we get on a call with you to review everything together: revenue, expenses, cash flow, and what to adjust next. Most accountants only check in once or twice a year. With the high income and high expenses of a MedSpa, that’s not enough.</p></div></article>
+          <article class="bss-service bss-reveal" style="--d:0.06s"><span class="bss-num" aria-hidden="true">01</span><div><h4>Bookkeeping and transaction reconciliation</h4><p>Keep transactions accounted for and maintain an up-to-date view of the business’s cash position.</p></div></article>
+          <article class="bss-service bss-reveal" style="--d:0.14s"><span class="bss-num" aria-hidden="true">02</span><div><h4>Profit First assessment and rollout</h4><p>Review current financials, shape a customized rollout plan, and help set up the accounts for the system.</p></div></article>
+          <article class="bss-service bss-reveal" style="--d:0.12s"><span class="bss-num" aria-hidden="true">03</span><div><h4>Accounting software setup</h4><p>Set up and manage accounting software such as QuickBooks to match a spa business’s needs.</p></div></article>
+          <article class="bss-service bss-reveal" style="--d:0.20s"><span class="bss-num" aria-hidden="true">04</span><div><h4>Invoicing and bill payments</h4><p>Support invoicing and bill-payment processes for cash flow and vendor relationships.</p></div></article>
+          <article class="bss-service bss-reveal" style="--d:0.18s"><span class="bss-num" aria-hidden="true">05</span><div><h4>Service and product profitability analysis</h4><p>Review profitability by service, package, and product line.</p></div></article>
+          <article class="bss-service bss-reveal" style="--d:0.26s"><span class="bss-num" aria-hidden="true">06</span><div><h4>Payroll tracking</h4><p>Work with the payroll provider to track salaries, hourly wages, and commission structures.</p></div></article>
           </div>
         </div>
         <div>
           <h3 class="bss-group__title bss-reveal"><span aria-hidden="true">02</span>What You Get</h3>
           <div class="bss-services">
-          <article class="bss-service bss-reveal" style="--d:0.00s"><span class="bss-num" aria-hidden="true">01</span><div><h4>A clear cash position</h4><p>Transactions are accounted for to give a current picture of cash position.</p></div></article>
-          <article class="bss-service bss-reveal" style="--d:0.08s"><span class="bss-num" aria-hidden="true">02</span><div><h4>Monthly financial statements</h4><p>Receive easy-to-understand Profit and Loss and Balance Sheet statements each month.</p></div></article>
-          <article class="bss-service bss-reveal" style="--d:0.06s"><span class="bss-num" aria-hidden="true">03</span><div><h4>Visibility by service and product</h4><p>Understand where revenue comes from across services and retail, and review profitability by line.</p></div></article>
-          <article class="bss-service bss-reveal" style="--d:0.14s"><span class="bss-num" aria-hidden="true">04</span><div><h4>Retail, supply, and gift-card tracking</h4><p>Track retail product and professional supply costs, along with the liability from unredeemed gift cards.</p></div></article>
-          <article class="bss-service bss-reveal" style="--d:0.12s"><span class="bss-num" aria-hidden="true">05</span><div><h4>Budgeting and cash flow forecasting</h4><p>Plan for seasonal changes and major investments with a budget and cash flow forecast.</p></div></article>
-          <article class="bss-service bss-reveal" style="--d:0.20s"><span class="bss-num" aria-hidden="true">06</span><div><h4>A twice-monthly allocation rhythm</h4><p>Establish a regular cadence for allocating income into the designated Profit First accounts.</p></div></article>
+          <article class="bss-service bss-service--featured bss-reveal" style="--d:0.00s"><span class="bss-feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3l4 4-4 4M3 7h18M7 21l-4-4 4-4M21 17H3"/></svg></span><div><p class="bss-feature-tag">Built for high income, high expenses</p><h4>Cash flow management</h4><p>MedSpas bring in a lot and spend a lot. We manage your cash flow month to month, so you always know what’s coming in, what’s going out, and what’s left to plan with.</p></div></article>
+          <article class="bss-service bss-reveal" style="--d:0.06s"><span class="bss-num" aria-hidden="true">01</span><div><h4>A clear cash position</h4><p>Transactions are accounted for to give a current picture of cash position.</p></div></article>
+          <article class="bss-service bss-reveal" style="--d:0.14s"><span class="bss-num" aria-hidden="true">02</span><div><h4>Monthly financial statements</h4><p>Receive easy-to-understand Profit and Loss and Balance Sheet statements each month.</p></div></article>
+          <article class="bss-service bss-reveal" style="--d:0.12s"><span class="bss-num" aria-hidden="true">03</span><div><h4>Visibility by service and product</h4><p>Understand where revenue comes from across services and retail, and review profitability by line.</p></div></article>
+          <article class="bss-service bss-reveal" style="--d:0.20s"><span class="bss-num" aria-hidden="true">04</span><div><h4>Retail, supply, and gift-card tracking</h4><p>Track retail product and professional supply costs, along with the liability from unredeemed gift cards.</p></div></article>
+          <article class="bss-service bss-reveal" style="--d:0.18s"><span class="bss-num" aria-hidden="true">05</span><div><h4>Budgeting and cash flow forecasting</h4><p>Plan for seasonal changes and major investments with a budget and cash flow forecast.</p></div></article>
+          <article class="bss-service bss-reveal" style="--d:0.26s"><span class="bss-num" aria-hidden="true">06</span><div><h4>A twice-monthly allocation rhythm</h4><p>Establish a regular cadence for allocating income into the designated Profit First accounts.</p></div></article>
           </div>
         </div>
       </div>
@@ -332,7 +349,7 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
     <section class="bss-section bss-proof" aria-labelledby="bss-reviews-title">
       <div class="bss-heading bss-reveal">
         <p class="bss-eyebrow">Client reviews shared on Google</p>
-        <h2 id="bss-reviews-title">Hear From Bright Skies Clients</h2>
+        <h2 id="bss-reviews-title">Hear From BrightSkies Clients</h2>
         <p class="bss-rating"><span class="bss-rating__g"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg></span><span class="bss-stars" aria-hidden="true">★★★★★</span><span>Five-star client reviews</span></p>
       </div>
       <div class="bss-wrap">
@@ -390,29 +407,33 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
     <section class="bss-section bss-faq" aria-labelledby="bss-faq-title">
       <div class="bss-wrap bss-faq__grid">
         <div class="bss-heading bss-faq__head bss-reveal">
-          <p class="bss-eyebrow">Answers from Bright Skies’ official service information</p>
+          <p class="bss-eyebrow">Answers from BrightSkies’ official service information</p>
           <h2 id="bss-faq-title">Frequently Asked Questions</h2>
         </div>
         <div class="bss-faq__list">
           <div class="bss-faq__item bss-reveal" style="--d:0.00s">
-            <h3><button type="button" class="bss-faq__q" id="bss-faq-q1" aria-expanded="false" aria-controls="bss-faq-a1"><span>Which types of businesses does Bright Skies serve?</span><span class="bss-faq__mark" aria-hidden="true"></span></button></h3>
-            <div class="bss-faq__a" id="bss-faq-a1" role="region" aria-labelledby="bss-faq-q1"><div><p>Bright Skies describes its focus as spa and wellness businesses, MedSpas, weight-loss clinics, medical services, and other private-pay medical providers.</p></div></div>
+            <h3><button type="button" class="bss-faq__q" id="bss-faq-q1" aria-expanded="false" aria-controls="bss-faq-a1"><span>Which types of businesses does BrightSkies serve?</span><span class="bss-faq__mark" aria-hidden="true"></span></button></h3>
+            <div class="bss-faq__a" id="bss-faq-a1" role="region" aria-labelledby="bss-faq-q1"><div><p>BrightSkies describes its focus as spa and wellness businesses, MedSpas, weight-loss clinics, medical services, and other private-pay medical providers.</p></div></div>
           </div>
-          <div class="bss-faq__item bss-reveal" style="--d:0.06s">
+          <div class="bss-faq__item bss-reveal" style="--d:0.04s">
+            <h3><button type="button" class="bss-faq__q" id="bss-faq-q6" aria-expanded="false" aria-controls="bss-faq-a6"><span>How often will we talk?</span><span class="bss-faq__mark" aria-hidden="true"></span></button></h3>
+            <div class="bss-faq__a" id="bss-faq-a6" role="region" aria-labelledby="bss-faq-q6"><div><p>Every month. You get a monthly check-in call to review your numbers, cash flow, and next steps together, instead of hearing from your accountant only once or twice a year.</p></div></div>
+          </div>
+          <div class="bss-faq__item bss-reveal" style="--d:0.08s">
             <h3><button type="button" class="bss-faq__q" id="bss-faq-q2" aria-expanded="false" aria-controls="bss-faq-a2"><span>What does the bookkeeping service cover?</span><span class="bss-faq__mark" aria-hidden="true"></span></button></h3>
             <div class="bss-faq__a" id="bss-faq-a2" role="region" aria-labelledby="bss-faq-q2"><div><p>The official bookkeeping page describes transaction reconciliation and tracking for revenue sources, retail products, professional supplies, unredeemed gift cards, payroll costs, and monthly financial statements.</p></div></div>
           </div>
           <div class="bss-faq__item bss-reveal" style="--d:0.12s">
-            <h3><button type="button" class="bss-faq__q" id="bss-faq-q3" aria-expanded="false" aria-controls="bss-faq-a3"><span>Can Bright Skies help with accounting software?</span><span class="bss-faq__mark" aria-hidden="true"></span></button></h3>
-            <div class="bss-faq__a" id="bss-faq-a3" role="region" aria-labelledby="bss-faq-q3"><div><p>Yes. Bright Skies says it can set up and manage accounting software such as QuickBooks to fit a spa business’s needs.</p></div></div>
+            <h3><button type="button" class="bss-faq__q" id="bss-faq-q3" aria-expanded="false" aria-controls="bss-faq-a3"><span>Can BrightSkies help with accounting software?</span><span class="bss-faq__mark" aria-hidden="true"></span></button></h3>
+            <div class="bss-faq__a" id="bss-faq-a3" role="region" aria-labelledby="bss-faq-q3"><div><p>Yes. BrightSkies says it can set up and manage accounting software such as QuickBooks to fit a spa business’s needs.</p></div></div>
           </div>
           <div class="bss-faq__item bss-reveal" style="--d:0.18s">
             <h3><button type="button" class="bss-faq__q" id="bss-faq-q4" aria-expanded="false" aria-controls="bss-faq-a4"><span>How does a Profit First rollout work?</span><span class="bss-faq__mark" aria-hidden="true"></span></button></h3>
-            <div class="bss-faq__a" id="bss-faq-a4" role="region" aria-labelledby="bss-faq-q4"><div><p>Bright Skies describes starting with an assessment of the business, creating a customized rollout plan, helping set up the necessary bank accounts, and establishing a twice-monthly allocation rhythm.</p></div></div>
+            <div class="bss-faq__a" id="bss-faq-a4" role="region" aria-labelledby="bss-faq-q4"><div><p>BrightSkies describes starting with an assessment of the business, creating a customized rollout plan, helping set up the necessary bank accounts, and establishing a twice-monthly allocation rhythm.</p></div></div>
           </div>
           <div class="bss-faq__item bss-reveal" style="--d:0.24s">
             <h3><button type="button" class="bss-faq__q" id="bss-faq-q5" aria-expanded="false" aria-controls="bss-faq-a5"><span>What financial reports are provided?</span><span class="bss-faq__mark" aria-hidden="true"></span></button></h3>
-            <div class="bss-faq__a" id="bss-faq-a5" role="region" aria-labelledby="bss-faq-q5"><div><p>Bright Skies describes monthly Profit and Loss and Balance Sheet statements, along with help understanding what the numbers mean for the business.</p></div></div>
+            <div class="bss-faq__a" id="bss-faq-a5" role="region" aria-labelledby="bss-faq-q5"><div><p>BrightSkies describes monthly Profit and Loss and Balance Sheet statements, along with help understanding what the numbers mean for the business.</p></div></div>
           </div>
         </div>
         <div class="bss-faq__cta bss-reveal">
