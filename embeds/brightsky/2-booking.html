@@ -2,7 +2,9 @@
   BrightSkies Services | Funnel step 2 of 3: Booking page
   Paste all of this into ONE "Custom JS/HTML" element, inside a full-width section with 0 padding.
   Your Calendly calendar is already in place (look for "YOUR CALENDAR GOES HERE" to change it).
-  On phones the whole page fits one screen: the calendar fills the space below the title.
+  On phones the header is compact and the dates sit right under the title. The calendar grows to fit
+  what it's showing, so the page scrolls normally (no scroll box inside the page).
+  Faster loading: also paste 2-booking-head.html into this step's Head tracking code.
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,8 +17,8 @@
 @keyframes bss-drift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(70px,40px,0) scale(1.15)}}
 @keyframes bss-up{from{opacity:0;translate:0 22px}to{opacity:1;translate:none}}
 @keyframes bss-draw{to{transform:scaleX(1)}}
-@keyframes bss-spin{to{transform:rotate(360deg)}}
-#bss{position:relative;width:100%;min-height:100vh;margin:0;padding:0;background:#fff}
+@keyframes bss-shimmer{from{background-position:100% 0}to{background-position:0 0}}
+#bss{position:relative;width:100%;margin:0;padding:0;background:#fff}
 #bss .bss-top{position:relative;overflow:hidden;background:linear-gradient(180deg,#fff 0%,#f4f4fb 55%,#fff 100%)}
 #bss .bss-bg{position:absolute;inset:0;pointer-events:none}
 #bss .bss-bg span{position:absolute;display:block;border-radius:50%;animation:bss-drift 18s ease-in-out infinite alternate}
@@ -43,15 +45,22 @@
 #bss .bss-trust__check{display:inline-flex;width:22px;height:22px;justify-content:center;align-items:center;border-radius:50%;background:rgba(51,51,148,.1);color:#333394}
 #bss .bss-trust__check svg{width:13px;height:13px}
 #bss .bss-cal{position:relative;box-sizing:border-box;width:min(100%,1100px);margin:0 auto;padding:0 20px 64px;animation:bss-up .9s cubic-bezier(.2,.7,.2,1) .3s both}
-#bss .bss-loader{position:absolute;top:110px;right:0;left:0;display:flex;flex-direction:column;align-items:center;gap:14px;margin:0;color:#5d5d72;font-family:"Roboto",Arial,sans-serif;font-size:14px;font-weight:500;text-align:center;transition:opacity .4s ease,visibility 0s .4s}
-#bss .bss-loader::before{content:"";width:34px;height:34px;border:3px solid rgba(51,51,148,.15);border-top-color:#333394;border-right-color:#e8b528;border-radius:50%;animation:bss-spin .9s linear infinite}
-#bss .bss-loader.is-done{opacity:0;visibility:hidden}
+/* Calendar-shaped placeholder shown on top of the calendar until Calendly is ready */
+#bss .bss-skel{position:absolute;z-index:2;top:0;right:20px;left:20px;display:flex;flex-direction:column;align-items:center;gap:16px;padding-top:28px;background:#fff;pointer-events:none;transition:opacity .45s ease,visibility 0s .45s}
+#bss .bss-skel.is-done{opacity:0;visibility:hidden}
+#bss .bss-skel__card{display:flex;box-sizing:border-box;width:min(100%,1000px);min-height:560px;overflow:hidden;border:1px solid #ececf4;border-radius:12px;background:#fff;box-shadow:0 1px 10px rgba(37,37,89,.06)}
+#bss .bss-skel__side{display:flex;flex:0 0 34%;flex-direction:column;gap:14px;box-sizing:border-box;padding:30px 28px;border-right:1px solid #ececf4}
+#bss .bss-skel__main{display:flex;flex:1;flex-direction:column;gap:24px;box-sizing:border-box;padding:30px 34px}
+#bss .bss-skel i,#bss .bss-skel b{display:block;height:12px;border-radius:8px;background:linear-gradient(90deg,#efeff7 0%,#efeff7 35%,#fbf6e6 50%,#efeff7 65%,#efeff7 100%);background-size:300% 100%;animation:bss-shimmer 1.5s ease-in-out infinite}
+#bss .bss-skel .bss-skel__lg{height:20px}
+#bss .bss-skel__grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:14px 12px;width:100%;max-width:440px}
+#bss .bss-skel b{height:auto;aspect-ratio:1;border-radius:50%}
+#bss .bss-skel__note{margin:0;padding:0;color:#5d5d72;font-family:"Roboto",Arial,sans-serif;font-size:14px;font-weight:500}
 #bss .bss-slot{position:relative;box-sizing:border-box;width:100%}
 #bss .bss-slot:not(:has(*)){min-height:160px;border:2px dashed #d9d9e8;border-radius:20px}
 #bss .bss-slot:not(:has(*))::after{content:"Your calendar will show here once you add it.";display:flex;min-height:156px;justify-content:center;align-items:center;color:#8a8a9c;font-family:"Roboto",Arial,sans-serif;font-size:14px;text-align:center}
 @media (max-width:640px){
-  /* Phones: compact top so the header, title and calendar all fit on one screen */
-  #bss{min-height:0}
+  /* Phones: compact top so the dates sit right under the title */
   #bss .bss-header{min-height:50px;padding:10px 16px 0}
   #bss .bss-header img{width:110px}
   #bss .bss-bg span:nth-child(1){width:560px;margin-left:-280px}
@@ -61,10 +70,13 @@
   #bss .bss-intro h1{margin-bottom:6px;font-size:clamp(1.5rem,6.6vw,1.9rem)}
   #bss .bss-sub{font-size:14px}
   #bss .bss-cal{padding:0}
-  #bss .bss-loader{top:90px}
+  #bss .bss-skel{right:0;left:0;padding-top:6px}
+  #bss .bss-skel__card{flex-direction:column;min-height:0;border:0;box-shadow:none}
+  #bss .bss-skel__side{display:none}
+  #bss .bss-skel__main{gap:20px;padding:16px 22px}
 }
 @media (prefers-reduced-motion:reduce){
-  #bss .bss-bg span,#bss .bss-intro > *,#bss .bss-cal{animation:none}
+  #bss .bss-bg span,#bss .bss-intro > *,#bss .bss-cal,#bss .bss-skel i,#bss .bss-skel b{animation:none}
   #bss .bss-hl::after{animation:none;transform:none}
 }
 </style>
@@ -90,7 +102,13 @@
   </div>
 
   <div class="bss-cal">
-    <p class="bss-loader" role="status">Loading available times…</p>
+    <div class="bss-skel" aria-hidden="true">
+      <div class="bss-skel__card">
+        <div class="bss-skel__side"><i style="width:45%"></i><i class="bss-skel__lg" style="width:80%"></i><i style="width:55%"></i><i style="width:65%"></i></div>
+        <div class="bss-skel__main"><i class="bss-skel__lg" style="width:50%"></i><i style="width:35%"></i><div class="bss-skel__grid"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div><i style="width:40%"></i></div>
+      </div>
+      <p class="bss-skel__note">Loading available times…</p>
+    </div>
 
     <!-- =====================================================================
          YOUR CALENDAR GOES HERE
@@ -110,13 +128,12 @@
       <!-- ▼▼▼ PASTE YOUR CALENDAR EMBED CODE BELOW THIS LINE ▼▼▼ -->
       <div class="calendly-inline-widget" data-url="https://calendly.com/mturner-6/brightskies-strategy-session?primary_color=333394" data-resize="true" style="min-width:320px;height:700px;"></div>
       <script>
-        /* Phones: skip Calendly's event-details block so the dates show right away, and keep the
-           calendar to the screen's height (it scrolls inside) instead of making the page long. */
+        /* Phones: skip Calendly's event-details block so the dates show right under the title. */
         (function () {
           var w = document.querySelector("#bss .calendly-inline-widget");
           if (!w || !window.matchMedia("(max-width: 640px)").matches) return;
           w.setAttribute("data-url", w.getAttribute("data-url") + "&hide_event_type_details=1");
-          w.removeAttribute("data-resize");
+          w.style.height = "600px";
         })();
       </script>
       <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
@@ -137,13 +154,13 @@
 
   var root = document.getElementById("bss");
   var slot = root && root.querySelector(".bss-slot");
-  var loader = root && root.querySelector(".bss-loader");
-  if (!slot || !loader) return;
+  var skel = root && root.querySelector(".bss-skel");
+  if (!slot) return;
 
-  // Hide the "Loading available times" note once the calendar shows up.
-  function done() { loader.classList.add("is-done"); }
-  if (!slot.querySelector("*")) done();
-  function watch(frame) { frame.addEventListener("load", function () { setTimeout(done, 400); }); }
+  // Take the placeholder away once the calendar is ready.
+  function ready() { if (skel) skel.classList.add("is-done"); }
+  if (!slot.querySelector("*")) ready();
+  function watch(frame) { frame.addEventListener("load", function () { setTimeout(ready, 1500); }); }
   var frames = slot.querySelectorAll("iframe");
   for (var i = 0; i < frames.length; i++) watch(frames[i]);
   if ("MutationObserver" in window) {
@@ -157,41 +174,36 @@
       }
     }).observe(slot, { childList: true, subtree: true });
   }
-  setTimeout(done, 10000);
+  setTimeout(ready, 12000);
 
-  // Phones: the calendar fills exactly the rest of the screen, so the page itself doesn't scroll.
-  var phone = window.matchMedia("(max-width: 640px)");
-  function fitPhone() {
-    var widget = slot.querySelector(".calendly-inline-widget");
-    if (!widget || !phone.matches) return;
-    var top = 0;
-    for (var el = widget; el; el = el.offsetParent) top += el.offsetTop; // layout position, ignores the entrance animation
-    widget.style.height = Math.max(460, Math.floor(window.innerHeight - top)) + "px";
+  function widget() { return slot.querySelector(".calendly-inline-widget"); }
+
+  // If the calendar changes view while the visitor is scrolled down, bring its top back on screen
+  // instead of leaving them looking at empty space.
+  function keepInView(always) {
+    var w = widget();
+    if (!w) return;
+    var r = w.getBoundingClientRect();
+    // Scroll the page itself (not scrollIntoView, which can also shift GHL's clipped section boxes).
+    if (r.top < 0 && (always || r.bottom < window.innerHeight)) {
+      window.scrollTo({ top: Math.max(0, (window.pageYOffset || 0) + r.top - 12), behavior: "smooth" });
+    }
   }
-  fitPhone();
-  // Re-fit once fonts, the logo and the rest of the page have loaded, in case the header changed height.
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitPhone);
-  var logo = root.querySelector(".bss-header img");
-  if (logo && !logo.complete) logo.addEventListener("load", fitPhone);
-  if (document.readyState !== "complete") window.addEventListener("load", fitPhone);
-  var lastWidth = window.innerWidth;
-  window.addEventListener("resize", function () {
-    // Ignore the small height changes from mobile browser toolbars sliding in and out.
-    if (window.innerWidth === lastWidth && Math.abs(window.innerHeight - parseInt(slot.dataset.vh || 0, 10)) < 120) return;
-    lastWidth = window.innerWidth;
-    slot.dataset.vh = window.innerHeight;
-    fitPhone();
-  });
-  slot.dataset.vh = window.innerHeight;
 
   window.addEventListener("message", function (e) {
     if (e.origin !== "https://calendly.com" || !e.data || typeof e.data.event !== "string" || e.data.event.indexOf("calendly.") !== 0) return;
-    done();
-    // Desktop: grow the calendar to fit Calendly's content, so there's no scrollbar inside it.
-    if (e.data.event === "calendly.page_height" && e.data.payload && !phone.matches) {
-      var h = parseInt(e.data.payload.height, 10), widget = slot.querySelector(".calendly-inline-widget");
-      if (widget && h > 300) widget.style.height = h + "px";
+    ready();
+    var w = widget();
+    // The calendar grows and shrinks to fit what Calendly is showing, so there's never a scroll box inside the page.
+    if (e.data.event === "calendly.page_height" && e.data.payload && w) {
+      var h = parseInt(e.data.payload.height, 10);
+      if (h > 300) {
+        var before = w.offsetHeight;
+        w.style.height = h + "px";
+        if (h < before - 40) keepInView(false);
+      }
     }
+    if (e.data.event === "calendly.date_and_time_selected") keepInView(true);
     if (e.data.event === "calendly.event_scheduled" && CONFIRMATION_URL) window.location.href = CONFIRMATION_URL;
   });
 })();

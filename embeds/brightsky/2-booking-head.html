@@ -1,0 +1,10 @@
+<!--
+  BrightSkies Services | Funnel step 2 (Booking): HEAD code, optional but makes the calendar show up sooner.
+  Paste this into the booking step's Head tracking code (step Settings, Tracking Code, Head).
+  It tells the browser to start connecting to Calendly and downloading its script right away,
+  while the rest of the GHL page is still loading.
+-->
+<link rel="preconnect" href="https://calendly.com">
+<link rel="preconnect" href="https://assets.calendly.com">
+<link rel="preconnect" href="https://assets.calendly.com" crossorigin>
+<link rel="preload" href="https://assets.calendly.com/assets/external/widget.js" as="script">

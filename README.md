@@ -13,6 +13,10 @@ For each step:
 2. Add one **Custom JS/HTML** element to it, paste the whole file, and save.
 3. Test on the preview or live URL. The builder canvas doesn't run the scripts.
 
+Optional, for faster loading: paste `1-landing-head.html` into the landing step's Head tracking
+code, and `2-booking-head.html` into the booking step's Head tracking code (step Settings, Tracking
+Code, Head). They start connecting to the survey and to Calendly while GHL is still loading.
+
 Wiring the steps together:
 - **Survey → booking:** in the survey's settings, set the submit action to redirect to the booking step's URL.
 - **Calendar:** in `2-booking.html`, look for `YOUR CALENDAR GOES HERE`. Paste your calendar's
