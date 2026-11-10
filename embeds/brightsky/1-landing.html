@@ -132,9 +132,11 @@
 #bss.bss-js .bss-review.is-in{opacity:1;translate:none}
 #bss .bss-review__mark{position:absolute;top:10px;right:24px;color:var(--gold);font-family:Georgia,"Times New Roman",serif;font-size:96px;line-height:1;opacity:.35;pointer-events:none;transition:opacity .35s ease,transform .35s ease}
 #bss .bss-review:hover .bss-review__mark{opacity:.75;transform:translateY(-4px) rotate(-6deg)}
-#bss .bss-review__text{margin:18px 0 0;overflow:hidden;color:#3c3c52;font-size:15px;line-height:1.7;transition:max-height .5s cubic-bezier(.2,.7,.2,1)}
+#bss .bss-review__text{min-height:calc(1.7em * 4);margin:18px 0 0;overflow:hidden;color:#3c3c52;font-size:15px;line-height:1.7;transition:max-height .5s cubic-bezier(.2,.7,.2,1)}
 #bss.bss-js .bss-review__text{max-height:calc(1.7em * 4)}
 #bss .bss-review.is-long:not(.is-open) .bss-review__text{-webkit-mask-image:linear-gradient(180deg,#000 50%,transparent);mask-image:linear-gradient(180deg,#000 50%,transparent)}
+#bss .bss-review__top{display:flex;min-height:24px;flex-wrap:wrap;align-items:center;gap:10px}
+#bss .bss-review__tag{display:inline-flex;align-items:center;padding:4px 10px;border-radius:999px;background:rgba(232,181,40,.18);color:var(--indigo-deep);font-size:10.5px;font-weight:700;letter-spacing:.08em;line-height:1.3;text-transform:uppercase}
 #bss .bss-review__actions{display:flex;align-items:center;gap:12px;margin-top:12px}
 #bss .bss-more{display:none;width:fit-content;align-items:center;gap:7px;margin:0;padding:6px 0;border:0;background:none;color:var(--indigo);cursor:pointer;font-size:13px;font-weight:700;letter-spacing:.04em;line-height:1.2}
 #bss .bss-more::after{content:"";width:7px;height:7px;margin-top:-3px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform .3s ease,margin .3s ease}
@@ -258,7 +260,9 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
   #bss .bss-proof{--g:16px}
   #bss .bss-reviews{gap:14px}
   #bss .bss-review,#bss .bss-review:hover{flex-basis:86%;padding:26px 22px 22px}
-  #bss .bss-review__mark{font-size:80px}
+  #bss .bss-review__mark{font-size:64px}
+  #bss .bss-review__top .bss-stars{font-size:14px}
+  #bss .bss-review__tag{padding:3px 9px;font-size:10px}
   #bss .bss-rating{font-size:12px}
   #bss .bss-faq__q{min-height:64px;gap:12px;padding:16px 16px 16px 18px;font-size:15px}
   #bss .bss-faq__a p{padding:0 18px 18px;font-size:14px}
@@ -268,6 +272,7 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
   #bss .bss-modal{width:calc(100% - 18px);max-height:calc(100vh - 18px);max-height:calc(100dvh - 18px);border-radius:16px}
   #bss .bss-modal__body,#bss .bss-modal iframe{min-height:330px}
 }
+@media (max-width:359px){#bss .bss-review__mark{display:none}}
 @media (prefers-reduced-motion:reduce){
   #bss *,#bss *::before,#bss *::after{transition-duration:.01ms !important;animation:none !important}
   #bss.bss-js .bss-reveal,#bss.bss-js .bss-review{opacity:1;translate:none}
@@ -358,23 +363,49 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
         <div class="bss-reviews">
         <article class="bss-review" style="--d:0.00s">
           <span class="bss-review__mark" aria-hidden="true">“</span>
-          <div class="bss-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
-          <p class="bss-review__text" id="bss-review-1">“My company has been working with BrightSkies Services over the last couple of months and I have been extremely impressed with how quickly the team at BrightSkies is getting things fixed, explaining best practice and helping me think through potential issues. So thankful that I made the decision to switch.”</p>
+          <div class="bss-review__top"><div class="bss-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div><span class="bss-review__tag">MedSpa owner</span></div>
+          <p class="bss-review__text" id="bss-review-1">“We love Bright Skies! Literally seeing improvements in the first month! So grateful to have found them!”</p>
           <div class="bss-review__actions">
             <button class="bss-more" type="button" aria-expanded="false" aria-controls="bss-review-1">Show more</button>
-            <a class="bss-review__link" href="https://maps.app.goo.gl/LoBXUZ31f2bXTxu66" target="_blank" rel="noopener noreferrer" aria-label="View Jake Isaacs’s review on Google">View on Google<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+            <a class="bss-review__link" href="https://www.google.com/search?q=BrightSkies+Services+LLC+Nashville+reviews" target="_blank" rel="noopener noreferrer" aria-label="View Marinda Beasley’s review on Google">View on Google<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
           </div>
           <div class="bss-review__by">
-            <span class="bss-avatar" aria-hidden="true">JI</span>
-            <div class="bss-review__who"><p class="bss-review__name">Jake Isaacs</p><p class="bss-review__meta"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google · December 2024</p></div>
+            <span class="bss-avatar" aria-hidden="true">MB</span>
+            <div class="bss-review__who"><p class="bss-review__name">Marinda Beasley</p><p class="bss-review__meta"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Owner, MK Aesthetics</p></div>
           </div>
         </article>
         <article class="bss-review" style="--d:0.12s">
           <span class="bss-review__mark" aria-hidden="true">“</span>
-          <div class="bss-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
-          <p class="bss-review__text" id="bss-review-2">“The team at Brightskies is top notch! The way Masheka coached me in Profit First methods and money mindset was a game changer. Everyone works so hard to make sure all my accounts were settled and I was prepared for taxes, goals, and business strategy. You will have a great experience with this team!”</p>
+          <div class="bss-review__top"><div class="bss-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div><span class="bss-review__tag">MedSpa owner</span></div>
+          <p class="bss-review__text" id="bss-review-2">“Absolutely love them and would recommend them to anyone!”</p>
           <div class="bss-review__actions">
             <button class="bss-more" type="button" aria-expanded="false" aria-controls="bss-review-2">Show more</button>
+            <a class="bss-review__link" href="https://www.google.com/search?q=BrightSkies+Services+LLC+Nashville+reviews" target="_blank" rel="noopener noreferrer" aria-label="View Natalie D. Hollis’s review on Google">View on Google<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          </div>
+          <div class="bss-review__by">
+            <span class="bss-avatar" aria-hidden="true">NH</span>
+            <div class="bss-review__who"><p class="bss-review__name">Natalie D. Hollis</p><p class="bss-review__meta"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Owner, The Collective</p></div>
+          </div>
+        </article>
+        <article class="bss-review" style="--d:0.24s">
+          <span class="bss-review__mark" aria-hidden="true">“</span>
+          <div class="bss-review__top"><div class="bss-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div></div>
+          <p class="bss-review__text" id="bss-review-3">“I was new to BrightSkies and didn't know what to fully expect. The team did a great job to set &amp; manage expectations. Great communication throughout the process. I am continuing to work with BrightSkies and would recommend them.”</p>
+          <div class="bss-review__actions">
+            <button class="bss-more" type="button" aria-expanded="false" aria-controls="bss-review-3">Show more</button>
+            <a class="bss-review__link" href="https://www.google.com/search?q=BrightSkies+Services+LLC+Nashville+reviews" target="_blank" rel="noopener noreferrer" aria-label="View Sam Graham’s review on Google">View on Google<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          </div>
+          <div class="bss-review__by">
+            <span class="bss-avatar" aria-hidden="true">SG</span>
+            <div class="bss-review__who"><p class="bss-review__name">Sam Graham</p><p class="bss-review__meta"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google review</p></div>
+          </div>
+        </article>
+        <article class="bss-review" style="--d:0.00s">
+          <span class="bss-review__mark" aria-hidden="true">“</span>
+          <div class="bss-review__top"><div class="bss-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div></div>
+          <p class="bss-review__text" id="bss-review-4">“The team at Brightskies is top notch! The way Masheka coached me in Profit First methods and money mindset was a game changer. Everyone works so hard to make sure all my accounts were settled and I was prepared for taxes, goals, and business strategy. You will have a great experience with this team!”</p>
+          <div class="bss-review__actions">
+            <button class="bss-more" type="button" aria-expanded="false" aria-controls="bss-review-4">Show more</button>
             <a class="bss-review__link" href="https://maps.app.goo.gl/ffSwPZ77MpnwgJrD7" target="_blank" rel="noopener noreferrer" aria-label="View Rebecca Robinson’s review on Google">View on Google<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
           </div>
           <div class="bss-review__by">
@@ -382,12 +413,12 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
             <div class="bss-review__who"><p class="bss-review__name">Rebecca Robinson</p><p class="bss-review__meta"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google · March 2025</p></div>
           </div>
         </article>
-        <article class="bss-review" style="--d:0.24s">
+        <article class="bss-review" style="--d:0.12s">
           <span class="bss-review__mark" aria-hidden="true">“</span>
-          <div class="bss-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
-          <p class="bss-review__text" id="bss-review-3">“Best decision we made with our business bookkeeping was to move over to BrightSkies. They are just what we needed to get things in order so we can continue to run our business successfully. The team is great and their attention to detail in an area that needs it is a huge plus.”</p>
+          <div class="bss-review__top"><div class="bss-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div></div>
+          <p class="bss-review__text" id="bss-review-5">“Best decision we made with our business bookkeeping was to move over to BrightSkies. They are just what we needed to get things in order so we can continue to run our business successfully. The team is great and their attention to detail in an area that needs it is a huge plus.”</p>
           <div class="bss-review__actions">
-            <button class="bss-more" type="button" aria-expanded="false" aria-controls="bss-review-3">Show more</button>
+            <button class="bss-more" type="button" aria-expanded="false" aria-controls="bss-review-5">Show more</button>
             <a class="bss-review__link" href="https://maps.app.goo.gl/a7GQKXxVZ9wV19td8" target="_blank" rel="noopener noreferrer" aria-label="View Tony & Lisa DiLorenzo’s review on Google">View on Google<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
           </div>
           <div class="bss-review__by">
@@ -395,11 +426,27 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
             <div class="bss-review__who"><p class="bss-review__name">Tony &amp; Lisa DiLorenzo</p><p class="bss-review__meta"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google · February 2025</p></div>
           </div>
         </article>
+        <article class="bss-review" style="--d:0.24s">
+          <span class="bss-review__mark" aria-hidden="true">“</span>
+          <div class="bss-review__top"><div class="bss-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div></div>
+          <p class="bss-review__text" id="bss-review-6">“My company has been working with BrightSkies Services over the last couple of months and I have been extremely impressed with how quickly the team at BrightSkies is getting things fixed, explaining best practice and helping me think through potential issues. So thankful that I made the decision to switch.”</p>
+          <div class="bss-review__actions">
+            <button class="bss-more" type="button" aria-expanded="false" aria-controls="bss-review-6">Show more</button>
+            <a class="bss-review__link" href="https://maps.app.goo.gl/LoBXUZ31f2bXTxu66" target="_blank" rel="noopener noreferrer" aria-label="View Jake Isaacs’s review on Google">View on Google<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          </div>
+          <div class="bss-review__by">
+            <span class="bss-avatar" aria-hidden="true">JI</span>
+            <div class="bss-review__who"><p class="bss-review__name">Jake Isaacs</p><p class="bss-review__meta"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google · December 2024</p></div>
+          </div>
+        </article>
         </div>
         <div class="bss-dots" role="group" aria-label="Choose a review">
           <button class="bss-dot" type="button" aria-label="Review 1" aria-current="true"></button>
           <button class="bss-dot" type="button" aria-label="Review 2" aria-current="false"></button>
           <button class="bss-dot" type="button" aria-label="Review 3" aria-current="false"></button>
+          <button class="bss-dot" type="button" aria-label="Review 4" aria-current="false"></button>
+          <button class="bss-dot" type="button" aria-label="Review 5" aria-current="false"></button>
+          <button class="bss-dot" type="button" aria-label="Review 6" aria-current="false"></button>
         </div>
       </div>
       <div class="bss-cta bss-reveal"><button class="bss-btn" type="button" data-bss-open aria-haspopup="dialog">Get Started Now<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
@@ -613,13 +660,19 @@ html.bss-lock,html.bss-lock body{overflow:hidden !important}
     });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureReviews);
 
-    // Reviews fade up when they scroll into view.
+    // Reviews fade up as they scroll into view: row by row on desktop, all together in the swipe carousel.
+    var reviewTrack = root.querySelector(".bss-reviews");
     function reveal() { for (var c = 0; c < cards.length; c++) cards[c].classList.add("is-in"); }
     if ("IntersectionObserver" in window) {
       var io = new IntersectionObserver(function (entries) {
-        for (var e = 0; e < entries.length; e++) if (entries[e].isIntersecting) { reveal(); io.disconnect(); break; }
+        for (var e = 0; e < entries.length; e++) {
+          if (!entries[e].isIntersecting) continue;
+          if (reviewTrack.scrollWidth > reviewTrack.clientWidth + 2) { reveal(); io.disconnect(); return; }
+          entries[e].target.classList.add("is-in");
+          io.unobserve(entries[e].target);
+        }
       }, { threshold: 0.15 });
-      io.observe(root.querySelector(".bss-reviews"));
+      for (var rc = 0; rc < cards.length; rc++) io.observe(cards[rc]);
     } else {
       reveal();
     }
